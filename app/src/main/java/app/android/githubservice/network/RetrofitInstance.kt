@@ -1,13 +1,12 @@
 package app.android.githubservice.network
 
+import app.android.githubservice.BASE_URL
 import com.faramarzaf.sdk.af_android_sdk.core.network.ServiceRepository
 
 class RetrofitInstance {
 
-    private val gitHubService = ServiceRepository.ServiceBuilder
-        .buildService("", GitHubApi::class.java)
-
-    fun getApi() {
+    fun getApi(): GitHubApi {
+        return ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java)
     }
 
 }
