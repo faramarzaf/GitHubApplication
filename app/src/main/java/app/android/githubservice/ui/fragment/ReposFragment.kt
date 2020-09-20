@@ -1,4 +1,4 @@
-package app.android.githubservice.ui
+package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

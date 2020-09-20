@@ -1,4 +1,4 @@
-package app.android.githubservice.ui
+package app.android.githubservice.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
