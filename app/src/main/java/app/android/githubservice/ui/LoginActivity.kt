@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import app.android.githubservice.KEY_IS_LOGGED_IN
-import app.android.githubservice.KEY_PASSWORD
-import app.android.githubservice.KEY_USERNAME
+import app.android.githubservice.util.KEY_IS_LOGGED_IN
+import app.android.githubservice.util.KEY_PASSWORD
+import app.android.githubservice.util.KEY_USERNAME
 import app.android.githubservice.R
 import app.android.githubservice.network.RetrofitInstance
 import app.android.githubservice.repository.AuthRepository

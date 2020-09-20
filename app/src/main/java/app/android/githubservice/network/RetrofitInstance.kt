@@ -1,6 +1,6 @@
 package app.android.githubservice.network
 
-import app.android.githubservice.BASE_URL
+import app.android.githubservice.util.BASE_URL
 import com.faramarzaf.sdk.af_android_sdk.core.network.ServiceRepository
 
 class RetrofitInstance {
