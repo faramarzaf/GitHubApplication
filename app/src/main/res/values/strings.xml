@@ -2,6 +2,6 @@
     <string name="app_name">GitHubService</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="font_address">sanssserif.ttf</string>
+    <string name="font_address">sansserif.ttf</string>
 
 </resources>

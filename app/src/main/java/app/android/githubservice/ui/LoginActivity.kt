@@ -1,6 +1,5 @@
 package app.android.githubservice.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -37,8 +36,8 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
             MyPreferences.writeString(this, KEY_USERNAME, username)
             MyPreferences.writeString(this, KEY_PASSWORD, password)
             viewModel.auth(username)
-        } else if (StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())
-            && StringHelper.stringIsEmptyOrNull(editTextPassword.text.toString().trim())
+        } else if (StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim()) &&
+            StringHelper.stringIsEmptyOrNull(editTextPassword.text.toString().trim())
         ) {
             hideProgressBar(authProgressBar)
             toast("Fill fields!")
@@ -48,7 +47,7 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
     private fun checkUserIsAuth() {
         if (MyPreferences.readBoolean(this, KEY_IS_LOGGED_IN, false)) {
             finish()
-            startActivity(Intent(this, MainActivity::class.java))
+            toActivity(MainActivity::class.java)
         } else
             return
     }
@@ -63,7 +62,7 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
                     } else {
                         hideProgressBar(authProgressBar)
                         MyPreferences.writeBoolean(this, KEY_IS_LOGGED_IN, true)
-                        startActivity(Intent(this, MainActivity::class.java))
+                        toActivity(MainActivity::class.java)
                     }
                 }
                 is Resource.Failure -> {
