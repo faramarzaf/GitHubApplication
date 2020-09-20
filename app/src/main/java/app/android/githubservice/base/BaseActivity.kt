@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -12,9 +14,13 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import app.android.githubservice.interfaces.AppDialogCallback
-import app.android.githubservice.util.KEY_SESSION_ID
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import app.android.githubservice.R
+import app.android.githubservice.interfaces.AppDialogCallback
+import app.android.githubservice.repository.BaseRepository
+import app.android.githubservice.util.KEY_SESSION_ID
+import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
@@ -23,11 +29,19 @@ import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.SimpleDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import java.util.*
 
-abstract class BaseActivity : AppCompatActivity() {
-
+abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     private var progressDialog: ProgressDialogCustom? = null
+    lateinit var viewModel: VM
 
+    abstract fun getRepository(): BaseRepository
+    abstract fun getViewModel(): Class<VM>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val factory = ViewModelFactory(getRepository())
+        viewModel = ViewModelProvider(this, factory).get(getViewModel())
+    }
 
     open fun toActivity(classOf: Class<*>) {
         startActivity(Intent(applicationContext, classOf))
@@ -148,6 +162,14 @@ abstract class BaseActivity : AppCompatActivity() {
         return NetworkHelper.checkNetwork(context)
     }
 
+
+    fun showProgressBar(pg: ProgressBar) {
+        pg.visibility = View.VISIBLE
+    }
+
+    fun hideProgressBar(pg: ProgressBar) {
+        pg.visibility = View.GONE
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()

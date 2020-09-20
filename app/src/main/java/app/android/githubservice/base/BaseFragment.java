@@ -3,7 +3,6 @@ package app.android.githubservice.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper;
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom;
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences;
 
@@ -123,14 +123,7 @@ public abstract class BaseFragment extends Fragment {
                 .show();
     }*/
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return Objects.requireNonNull(cm).getActiveNetworkInfo() != null && Objects.requireNonNull(cm.getActiveNetworkInfo()).isConnected();
-    }
-
-    public void checkNetworkAndInternet() {
-        if (!isNetworkConnected()) {
-            //showAlerter(getResources().getString(R.string.text_error_connection), getResources().getString(R.string.msg_error_connection));
-        }
+    public boolean isNetworkConnected(Context context) {
+        return NetworkHelper.Companion.checkNetwork(context);
     }
 }

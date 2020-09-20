@@ -7,6 +7,4 @@ class AuthRepository(private val api: GitHubApi) : BaseRepository() {
     suspend fun authUser(username: String) = safeCallApi {
         api.checkUserIsValid(username)
     }
-
-
 }
