@@ -84,7 +84,7 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
     }
 
     override fun getRepository(): BaseRepository {
-        return AuthRepository(RetrofitInstance().getApi())
+        return AuthRepository(RetrofitInstance.api)
     }
 
     override fun getViewModel() = AuthViewModel::class.java

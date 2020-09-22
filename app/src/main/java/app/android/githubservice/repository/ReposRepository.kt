@@ -4,8 +4,8 @@ import app.android.githubservice.network.GitHubApi
 
 class ReposRepository(private val api: GitHubApi) : BaseRepository() {
 
-    suspend fun getRepos(username: String) = safeCallApi {
-        api.getRepositories(username)
+    suspend fun getRepos(username: String, page: Int, per_page: Int) = safeCallApi {
+        api.getRepositories(username, page, per_page)
     }
 
 }

@@ -1,6 +1,6 @@
 package app.android.githubservice.network
 
-import app.android.githubservice.model.repo.RepoModel
+import app.android.githubservice.model.RepositoryResponse
 import app.android.githubservice.model.search.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,7 +17,9 @@ interface GitHubApi {
 
 
     @GET("/users/{user}/repos")
-    suspend fun getRepositories(@Path("user") username: String): RepoModel
-
+    suspend fun getRepositories(@Path("user") username: String
+                                , @Query("page") page:Int
+                                , @Query("per_page") per_page:Int
+    ): RepositoryResponse
 
 }

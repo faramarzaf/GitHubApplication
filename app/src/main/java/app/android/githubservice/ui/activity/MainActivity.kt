@@ -2,9 +2,10 @@ package app.android.githubservice.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.ViewModelProvider
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivity
 import app.android.githubservice.network.RetrofitInstance
@@ -18,29 +19,30 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<RepositoriesViewModel>() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController())
+        btnget.setOnClickListener {
+            viewModel.getRepos(MyPreferences.readString(this, KEY_USERNAME,"faramarzaf"),1,1000)
+        }
         handleAuthResponse()
-        viewModel.getRepos(MyPreferences.readString(this, KEY_USERNAME, "faramarz"))
     }
-
 
     fun handleAuthResponse() {
         viewModel.reposResponse.observe(this, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    for (i in response.value.repos) {
+                    for (i in response.value) {
                         Log.d("TAG00Results", " RESPONSE:         " + i.name)
                     }
                 }
                 is Resource.Failure -> {
                     if (response.isNetworkError) {
-                        toast("Check your connection!")
+                        Toast.makeText(applicationContext, "Check your connection!", Toast.LENGTH_SHORT).show()
+                        //toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
+
                 }
             }
         })
@@ -48,9 +50,8 @@ class MainActivity : BaseActivity<RepositoriesViewModel>() {
 
 
 
-
     override fun getRepository(): BaseRepository {
-        return ReposRepository(RetrofitInstance().getApi())
+        return ReposRepository(RetrofitInstance.api)
     }
 
     override fun getViewModel()=
