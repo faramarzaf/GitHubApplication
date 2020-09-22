@@ -1,8 +1,6 @@
 package app.android.githubservice.model.repo
 
 
-import app.android.githubservice.model.repo.License
-import app.android.githubservice.model.repo.Owner
 import com.google.gson.annotations.SerializedName
 
 data class RepoModelItem(

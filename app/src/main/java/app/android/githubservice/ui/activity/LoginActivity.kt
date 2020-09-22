@@ -5,13 +5,12 @@ import android.view.View
 import androidx.lifecycle.Observer
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivity
+import app.android.githubservice.model.search.SearchResponse
 import app.android.githubservice.network.RetrofitInstance
 import app.android.githubservice.repository.AuthRepository
 import app.android.githubservice.repository.BaseRepository
 import app.android.githubservice.repository.Resource
-import app.android.githubservice.util.KEY_IS_LOGGED_IN
-import app.android.githubservice.util.KEY_PASSWORD
-import app.android.githubservice.util.KEY_USERNAME
+import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.AuthViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.StringHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
@@ -62,6 +61,7 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
                     } else {
                         hideProgressBar(authProgressBar)
                         MyPreferences.writeBoolean(this, KEY_IS_LOGGED_IN, true)
+                        saveUsefulUrls(it.value)
                         toActivity(MainActivity::class.java)
                     }
                 }
@@ -74,6 +74,13 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
                 }
             }
         })
+    }
+
+    private fun saveUsefulUrls(response: SearchResponse) {
+        for (info in response.items) {
+            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
+            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
+        }
     }
 
     override fun getRepository(): BaseRepository {

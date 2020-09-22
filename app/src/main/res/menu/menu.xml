@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/repositoriesFragment"
+        android:title="Repositories"
+        android:icon="@drawable/ic_repo" />
+
+    <item android:id="@+id/searchFragment"
+        android:title="Search"
+        android:icon="@drawable/ic_search" />
+
+    <item android:id="@+id/StarredFragment"
+        android:title="starred"
+        android:icon="@drawable/ic_star" />
+
+</menu>

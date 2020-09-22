@@ -1,4 +1,8 @@
 package app.android.githubservice.model.repo
 
+import com.google.gson.annotations.SerializedName
 
-class RepoModel : ArrayList<RepoModelItem>()
+
+data class RepoModel(
+    val repos: MutableList<RepoModelItem>
+)
