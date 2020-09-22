@@ -17,9 +17,10 @@ interface GitHubApi {
 
 
     @GET("/users/{user}/repos")
-    suspend fun getRepositories(@Path("user") username: String
-                                , @Query("page") page:Int
-                                , @Query("per_page") per_page:Int
+    suspend fun getRepositories(
+        @Path("user") username: String
+        , @Query("page") page: Int
+        , @Query("per_page") per_page: Int
     ): RepositoryResponse
 
 }

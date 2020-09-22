@@ -12,15 +12,12 @@ abstract class GitHubDatabase : RoomDatabase() {
     abstract fun getGitHubDao(): GitHubDao
 
     companion object {
-        // other threads can see immediately when a thread changes this instance
         @Volatile
         private var instance: GitHubDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            // synchronized(LOCK) ---> everything that happens inside of this block code ---> can be access by other threads at the same time
-            // so with this below code we make sure that we dont set this instance while we already set it.
-            instance ?: createDatabase(context).also { instance = it }
+             instance ?: createDatabase(context).also { instance = it }
         }
 
         private fun createDatabase(context: Context) =

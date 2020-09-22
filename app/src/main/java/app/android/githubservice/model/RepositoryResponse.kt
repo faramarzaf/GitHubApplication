@@ -4,7 +4,7 @@ package app.android.githubservice.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class RepositoryResponse : ArrayList<RepositoryResponse.RepositoryModelItem>(){
+class RepositoryResponse : ArrayList<RepositoryResponse.RepositoryModelItem>() {
     data class RepositoryModelItem(
         @SerializedName("archive_url")
         val archiveUrl: String?,
@@ -152,7 +152,7 @@ class RepositoryResponse : ArrayList<RepositoryResponse.RepositoryModelItem>(){
         val watchers: Int?,
         @SerializedName("watchers_count")
         val watchersCount: Int?
-    ):Serializable {
+    ) : Serializable {
         data class License(
             @SerializedName("key")
             val key: String?,
@@ -164,8 +164,8 @@ class RepositoryResponse : ArrayList<RepositoryResponse.RepositoryModelItem>(){
             val spdxId: String?,
             @SerializedName("url")
             val url: String?
-        ):Serializable
-    
+        ) : Serializable
+
         data class Owner(
             @SerializedName("avatar_url")
             val avatarUrl: String?,
@@ -203,6 +203,6 @@ class RepositoryResponse : ArrayList<RepositoryResponse.RepositoryModelItem>(){
             val type: String?,
             @SerializedName("url")
             val url: String?
-        ):Serializable
+        ) : Serializable
     }
 }
