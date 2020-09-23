@@ -9,7 +9,7 @@
         android:title="Search"
         android:icon="@drawable/ic_search" />
 
-    <item android:id="@+id/StarredFragment"
+    <item android:id="@+id/starredFragment"
         android:title="starred"
         android:icon="@drawable/ic_star" />
 
