@@ -9,3 +9,5 @@ const val KEY_HTML_URL = "htmlurl"
 const val KEY_AVATAR_URL = "avatarturl"
 const val BASE_URL = "https://api.github.com"
 const val DEFAULT_USER = "faramarzaf"
+const val MAX_PAGE = 10000
+const val MIN_PAGE = 1
