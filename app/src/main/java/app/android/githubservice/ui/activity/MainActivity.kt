@@ -19,6 +19,7 @@ class MainActivity : BaseActivity<RepositoriesViewModel>(), BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setDefaultFragment()
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
     }
 
@@ -31,10 +32,15 @@ class MainActivity : BaseActivity<RepositoriesViewModel>(), BottomNavigationView
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.repositoriesFragment -> setFragments(R.id.flFragment, ReposFragment(), false)
-            R.id.searchFragment -> setFragments(R.id.flFragment, SearchFragment(), false)
-            R.id.starredFragment -> setFragments(R.id.flFragment, StarredFragment(), false)
+            R.id.repositoriesFragment -> setFragments(R.id.container, ReposFragment().newInstance(), false)
+            R.id.searchFragment -> setFragments(R.id.container, SearchFragment().newInstance(), false)
+            R.id.starredFragment -> setFragments(R.id.container, StarredFragment().newInstance(), false)
         }
         return true
     }
+
+    private fun setDefaultFragment() {
+        setFragments(R.id.container, ReposFragment().newInstance(), false)
+    }
+
 }

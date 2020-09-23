@@ -27,14 +27,15 @@ import static app.android.githubservice.util.ConstantsKt.KEY_SESSION_ID;
 
 public abstract class BaseFragment extends Fragment {
 
-    private String TAG = BaseFragment.class.getSimpleName();
-
     protected ProgressDialogCustom mProgressDialog;
+
+    protected abstract int getFragmentLayout();
+
+    public abstract Fragment newInstance();
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
     @Override
@@ -74,9 +75,6 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(getFragmentLayout(), container, false);
     }
-
-
-    protected abstract int getFragmentLayout();
 
 
     @Override

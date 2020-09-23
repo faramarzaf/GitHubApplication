@@ -2,10 +2,9 @@ package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AbsListView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.repository.Resource
@@ -26,6 +25,10 @@ class ReposFragment : BaseFragment() {
         return R.layout.fragment_repos
     }
 
+    override fun newInstance(): Fragment {
+        return ReposFragment()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +40,6 @@ class ReposFragment : BaseFragment() {
             toast(it.name)
         }
     }
-
 
     private fun fetchRepositoryData() {
         showProgressBar()
@@ -59,7 +61,6 @@ class ReposFragment : BaseFragment() {
         })
     }
 
-
     private fun hideProgressBar() {
         paginationProgressBar.visibility = View.INVISIBLE
 
@@ -78,6 +79,4 @@ class ReposFragment : BaseFragment() {
 
         }
     }
-
-
 }
