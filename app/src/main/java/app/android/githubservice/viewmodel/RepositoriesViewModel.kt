@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.android.githubservice.model.RepositoryResponse
+import app.android.githubservice.entity.repo.RepositoryResponse
 import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import kotlinx.coroutines.launch

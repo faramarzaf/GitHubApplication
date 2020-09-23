@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivity
-import app.android.githubservice.network.RetrofitInstance
+import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.BaseRepository
 import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.ui.fragment.ReposFragment

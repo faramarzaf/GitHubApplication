@@ -5,8 +5,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivity
-import app.android.githubservice.model.search.SearchResponse
-import app.android.githubservice.network.RetrofitInstance
+import app.android.githubservice.entity.search.SearchResponse
+import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.AuthRepository
 import app.android.githubservice.repository.BaseRepository
 import app.android.githubservice.repository.Resource

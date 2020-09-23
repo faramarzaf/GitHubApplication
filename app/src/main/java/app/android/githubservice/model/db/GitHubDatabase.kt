@@ -1,10 +1,10 @@
-package app.android.githubservice.db
+package app.android.githubservice.model.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import app.android.githubservice.model.search.Item
+import app.android.githubservice.entity.search.Item
 
 @Database(entities = [Item::class], version = 1)
 abstract class GitHubDatabase : RoomDatabase() {
@@ -17,7 +17,8 @@ abstract class GitHubDatabase : RoomDatabase() {
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-             instance ?: createDatabase(context).also { instance = it }
+             instance ?: createDatabase(context)
+                 .also { instance = it }
         }
 
         private fun createDatabase(context: Context) =

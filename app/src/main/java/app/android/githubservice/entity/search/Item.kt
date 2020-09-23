@@ -1,4 +1,4 @@
-package app.android.githubservice.model.search
+package app.android.githubservice.entity.search
 
 
 import androidx.room.Entity

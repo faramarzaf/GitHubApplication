@@ -1,4 +1,4 @@
-package app.android.githubservice.network
+package app.android.githubservice.model.network
 
 import app.android.githubservice.util.BASE_URL
 import okhttp3.OkHttpClient

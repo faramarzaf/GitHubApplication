@@ -1,7 +1,7 @@
-package app.android.githubservice.network
+package app.android.githubservice.model.network
 
-import app.android.githubservice.model.RepositoryResponse
-import app.android.githubservice.model.search.SearchResponse
+import app.android.githubservice.entity.repo.RepositoryResponse
+import app.android.githubservice.entity.search.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

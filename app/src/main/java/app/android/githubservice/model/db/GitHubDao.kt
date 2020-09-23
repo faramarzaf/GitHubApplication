@@ -1,8 +1,8 @@
-package app.android.githubservice.db
+package app.android.githubservice.model.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import app.android.githubservice.model.search.Item
+import app.android.githubservice.entity.search.Item
 
 @Dao
 interface GitHubDao {

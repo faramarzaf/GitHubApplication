@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.android.githubservice.model.search.SearchResponse
+import app.android.githubservice.entity.search.SearchResponse
 import app.android.githubservice.repository.AuthRepository
 import app.android.githubservice.repository.Resource
 import kotlinx.coroutines.launch

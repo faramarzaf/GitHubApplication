@@ -1,6 +1,6 @@
 package app.android.githubservice.repository
 
-import app.android.githubservice.network.GitHubApi
+import app.android.githubservice.model.network.GitHubApi
 
 class AuthRepository(private val api: GitHubApi) : BaseRepository() {
 

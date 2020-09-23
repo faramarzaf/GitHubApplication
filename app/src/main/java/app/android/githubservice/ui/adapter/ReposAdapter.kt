@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
-import app.android.githubservice.model.RepositoryResponse.RepositoryModelItem
+import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
 
