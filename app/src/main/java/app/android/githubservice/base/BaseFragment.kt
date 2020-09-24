@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
@@ -25,9 +26,23 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun newInstance(): Fragment?
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(getFragmentLayout, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
 
     override fun onDetach() {
         super.onDetach()
@@ -58,20 +73,17 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    fun showProgressBar(pg: ProgressBar) {
+        pg.visibility = View.VISIBLE
+    }
+
+    fun hideProgressBar(pg: ProgressBar) {
+        pg.visibility = View.GONE
+    }
+
+
     fun toast(msg: String?) {
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getFragmentLayout, container, false)
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     val sessionId: String
@@ -88,7 +100,8 @@ abstract class BaseFragment : Fragment() {
 
     fun toActivityWithSharedElement(activity: Activity?, destination: Class<*>?, view: View?) {
         val intent = Intent(activity, destination)
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), requireView(),
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            requireActivity(), requireView(),
             Objects.requireNonNull(ViewCompat.getTransitionName(requireView())).toString()
         )
         startActivity(intent, options.toBundle())

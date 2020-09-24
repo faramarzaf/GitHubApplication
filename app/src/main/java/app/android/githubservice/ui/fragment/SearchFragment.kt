@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.network.RetrofitInstance
+import app.android.githubservice.repository.BaseRepository
+import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.viewmodel.RepositoriesViewModel
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_starred.*
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -36,6 +37,7 @@ class SearchFragment : BaseFragment() {
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_search
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,11 +57,13 @@ class SearchFragment : BaseFragment() {
         editTextSearch.addTextChangedListener { editable ->
             job?.cancel()
             job = viewLifecycleOwner.lifecycle.coroutineScope.launch {
-                showProgressBar()
+                showProgressBar(searchProgressBar)
                 delay(500)
                 editable?.let {
                     if (editable.toString().isNotEmpty()) {
                         viewModel.searchUser(editable.toString(), MIN_PAGE, MAX_PAGE)
+                    } else {
+                        hideProgressBar(searchProgressBar)
                     }
                 }
             }
@@ -70,12 +74,12 @@ class SearchFragment : BaseFragment() {
         viewModel.searchResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    hideProgressBar()
+                    hideProgressBar(searchProgressBar)
                     searchAdapter.differ.submitList(response.value.items)
                     rv_search.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
-                    hideProgressBar()
+                    hideProgressBar(searchProgressBar)
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
@@ -83,16 +87,6 @@ class SearchFragment : BaseFragment() {
                 }
             }
         })
-    }
-
-    private fun hideProgressBar() {
-        searchProgressBar.visibility = View.INVISIBLE
-
-    }
-
-    private fun showProgressBar() {
-        searchProgressBar.visibility = View.VISIBLE
-
     }
 
     private fun setupRecyclerView() {
@@ -103,6 +97,5 @@ class SearchFragment : BaseFragment() {
 
         }
     }
-
 
 }
