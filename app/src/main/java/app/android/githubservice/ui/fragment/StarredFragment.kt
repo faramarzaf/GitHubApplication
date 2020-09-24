@@ -27,9 +27,9 @@ class StarredFragment : BaseFragment() {
     lateinit var starredAdapter: StarredAdapter
 
 
-    override fun getFragmentLayout(): Int {
-        return R.layout.fragment_starred
-    }
+    override val getFragmentLayout: Int
+        get() = R.layout.fragment_starred
+
 
     override fun newInstance(): Fragment {
         return StarredFragment()

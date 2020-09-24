@@ -11,9 +11,7 @@ class SearchFragment : BaseFragment() {
         return SearchFragment()
     }
 
-    override fun getFragmentLayout(): Int {
-        return R.layout.fragment_search
-    }
-
+    override val getFragmentLayout: Int
+        get() = R.layout.fragment_search
 
 }

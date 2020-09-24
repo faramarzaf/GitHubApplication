@@ -17,7 +17,6 @@ import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import kotlinx.android.synthetic.main.fragment_repos.*
-import kotlinx.android.synthetic.main.fragment_starred.*
 
 
 class ReposFragment : BaseFragment() {
@@ -25,9 +24,8 @@ class ReposFragment : BaseFragment() {
     lateinit var viewModel: RepositoriesViewModel
     lateinit var reposAdapter: ReposAdapter
 
-    override fun getFragmentLayout(): Int {
-        return R.layout.fragment_repos
-    }
+    override val getFragmentLayout: Int
+        get() = R.layout.fragment_repos
 
     override fun newInstance(): Fragment {
         return ReposFragment()
@@ -52,7 +50,7 @@ class ReposFragment : BaseFragment() {
                 is Resource.Success -> {
                     hideProgressBar()
                     reposAdapter.differ.submitList(response.value)
-                    rv_repos.setPadding(0,0,0,0)
+                    rv_repos.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
                     hideProgressBar()
