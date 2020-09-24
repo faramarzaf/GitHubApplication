@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/repositoriesFragment"
-        android:title="Repositories"
-        android:icon="@drawable/ic_repo" />
+    <item
+        android:id="@+id/repositoriesFragment"
+        android:icon="@drawable/ic_repo"
+        android:title="Repositories" />
 
-    <item android:id="@+id/searchFragment"
-        android:title="Search"
-        android:icon="@drawable/ic_search" />
+    <item
+        android:id="@+id/starredFragment"
+        android:icon="@drawable/ic_star"
+        android:title="starred" />
 
-    <item android:id="@+id/starredFragment"
-        android:title="starred"
-        android:icon="@drawable/ic_star" />
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/ic_fav"
+        android:title="Favorites" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_setting"
+        android:title="Settings" />
 
 </menu>
