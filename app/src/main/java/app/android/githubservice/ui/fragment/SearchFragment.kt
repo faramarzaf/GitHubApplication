@@ -1,5 +1,6 @@
 package app.android.githubservice.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -9,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.entity.search.Item
+import app.android.githubservice.model.db.GitHubDatabase
 import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.SearchRepository
@@ -18,6 +21,7 @@ import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.item_list_searched_users.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,13 +36,16 @@ class SearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ViewModelFactory(SearchRepository(RetrofitInstance.api))
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+        initViewModel()
         setupRecyclerView()
         getUsersList()
         fetchSearchRepositoryData()
         searchAdapter.setOnItemClickListener {
             toast(it.login)
+        }
+        searchAdapter.setOnSaveUserClickListener {
+            //imageFav.setColorFilter(Color.RED)
+            saveUser(it)
         }
     }
 
@@ -79,12 +86,21 @@ class SearchFragment : BaseFragment() {
         })
     }
 
+    private fun initViewModel() {
+        val factory = ViewModelFactory(SearchRepository(RetrofitInstance.api, GitHubDatabase(requireActivity())))
+        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+
+    }
+
+    private fun saveUser(user: Item) {
+        viewModel.saveUser(user)
+    }
+
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter()
         rv_search.apply {
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(activity)
-
         }
     }
 

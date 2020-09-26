@@ -10,7 +10,7 @@ interface GitHubDao {
     suspend fun upsert(article: Item): Long
 
     @Query("SELECT * FROM users")
-    fun getUser(): LiveData<List<Item>>
+    fun getAllUsers(): LiveData<List<Item>>
 
     @Delete
     suspend fun deleteUser(user: Item)
