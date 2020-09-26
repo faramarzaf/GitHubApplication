@@ -24,9 +24,6 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract val getFragmentLayout: Int
 
-    abstract fun newInstance(): Fragment?
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
     }

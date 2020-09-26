@@ -2,15 +2,12 @@ package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.network.RetrofitInstance
-import app.android.githubservice.repository.BaseRepository
-import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.StarredRepository
 import app.android.githubservice.ui.adapter.StarredAdapter
@@ -18,7 +15,6 @@ import app.android.githubservice.util.DEFAULT_USER
 import app.android.githubservice.util.KEY_USERNAME
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
-import app.android.githubservice.viewmodel.RepositoriesViewModel
 import app.android.githubservice.viewmodel.StarredViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
@@ -32,12 +28,6 @@ class StarredFragment : BaseFragment() {
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_starred
-
-
-    override fun newInstance(): Fragment {
-        return StarredFragment()
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

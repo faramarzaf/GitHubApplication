@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/reposFragment">
+
+    <fragment
+        android:id="@+id/reposFragment"
+        android:name="app.android.githubservice.ui.fragment.ReposFragment"
+        android:label="fragment_repos"
+        tools:layout="@layout/fragment_repos" />
+    <fragment
+        android:id="@+id/starredFragment"
+        android:name="app.android.githubservice.ui.fragment.StarredFragment"
+        android:label="fragment_starred"
+        tools:layout="@layout/fragment_starred" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="app.android.githubservice.ui.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="app.android.githubservice.ui.fragment.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="app.android.githubservice.ui.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

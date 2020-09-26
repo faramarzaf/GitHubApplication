@@ -3,22 +3,18 @@ package app.android.githubservice.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.network.RetrofitInstance
-import app.android.githubservice.repository.BaseRepository
-import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
-import app.android.githubservice.viewmodel.RepositoriesViewModel
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -31,14 +27,8 @@ class SearchFragment : BaseFragment() {
     lateinit var viewModel: SearchViewModel
     lateinit var searchAdapter: SearchAdapter
 
-    override fun newInstance(): Fragment {
-        return SearchFragment()
-    }
-
     override val getFragmentLayout: Int
         get() = R.layout.fragment_search
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +46,7 @@ class SearchFragment : BaseFragment() {
         var job: Job? = null
         editTextSearch.addTextChangedListener { editable ->
             job?.cancel()
-            job = viewLifecycleOwner.lifecycle.coroutineScope.launch {
+            job = lifecycleScope.launch {
                 showProgressBar(searchProgressBar)
                 delay(500)
                 editable?.let {

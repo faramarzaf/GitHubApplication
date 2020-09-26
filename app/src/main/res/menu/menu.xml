@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/repositoriesFragment"
+        android:id="@+id/reposFragment"
         android:icon="@drawable/ic_repo"
         android:title="Repositories" />
 
