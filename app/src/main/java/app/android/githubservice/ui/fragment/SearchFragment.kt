@@ -1,6 +1,5 @@
 package app.android.githubservice.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -21,7 +20,6 @@ import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.item_list_searched_users.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -44,7 +42,6 @@ class SearchFragment : BaseFragment() {
             toast(it.login)
         }
         searchAdapter.setOnSaveUserClickListener {
-            //imageFav.setColorFilter(Color.RED)
             saveUser(it)
         }
     }

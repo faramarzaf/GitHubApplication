@@ -47,6 +47,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             setOnClickListener {
                 onItemClickListener?.let { it(searchInfo) }
             }
+
             imageFav.setOnClickListener {
                 onSaveUserClickListener?.let {
                     it(searchInfo)

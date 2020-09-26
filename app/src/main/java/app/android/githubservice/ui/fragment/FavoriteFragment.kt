@@ -20,8 +20,8 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment : BaseFragment() {
 
-    lateinit var viewModel: SearchViewModel
-    lateinit var savedAdapter: SavedAdapter
+    private lateinit var viewModel: SearchViewModel
+    private lateinit var savedAdapter: SavedAdapter
 
 
     override val getFragmentLayout: Int
@@ -30,19 +30,25 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ViewModelFactory(SearchRepository(RetrofitInstance.api, GitHubDatabase(requireActivity())))
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+        initViewModel()
         setupRecyclerView()
-
+        swipeRemoving(view)
         savedAdapter.setOnItemClickListener {
             toast(it.login)
         }
+        observeUsersList()
+    }
 
 
+    private fun observeUsersList() {
+        viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { articles ->
+            savedAdapter.differ.submitList(articles)
+        })
+    }
 
-        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+    private fun swipeRemoving(view: View) {
+
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return true
             }
@@ -51,7 +57,7 @@ class FavoriteFragment : BaseFragment() {
                 val position = viewHolder.adapterPosition
                 val user = savedAdapter.differ.currentList[position]
                 viewModel.deleteUser(user)
-                Snackbar.make(view, "Successfully deleted article", Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(view, "Successfully deleted user", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo") {
                         viewModel.saveUser(user)
                     }
@@ -63,13 +69,12 @@ class FavoriteFragment : BaseFragment() {
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(rv_saved)
         }
-
-        viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { articles ->
-            savedAdapter.differ.submitList(articles)
-        })
-
     }
 
+    private fun initViewModel() {
+        val factory = ViewModelFactory(SearchRepository(RetrofitInstance.api, GitHubDatabase(requireActivity())))
+        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+    }
 
     private fun setupRecyclerView() {
         savedAdapter = SavedAdapter()

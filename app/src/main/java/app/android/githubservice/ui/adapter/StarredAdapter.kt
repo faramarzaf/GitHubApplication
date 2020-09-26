@@ -41,7 +41,6 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
     override fun onBindViewHolder(holder: StarredViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
-            //Glide.with(this).load(article.urlToImage).into(ivRepositoryResponse.RepositoryModelItemImage)
             text_repo_name.text = repoInfo.name
             text_stars.text = repoInfo.stargazersCount.toString()
 
