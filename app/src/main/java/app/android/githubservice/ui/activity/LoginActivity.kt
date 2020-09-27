@@ -78,8 +78,8 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
 
     private fun saveUsefulUrls(response: SearchResponse) {
         for (info in response.items) {
-            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
-            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
+            MyPreferences.writeString(this, AVATAR_URL, info.avatarUrl.toString())
+            MyPreferences.writeString(this, HTML_URL, info.htmlUrl.toString())
         }
     }
 

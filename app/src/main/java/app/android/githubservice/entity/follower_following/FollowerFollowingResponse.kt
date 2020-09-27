@@ -6,40 +6,40 @@ import com.google.gson.annotations.SerializedName
 class FollowerFollowingResponse : ArrayList<FollowerFollowingResponse.FollowerFollowingItem>(){
     data class FollowerFollowingItem(
         @SerializedName("avatar_url")
-        val avatarUrl: String,
+        val avatarUrl: String?,
         @SerializedName("events_url")
-        val eventsUrl: String,
+        val eventsUrl: String?,
         @SerializedName("followers_url")
-        val followersUrl: String,
+        val followersUrl: String?,
         @SerializedName("following_url")
-        val followingUrl: String,
+        val followingUrl: String?,
         @SerializedName("gists_url")
-        val gistsUrl: String,
+        val gistsUrl: String?,
         @SerializedName("gravatar_id")
-        val gravatarId: String,
+        val gravatarId: String?,
         @SerializedName("html_url")
-        val htmlUrl: String,
+        val htmlUrl: String?,
         @SerializedName("id")
-        val id: Int,
+        val id: Int?,
         @SerializedName("login")
-        val login: String,
+        val login: String?,
         @SerializedName("node_id")
-        val nodeId: String,
+        val nodeId: String?,
         @SerializedName("organizations_url")
-        val organizationsUrl: String,
+        val organizationsUrl: String?,
         @SerializedName("received_events_url")
-        val receivedEventsUrl: String,
+        val receivedEventsUrl: String?,
         @SerializedName("repos_url")
-        val reposUrl: String,
+        val reposUrl: String?,
         @SerializedName("site_admin")
-        val siteAdmin: Boolean,
+        val siteAdmin: Boolean?,
         @SerializedName("starred_url")
-        val starredUrl: String,
+        val starredUrl: String?,
         @SerializedName("subscriptions_url")
-        val subscriptionsUrl: String,
+        val subscriptionsUrl: String?,
         @SerializedName("type")
-        val type: String,
+        val type: String?,
         @SerializedName("url")
-        val url: String
+        val url: String?
     )
 }
