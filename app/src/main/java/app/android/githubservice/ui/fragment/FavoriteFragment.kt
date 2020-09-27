@@ -1,5 +1,6 @@
 package app.android.githubservice.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -15,7 +16,8 @@ import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.SavedAdapter
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
+import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
+import com.faramarzaf.sdk.af_android_sdk.core.ui.SimpleSnackbar
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment : BaseFragment() {
@@ -57,12 +59,12 @@ class FavoriteFragment : BaseFragment() {
                 val position = viewHolder.adapterPosition
                 val user = savedAdapter.differ.currentList[position]
                 viewModel.deleteUser(user)
-                Snackbar.make(view, "Successfully deleted user", Snackbar.LENGTH_LONG).apply {
-                    setAction("Undo") {
-                        viewModel.saveUser(user)
-                    }
-                    show()
-                }
+                SimpleSnackbar.show(view, "Successfully deleted user", "Undo", Color.GRAY,
+                    Color.WHITE, Color.BLUE, true, object : CallbackSnackBar {
+                        override fun onActionClick() {
+                            viewModel.saveUser(user)
+                        }
+                    })
             }
         }
 
