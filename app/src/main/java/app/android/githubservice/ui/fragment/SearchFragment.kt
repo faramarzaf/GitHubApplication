@@ -37,7 +37,7 @@ class SearchFragment : BaseFragment() {
         initViewModel()
         setupRecyclerView()
         getUsersList()
-        fetchSearchRepositoryData()
+        handleSearchRepositoryData()
         searchAdapter.setOnItemClickListener {
             toast(it.login)
         }
@@ -64,7 +64,7 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    private fun fetchSearchRepositoryData() {
+    private fun handleSearchRepositoryData() {
         viewModel.searchResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {

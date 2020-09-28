@@ -23,22 +23,26 @@ import kotlinx.android.synthetic.main.fragment_repos.*
 
 class ReposFragment : BaseFragment() {
 
-    lateinit var viewModel: RepositoriesViewModel
-    lateinit var reposAdapter: ReposAdapter
+    private lateinit var viewModel: RepositoriesViewModel
+    private lateinit var reposAdapter: ReposAdapter
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_repos
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ViewModelFactory(ReposRepository(RetrofitInstance.api))
-        viewModel = ViewModelProvider(this, factory).get(RepositoriesViewModel::class.java)
+        initViewModel()
         viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
         setupRecyclerView()
         fetchRepositoryData()
         reposAdapter.setOnItemClickListener {
             toast(it.name)
         }
+    }
+
+    private fun initViewModel() {
+        val factory = ViewModelFactory(ReposRepository(RetrofitInstance.api))
+        viewModel = ViewModelProvider(this, factory).get(RepositoriesViewModel::class.java)
     }
 
     private fun fetchRepositoryData() {

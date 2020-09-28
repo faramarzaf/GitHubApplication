@@ -79,6 +79,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
 
+    // my sdk
     implementation 'com.github.faramarzaf:Android-SDK:1.0.18'
-
+    
 }

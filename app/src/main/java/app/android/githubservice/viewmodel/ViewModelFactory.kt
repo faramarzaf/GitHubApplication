@@ -13,7 +13,8 @@ class ViewModelFactory(private val repository: BaseRepository) : ViewModelProvid
             modelClass.isAssignableFrom(RepositoriesViewModel::class.java) -> RepositoriesViewModel(repository as ReposRepository) as T
             modelClass.isAssignableFrom(StarredViewModel::class.java) -> StarredViewModel(repository as StarredRepository) as T
             modelClass.isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(repository as SearchRepository) as T
-
+            modelClass.isAssignableFrom(FollowersViewModel::class.java) -> FollowersViewModel(repository as FollowersRepository) as T
+            modelClass.isAssignableFrom(FollowingViewModel::class.java) -> FollowingViewModel(repository as FollowingRepository) as T
             else -> throw IllegalArgumentException("View model class not found")
         }
     }
