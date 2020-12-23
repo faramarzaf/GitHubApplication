@@ -2,7 +2,6 @@ package app.android.githubservice.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import app.android.githubservice.ui.fragment.FollowersFragment
 import app.android.githubservice.ui.fragment.FollowingFragment

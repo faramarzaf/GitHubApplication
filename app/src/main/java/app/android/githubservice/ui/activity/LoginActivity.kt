@@ -22,6 +22,7 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        transparentToolbar(this)
         btnLogin.setOnClickListener(this)
         handleAuthResponse()
         checkUserIsAuth()
