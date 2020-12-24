@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import app.android.githubservice.R
 import app.android.githubservice.util.KEY_SESSION_ID
 import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper.Companion.checkNetwork
+import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences.Prefs.readString
 import java.util.*
@@ -30,6 +31,11 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getFragmentLayout, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.let { transparentToolbar(it) }
     }
 
     override fun onStart() {
@@ -102,6 +108,10 @@ abstract class BaseFragment : Fragment() {
             Objects.requireNonNull(ViewCompat.getTransitionName(requireView())).toString()
         )
         startActivity(intent, options.toBundle())
+    }
+
+    fun transparentToolbar(activity: Activity) {
+        ScreenHelper.hideToolbar(activity)
     }
 
     /*    public void showAlerter(String title, String message) {

@@ -5,5 +5,10 @@
     <string name="login">Login</string>
     <string name="remember_me">Remember me</string>
     <string name="username">username</string>
+    <string name="repositories">Repositories</string>
+    <string name="starred">starred</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
 
 </resources>

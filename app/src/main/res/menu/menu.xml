@@ -4,26 +4,26 @@
     <item
         android:id="@+id/reposFragment"
         android:icon="@drawable/ic_repo"
-        android:title="Repositories" />
+        android:title="@string/repositories" />
 
     <item
         android:id="@+id/starredFragment"
         android:icon="@drawable/ic_star"
-        android:title="starred" />
+        android:title="@string/starred" />
 
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
-        android:title="Search" />
+        android:title="@string/search" />
 
     <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/ic_fav"
-        android:title="Favorites" />
+        android:title="@string/favorites" />
 
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_setting"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
 </menu>
