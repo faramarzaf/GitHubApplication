@@ -16,9 +16,9 @@
         android:drawableStart="@drawable/ic_profile"
         android:drawablePadding="5dp"
         android:drawableTint="#43A047"
-        android:hint="username"
+        android:hint="@string/username"
         android:textColor="#fff"
-        android:textColorHint="#E3E3E3"
+        android:textColorHint="#A8A8A8"
         app:backgroundTint="#E3E3E3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +29,21 @@
 
         />
 
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_remember_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:buttonTint="#43A047"
+        android:checked="false"
+        android:text="@string/remember_me"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
@@ -36,7 +51,7 @@
         android:layout_margin="30dp"
         android:layout_marginBottom="196dp"
         android:background="@drawable/bg_button_login"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,11 +82,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:fontFamily="@font/sansserif"
+        android:text="@string/login"
         android:textColor="#fff"
         android:textSize="38dp"
         android:textStyle="bold"
-        android:fontFamily="@font/sansserif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
