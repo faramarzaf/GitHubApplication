@@ -13,7 +13,7 @@ import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.db.GitHubDatabase
 import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.SearchRepository
-import app.android.githubservice.ui.adapter.SavedAdapter
+import app.android.githubservice.ui.adapter.FavoriteAdapter
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 class FavoriteFragment : BaseFragment() {
 
     private lateinit var viewModel: SearchViewModel
-    private lateinit var savedAdapter: SavedAdapter
+    private lateinit var favoriteAdapter: FavoriteAdapter
 
 
     override val getFragmentLayout: Int
@@ -35,7 +35,7 @@ class FavoriteFragment : BaseFragment() {
         initViewModel()
         setupRecyclerView()
         swipeRemoving(view)
-        savedAdapter.setOnItemClickListener {
+        favoriteAdapter.setOnItemClickListener {
             toast(it.login)
         }
         observeUsersList()
@@ -43,8 +43,11 @@ class FavoriteFragment : BaseFragment() {
 
 
     private fun observeUsersList() {
-        viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { articles ->
-            savedAdapter.differ.submitList(articles)
+        viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { listFavorite ->
+            if (listFavorite.isNotEmpty())
+                favoriteAdapter.differ.submitList(listFavorite)
+            else
+                noDataAvailable()
         })
     }
 
@@ -57,7 +60,7 @@ class FavoriteFragment : BaseFragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val user = savedAdapter.differ.currentList[position]
+                val user = favoriteAdapter.differ.currentList[position]
                 viewModel.deleteUser(user)
                 SimpleSnackbar.show(view, "Successfully deleted user", "Undo", Color.GRAY,
                     Color.WHITE, Color.BLUE, true, object : CallbackSnackBar {
@@ -79,11 +82,16 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView() {
-        savedAdapter = SavedAdapter()
+        favoriteAdapter = FavoriteAdapter()
         rv_saved.apply {
-            adapter = savedAdapter
+            adapter = favoriteAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+    }
+
+    private fun noDataAvailable() {
+        rv_saved.visibility = View.GONE
+        textNoFavUser.visibility = View.VISIBLE
     }
 
 }

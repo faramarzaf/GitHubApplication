@@ -7,14 +7,12 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
-import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
 import app.android.githubservice.entity.search.Item
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
-import kotlinx.android.synthetic.main.item_list_repos.view.*
 import kotlinx.android.synthetic.main.item_list_saved.view.*
 
 
-class SavedAdapter : RecyclerView.Adapter<SavedAdapter.SavedViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() {
 
     inner class SavedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -44,7 +42,7 @@ class SavedAdapter : RecyclerView.Adapter<SavedAdapter.SavedViewHolder>() {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
             text_save_name.text = repoInfo.login.toString()
-            GlideHelper.circularImage(context,repoInfo.avatarUrl.toString(),imageSavedUsers)
+            GlideHelper.circularImage(context, repoInfo.avatarUrl.toString(), imageSavedUsers)
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }
             }

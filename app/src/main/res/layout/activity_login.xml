@@ -17,6 +17,8 @@
         android:drawablePadding="5dp"
         android:drawableTint="#43A047"
         android:hint="@string/username"
+        android:inputType="text"
+        android:maxLines="1"
         android:textColor="#fff"
         android:textColorHint="#A8A8A8"
         app:backgroundTint="#E3E3E3"
@@ -26,7 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
-
         />
 
     <androidx.appcompat.widget.AppCompatCheckBox
