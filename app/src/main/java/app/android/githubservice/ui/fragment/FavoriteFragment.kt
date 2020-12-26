@@ -46,6 +46,10 @@ class FavoriteFragment : BaseFragment() {
     private fun observeUsersList() {
         viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { listFavorite ->
             favoriteAdapter.differ.submitList(listFavorite)
+            if (listFavorite.isEmpty())
+                noDataisAvailable()
+            else
+                dataisAvailable()
         })
     }
 
@@ -88,12 +92,10 @@ class FavoriteFragment : BaseFragment() {
     }
 
     fun noDataisAvailable() {
-        rv_saved.visibility = View.GONE
         textNoFavUser.visibility = View.VISIBLE
     }
 
     fun dataisAvailable() {
-        rv_saved.visibility = View.VISIBLE
         textNoFavUser.visibility = View.GONE
     }
 }
