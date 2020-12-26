@@ -20,6 +20,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
 import com.faramarzaf.sdk.af_android_sdk.core.ui.SimpleSnackbar
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
+
 class FavoriteFragment : BaseFragment() {
 
     private lateinit var viewModel: SearchViewModel
@@ -44,10 +45,7 @@ class FavoriteFragment : BaseFragment() {
 
     private fun observeUsersList() {
         viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { listFavorite ->
-            if (listFavorite.isNotEmpty())
-                favoriteAdapter.differ.submitList(listFavorite)
-            else
-                noDataAvailable()
+            favoriteAdapter.differ.submitList(listFavorite)
         })
     }
 
@@ -84,14 +82,18 @@ class FavoriteFragment : BaseFragment() {
     private fun setupRecyclerView() {
         favoriteAdapter = FavoriteAdapter()
         rv_saved.apply {
-            adapter = favoriteAdapter
             layoutManager = LinearLayoutManager(activity)
+            adapter = favoriteAdapter
         }
     }
 
-    private fun noDataAvailable() {
+    fun noDataisAvailable() {
         rv_saved.visibility = View.GONE
         textNoFavUser.visibility = View.VISIBLE
     }
 
+    fun dataisAvailable() {
+        rv_saved.visibility = View.VISIBLE
+        textNoFavUser.visibility = View.GONE
+    }
 }
