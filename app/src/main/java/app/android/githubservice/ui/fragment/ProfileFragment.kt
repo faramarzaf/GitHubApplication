@@ -24,7 +24,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SearchFragment : BaseFragment() {
+class ProfileFragment : BaseFragment() {
 
     lateinit var viewModel: SearchViewModel
     lateinit var searchAdapter: SearchAdapter
@@ -100,5 +100,6 @@ class SearchFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(activity)
         }
     }
+
 
 }

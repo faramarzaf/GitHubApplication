@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_starred" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="app.android.githubservice.ui.fragment.SearchFragment"
+        android:name="app.android.githubservice.ui.fragment.ProfileFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
@@ -26,8 +26,8 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/profileFragment"
         android:name="app.android.githubservice.ui.fragment.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>
