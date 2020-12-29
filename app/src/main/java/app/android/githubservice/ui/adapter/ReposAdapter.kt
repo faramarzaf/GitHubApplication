@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
+import app.android.githubservice.entity.LanguageColor
 import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
 
@@ -40,10 +42,14 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
     override fun onBindViewHolder(holder: ReposViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
-            //Glide.with(this).load(article.urlToImage).into(ivRepositoryResponse.RepositoryModelItemImage)
             text_repo_name.text = repoInfo.name
             text_stars.text = repoInfo.stargazersCount.toString()
-
+            val language = repoInfo.language
+            val objarraystring: String = context.resources.openRawResource(R.raw.colors).bufferedReader().use { it.readText() }
+            val objectarray = Gson().fromJson(objarraystring, LanguageColor::class.java)
+            text_language.text = language
+            if (language.isNullOrEmpty())
+                text_language.text = "-"
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }
             }
@@ -53,4 +59,6 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
     fun setOnItemClickListener(listener: (RepositoryModelItem) -> Unit) {
         onItemClickListener = listener
     }
+
+
 }

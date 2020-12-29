@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -53,6 +54,7 @@ class ReposFragment : BaseFragment() {
                     hideProgressBar(reposProgressBar)
                     reposAdapter.differ.submitList(response.value)
                     rv_repos.setPadding(0, 0, 0, 0)
+                    // response.value.get(0).language
                 }
                 is Resource.Failure -> {
                     hideProgressBar(reposProgressBar)
@@ -69,7 +71,10 @@ class ReposFragment : BaseFragment() {
         reposAdapter = ReposAdapter()
         rv_repos.apply {
             adapter = reposAdapter
-            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+            setItemViewCacheSize(20)
+            //  layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context)
 
         }
     }
