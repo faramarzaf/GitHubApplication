@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
-import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
 import app.android.githubservice.entity.starred.StarredResponse
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
@@ -42,7 +41,16 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
             text_repo_name.text = repoInfo.name
-            text_stars.text = repoInfo.stargazersCount.toString()
+            if (repoInfo.stargazersCount!! > 1000) {
+                val startValue = "☆ " + repoInfo.stargazersCount.toString().substring(0, 2) + "K"
+                text_stars.text = startValue
+            } else
+                text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
+
+            val language = repoInfo.language
+            text_language.text = language
+            if (language.isNullOrEmpty())
+                text_language.text = "-"
 
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -75,7 +76,7 @@ class StarredFragment : BaseFragment() {
         starredAdapter = StarredAdapter()
         rv_starred.apply {
             adapter = starredAdapter
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
 
         }
     }

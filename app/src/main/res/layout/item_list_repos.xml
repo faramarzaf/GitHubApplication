@@ -12,23 +12,24 @@
         android:id="@+id/text_repo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:ellipsize="end"
         android:padding="4dp"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/text_stars"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -36,13 +37,25 @@
         <TextView
             android:id="@+id/text_language"
             android:layout_width="0dp"
-            android:layout_weight="6"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
+            android:layout_weight="6"
             android:gravity="end|center"
             android:padding="4dp"
+            android:text="java"
             android:textColor="@color/gray"
             android:textSize="14sp" />
+
+
+        <LinearLayout
+            android:id="@+id/view_colored_language"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dot_language"
+            android:gravity="center"
+            android:orientation="vertical" />
+
 
     </LinearLayout>
 
