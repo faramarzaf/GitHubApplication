@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#101010"
         app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorPrimaryLight"
 
         />
 

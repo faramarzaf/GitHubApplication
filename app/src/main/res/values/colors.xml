@@ -6,7 +6,7 @@
 
     <color name="InactiveBottomNavIconColor">#03DAC5</color>
     <color name="white">#fff</color>
-
+    <color name="colorPrimaryLight">#6F0AFF</color>
 
 
 </resources>
