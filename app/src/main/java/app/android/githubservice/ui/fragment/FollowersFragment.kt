@@ -11,10 +11,7 @@ import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.FollowersRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
-import app.android.githubservice.util.DEFAULT_USER
-import app.android.githubservice.util.KEY_USERNAME
-import app.android.githubservice.util.MAX_PAGE
-import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowersViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
@@ -32,8 +29,8 @@ class FollowersFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         getFollowers()
-        setupRecyclerView()
         handleFollowersRepositoryData()
+        setupRecyclerView()
         followersAdapter.setOnItemClickListener {
             toast(it.login)
         }
@@ -56,6 +53,7 @@ class FollowersFragment : BaseFragment() {
                 is Resource.Success -> {
                     hideProgressBar(followersProgressBar)
                     followersAdapter.differ.submitList(response.value)
+                    MyPreferences.writeString(requireContext(), KEY_FOLLOWERS, followersAdapter.itemCount.toString())
                     rv_followers.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {

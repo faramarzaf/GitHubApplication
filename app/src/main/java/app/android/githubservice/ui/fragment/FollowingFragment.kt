@@ -11,20 +11,17 @@ import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.FollowingRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
-import app.android.githubservice.util.DEFAULT_USER
-import app.android.githubservice.util.KEY_USERNAME
-import app.android.githubservice.util.MAX_PAGE
-import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
-import kotlinx.android.synthetic.main.fragment_followers.*
 import kotlinx.android.synthetic.main.fragment_following.*
 
 class FollowingFragment : BaseFragment() {
 
     private lateinit var viewModel: FollowingViewModel
     private lateinit var followingAdapter: FollowersFollowingAdapter
+
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_following
@@ -57,6 +54,7 @@ class FollowingFragment : BaseFragment() {
                 is Resource.Success -> {
                     hideProgressBar(followingProgressBar)
                     followingAdapter.differ.submitList(response.value)
+                    MyPreferences.writeString(requireContext(), KEY_FOLLOWINGS, followingAdapter.itemCount.toString())
                     rv_following.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
