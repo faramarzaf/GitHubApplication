@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
+import app.android.githubservice.util.LanguageColorGenerator
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
 
@@ -50,20 +51,17 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
             } else
                 text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
 
+            val keyColor = repoInfo.language.toString()
+            val codeColor = LanguageColorGenerator.getColors(context, keyColor)
+            if (codeColor != null)
+                ViewCompat.setBackgroundTintList(view_colored_language, ColorStateList.valueOf(Color.parseColor(codeColor)))
 
             val language = repoInfo.language
-            if (language == "Java")
-                ViewCompat.setBackgroundTintList(view_colored_language, ColorStateList.valueOf(Color.parseColor("#b07219")))
-            else
-                ViewCompat.setBackgroundTintList(view_colored_language, ColorStateList.valueOf(Color.parseColor("#82937f")))
-
-//            Glide.with(this).load(resources.getIdentifier("ic_star","drawable",context.packageName))
-//                .into(icon_star)
-
-
-                text_language.text = language
-            if (language.isNullOrEmpty())
+            text_language.text = language
+            if (language.isNullOrEmpty()) {
                 text_language.text = "-"
+                view_colored_language.visibility = View.GONE
+            }
 
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }
@@ -74,6 +72,5 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
     fun setOnItemClickListener(listener: (RepositoryModelItem) -> Unit) {
         onItemClickListener = listener
     }
-
 
 }

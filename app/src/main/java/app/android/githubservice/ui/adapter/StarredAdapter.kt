@@ -1,13 +1,17 @@
 package app.android.githubservice.ui.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.entity.starred.StarredResponse
+import app.android.githubservice.util.LanguageColorGenerator
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
 
@@ -47,10 +51,17 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
             } else
                 text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
 
+            val keyColor = repoInfo.language.toString()
+            val codeColor = LanguageColorGenerator.getColors(context, keyColor)
+            if (codeColor != null)
+                ViewCompat.setBackgroundTintList(view_colored_language, ColorStateList.valueOf(Color.parseColor(codeColor)))
+
             val language = repoInfo.language
             text_language.text = language
-            if (language.isNullOrEmpty())
+            if (language.isNullOrEmpty()){
                 text_language.text = "-"
+                view_colored_language.visibility = View.GONE
+            }
 
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }
