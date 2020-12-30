@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.network.RetrofitInstance
@@ -71,11 +71,7 @@ class ReposFragment : BaseFragment() {
         reposAdapter = ReposAdapter()
         rv_repos.apply {
             adapter = reposAdapter
-            setHasFixedSize(true)
-            setItemViewCacheSize(20)
-            //  layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-            layoutManager = LinearLayoutManager(context)
-
+            layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
         }
     }
 

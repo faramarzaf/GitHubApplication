@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.entity.LanguageColor
 import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
@@ -43,13 +44,16 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
             text_repo_name.text = repoInfo.name
-            text_stars.text = repoInfo.stargazersCount.toString()
+            text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
             val language = repoInfo.language
-            val objarraystring: String = context.resources.openRawResource(R.raw.colors).bufferedReader().use { it.readText() }
-            val objectarray = Gson().fromJson(objarraystring, LanguageColor::class.java)
+//            Glide.with(this).load(resources.getIdentifier("ic_star","drawable",context.packageName))
+//                .into(icon_star)
+
+
             text_language.text = language
             if (language.isNullOrEmpty())
                 text_language.text = "-"
+
             setOnClickListener {
                 onItemClickListener?.let { it(repoInfo) }
             }
