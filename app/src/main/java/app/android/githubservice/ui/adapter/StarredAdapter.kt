@@ -46,11 +46,16 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
         holder.itemView.apply {
             text_repo_name.text = repoInfo.fullName
             text_repo_desc.text  = repoInfo.description
-            if (repoInfo.stargazersCount!! > 1000) {
+            text_forks.text = repoInfo.forksCount.toString()
+            if (repoInfo.stargazersCount!! > 1000 || repoInfo.forksCount!! > 1000) {
                 val startValue = "☆ " + repoInfo.stargazersCount.toString().substring(0, 2) + "K"
+                val forkValue = repoInfo.forksCount.toString().substring(0, 2) + "K"
                 text_stars.text = startValue
-            } else
+                text_forks.text = forkValue
+            } else {
                 text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
+                text_forks.text = repoInfo.forksCount.toString()
+            }
 
             val keyColor = repoInfo.language.toString()
             val codeColor = LanguageColorGenerator.getColors(context, keyColor)
