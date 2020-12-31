@@ -13,10 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:maxLines="1"
         android:padding="4dp"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimaryLight2X"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/text_repo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:textColor="@color/white"
+            android:textColor="@color/gray"
             android:textSize="14sp" />
 
 

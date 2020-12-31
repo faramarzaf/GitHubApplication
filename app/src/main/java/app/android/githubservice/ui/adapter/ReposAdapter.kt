@@ -48,6 +48,7 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
 
         holder.itemView.apply {
             text_repo_name.text = repoInfo.name
+            text_repo_desc.text  = repoInfo.description
             if (repoInfo.stargazersCount!! > 1000) {
                 val startValue = "☆ " + repoInfo.stargazersCount.toString().substring(0, 2) + "K"
                 text_stars.text = startValue

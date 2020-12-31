@@ -44,7 +44,8 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
     override fun onBindViewHolder(holder: StarredViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
-            text_repo_name.text = repoInfo.name
+            text_repo_name.text = repoInfo.fullName
+            text_repo_desc.text  = repoInfo.description
             if (repoInfo.stargazersCount!! > 1000) {
                 val startValue = "☆ " + repoInfo.stargazersCount.toString().substring(0, 2) + "K"
                 text_stars.text = startValue
