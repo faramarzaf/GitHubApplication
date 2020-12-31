@@ -76,6 +76,7 @@ class StarredFragment : BaseFragment() {
         starredAdapter = StarredAdapter()
         rv_starred.apply {
             adapter = starredAdapter
+            setItemViewCacheSize(500)
             layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
 
         }

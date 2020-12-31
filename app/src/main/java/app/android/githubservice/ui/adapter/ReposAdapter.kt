@@ -43,6 +43,9 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
 
     override fun onBindViewHolder(holder: ReposViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
+        // holder.setIsRecyclable(false) alternative solution for data loosing
+        // but side effect on recycler view performance
+
         holder.itemView.apply {
             text_repo_name.text = repoInfo.name
             if (repoInfo.stargazersCount!! > 1000) {

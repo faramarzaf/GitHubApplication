@@ -69,6 +69,7 @@ class ReposFragment : BaseFragment() {
         reposAdapter = ReposAdapter()
         rv_repos.apply {
             adapter = reposAdapter
+            setItemViewCacheSize(500)
             layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
         }
     }
