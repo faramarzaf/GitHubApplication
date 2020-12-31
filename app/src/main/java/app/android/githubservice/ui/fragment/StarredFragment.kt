@@ -77,7 +77,7 @@ class StarredFragment : BaseFragment() {
         rv_starred.apply {
             adapter = starredAdapter
             setItemViewCacheSize(500)
-            layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context)
 
         }
     }
