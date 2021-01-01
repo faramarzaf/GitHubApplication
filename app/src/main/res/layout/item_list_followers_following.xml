@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    android:background="#D5D5D5"
+    android:background="@drawable/bg_search"
+    android:backgroundTint="#232323"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:padding="4dp">
 
 
     <ImageView
