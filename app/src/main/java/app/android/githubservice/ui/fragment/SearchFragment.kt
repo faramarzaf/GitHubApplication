@@ -21,16 +21,14 @@ import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.item_list_searched_users.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchFragment : BaseFragment() {
 
-    lateinit var viewModel: SearchViewModel
-    lateinit var searchAdapter: SearchAdapter
-    private lateinit var user: Item
+    private lateinit var viewModel: SearchViewModel
+    private lateinit var searchAdapter: SearchAdapter
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_search
@@ -38,34 +36,38 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        setupRecyclerView()
         getUsersList()
-        searchAdapter.getItemInstance {
-            searchAdapter.getViewFromAdapter { views ->
-                if (!viewModel.userExists(it)) {
-                    views.setColorFilter(Color.WHITE)
-                } else
-                    views.setColorFilter(Color.RED)
-            }
-        }
+        setupRecyclerView()
         handleSearchRepositoryData()
-        searchAdapter.setOnItemClickListener {
-            toast(it.login)
-        }
-
-
-        searchAdapter.setOnSaveUserClickListener {
-            if (!viewModel.userExists(it)) {
-                imageFav.setColorFilter(Color.RED)
-                saveUser(it)
-            } else if (viewModel.userExists(it)) {
-                imageFav.setColorFilter(Color.RED)
-                toast("user already in favorite")
-            }
-
-        }
+        favoriteUserOperation()
     }
 
+    private fun favoriteUserOperation() {
+        with(searchAdapter) {
+            getItemInstance {
+                getViewFromAdapter { views ->
+                    if (!viewModel.userExists(it)) {
+                        views.setColorFilter(Color.WHITE)
+                    } else
+                        views.setColorFilter(Color.RED)
+                }
+            }
+            setOnItemClickListener {
+                toast(it.login)
+            }
+            setOnSaveUserClickListener { item, imageview ->
+
+                if (!viewModel.userExists(item)) {
+                    imageview.setColorFilter(Color.RED)
+                    saveUser(item)
+                } else if (viewModel.userExists(item)) {
+                    imageview.setColorFilter(Color.RED)
+                    toast("User is already in favorites!")
+                }
+
+            }
+        }
+    }
 
     private fun getUsersList() {
         var job: Job? = null
@@ -118,10 +120,7 @@ class SearchFragment : BaseFragment() {
         searchAdapter = SearchAdapter()
         rv_search.apply {
             adapter = searchAdapter
-            setItemViewCacheSize(500)
             layoutManager = LinearLayoutManager(activity)
         }
     }
-
-
 }

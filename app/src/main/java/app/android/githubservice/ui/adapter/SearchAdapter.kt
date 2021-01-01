@@ -38,16 +38,18 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     }
 
     private var onItemClickListener: ((Item) -> Unit)? = null
-    private var onSaveUserClickListener: ((Item) -> Unit)? = null
+    private var onSaveUserClickListener: ((Item, ImageView) -> Unit)? = null
     private var getItemInstance: ((Item) -> Unit)? = null
     private var getViewFromAdapter: ((ImageView) -> Unit)? = null
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val searchInfo = differ.currentList[position]
-        val viewimage = holder.itemView.imageFav
+        val imageViewFav = holder.itemView.imageFav
 
-        getViewFromAdapter?.let { views ->
-            views(viewimage)
+        imageViewFav.setOnClickListener {
+            onSaveUserClickListener?.let { item ->
+                item(searchInfo, imageViewFav)
+            }
         }
 
         getItemInstance?.let {
@@ -60,12 +62,8 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             setOnClickListener {
                 onItemClickListener?.let { it(searchInfo) }
             }
-
-            imageFav.setOnClickListener {
-                onSaveUserClickListener?.let {
-                    it(searchInfo)
-                    ///  imageFav.setColorFilter(Color.RED)
-                }
+            getViewFromAdapter?.let { views ->
+                views(imageFav)
             }
         }
     }
@@ -74,7 +72,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         onItemClickListener = listener
     }
 
-    fun setOnSaveUserClickListener(listener: (Item) -> Unit) {
+    fun setOnSaveUserClickListener(listener: (Item, ImageView) -> Unit) {
         onSaveUserClickListener = listener
     }
 
