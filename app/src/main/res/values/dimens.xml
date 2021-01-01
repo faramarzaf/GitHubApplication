@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="global_margin">2dp</dimen>
+    <dimen name="global_margin1X">4dp</dimen>
+    <dimen name="global_margin2X">6dp</dimen>
+    <dimen name="global_margin3X">8dp</dimen>
+    <dimen name="global_margin4X">10dp</dimen>
+    <dimen name="global_margin5X">12dp</dimen>
+    <dimen name="global_margin6X">16dp</dimen>
+    <dimen name="global_margin7X">24dp</dimen>
+    <dimen name="global_margin8X">32dp</dimen>
+    <dimen name="global_margin9X">64dp</dimen>
+
+
+    <dimen name="global_padding">2dp</dimen>
+    <dimen name="global_padding1X">4dp</dimen>
+    <dimen name="global_padding2X">6dp</dimen>
+    <dimen name="global_padding3X">8dp</dimen>
+    <dimen name="global_padding4X">10dp</dimen>
+    <dimen name="global_padding5X">12dp</dimen>
+    <dimen name="global_padding6X">16dp</dimen>
+    <dimen name="global_padding7X">24dp</dimen>
+    <dimen name="global_padding8X">32dp</dimen>
+    <dimen name="global_padding9X">64dp</dimen>
+
+
+</resources>

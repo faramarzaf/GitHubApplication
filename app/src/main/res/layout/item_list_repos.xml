@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="@dimen/global_margin2X"
     android:background="@drawable/bg_search"
-    android:backgroundTint="#232323"
+    android:backgroundTint="@color/colorListRecyclerview"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:padding="@dimen/global_padding1X">
 
     <TextView
         android:id="@+id/text_repo_name"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:padding="4dp"
+        android:padding="@dimen/global_padding1X"
         android:textColor="@color/colorPrimaryLight2X"
         android:textStyle="bold" />
 
@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:padding="4dp"
+        android:padding="@dimen/global_padding1X"
         android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="@dimen/global_padding1X">
 
         <TextView
             android:id="@+id/text_stars"
@@ -65,8 +65,7 @@
             android:layout_gravity="center"
             android:layout_weight="6"
             android:gravity="end|center"
-            android:padding="4dp"
-            android:text="java"
+            android:padding="@dimen/global_padding1X"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 

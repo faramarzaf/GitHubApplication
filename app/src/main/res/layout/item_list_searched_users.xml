@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="@dimen/global_margin2X"
     android:background="@drawable/bg_search"
-    android:backgroundTint="#232323"
+    android:backgroundTint="@color/colorListRecyclerview"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:padding="@dimen/global_padding2X">
 
     <ImageView
         android:id="@+id/avatarUser"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center"
-        android:padding="8dp"
+        android:padding="@dimen/global_padding3X"
         android:src="@drawable/ic_fav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

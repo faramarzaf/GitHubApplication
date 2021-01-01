@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#101010"
+    android:background="@color/blackDark"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
@@ -14,7 +14,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/global_margin6X"
         android:layout_weight="1"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
@@ -24,7 +24,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="#151515"
+        app:backgroundTint="@color/blackLight"
         app:itemTextColor="@color/white"
         app:menu="@menu/menu"
         app:itemIconTint="@color/bnv_tab_item_foreground"
