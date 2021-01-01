@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    android:background="#D5D5D5"
+    android:background="@drawable/bg_search"
+    android:backgroundTint="#232323"
     android:orientation="horizontal"
     android:padding="6dp">
 
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="#252525"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageFav"

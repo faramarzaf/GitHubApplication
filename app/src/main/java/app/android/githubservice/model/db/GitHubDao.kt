@@ -14,4 +14,8 @@ interface GitHubDao {
 
     @Delete
     suspend fun deleteUser(user: Item)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE id = :id)")
+    fun isUserExist(id: Int?): Boolean
+
 }

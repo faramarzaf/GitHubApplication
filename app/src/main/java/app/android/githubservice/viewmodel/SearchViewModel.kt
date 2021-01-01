@@ -32,4 +32,5 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
     fun getAllUsers() = searchRepository.getSavedUsers()
 
+    fun userExists(user: Item) = searchRepository.userExists(user)
 }

@@ -14,6 +14,8 @@ class SearchRepository(private val api: GitHubApi, private val db: GitHubDatabas
 
     fun getSavedUsers() = db.getGitHubDao().getAllUsers()
 
+    fun userExists(user: Item) = db.getGitHubDao().isUserExist(user.id)
+
     suspend fun deleteUser(user: Item) = db.getGitHubDao().deleteUser(user)
 
 }

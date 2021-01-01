@@ -3,6 +3,7 @@ package app.android.githubservice.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +39,21 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     private var onItemClickListener: ((Item) -> Unit)? = null
     private var onSaveUserClickListener: ((Item) -> Unit)? = null
+    private var getItemInstance: ((Item) -> Unit)? = null
+    private var getViewFromAdapter: ((ImageView) -> Unit)? = null
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val searchInfo = differ.currentList[position]
+        val viewimage = holder.itemView.imageFav
+
+        getViewFromAdapter?.let { views ->
+            views(viewimage)
+        }
+
+        getItemInstance?.let {
+            it(searchInfo)
+        }
+
         holder.itemView.apply {
             GlideHelper.circularImage(context, searchInfo.avatarUrl.toString(), avatarUser)
             textUser.text = searchInfo.login
@@ -51,6 +64,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             imageFav.setOnClickListener {
                 onSaveUserClickListener?.let {
                     it(searchInfo)
+                    ///  imageFav.setColorFilter(Color.RED)
                 }
             }
         }
@@ -63,4 +77,13 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     fun setOnSaveUserClickListener(listener: (Item) -> Unit) {
         onSaveUserClickListener = listener
     }
+
+    fun getItemInstance(listener: (Item) -> Unit) {
+        getItemInstance = listener
+    }
+
+    fun getViewFromAdapter(listener: (ImageView) -> Unit) {
+        getViewFromAdapter = listener
+    }
+
 }

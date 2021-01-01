@@ -1,5 +1,6 @@
 package app.android.githubservice.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -20,6 +21,7 @@ import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.item_list_searched_users.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ class SearchFragment : BaseFragment() {
 
     lateinit var viewModel: SearchViewModel
     lateinit var searchAdapter: SearchAdapter
+    private lateinit var user: Item
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_search
@@ -37,14 +40,32 @@ class SearchFragment : BaseFragment() {
         initViewModel()
         setupRecyclerView()
         getUsersList()
+        searchAdapter.getItemInstance {
+            searchAdapter.getViewFromAdapter { views ->
+                if (!viewModel.userExists(it)) {
+                    views.setColorFilter(Color.WHITE)
+                } else
+                    views.setColorFilter(Color.RED)
+            }
+        }
         handleSearchRepositoryData()
         searchAdapter.setOnItemClickListener {
             toast(it.login)
         }
+
+
         searchAdapter.setOnSaveUserClickListener {
-            saveUser(it)
+            if (!viewModel.userExists(it)) {
+                imageFav.setColorFilter(Color.RED)
+                saveUser(it)
+            } else if (viewModel.userExists(it)) {
+                imageFav.setColorFilter(Color.RED)
+                toast("user already in favorite")
+            }
+
         }
     }
+
 
     private fun getUsersList() {
         var job: Job? = null
@@ -97,6 +118,7 @@ class SearchFragment : BaseFragment() {
         searchAdapter = SearchAdapter()
         rv_search.apply {
             adapter = searchAdapter
+            setItemViewCacheSize(500)
             layoutManager = LinearLayoutManager(activity)
         }
     }

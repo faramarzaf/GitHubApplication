@@ -17,11 +17,11 @@ abstract class GitHubDatabase : RoomDatabase() {
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-             instance ?: createDatabase(context)
-                 .also { instance = it }
+            instance ?: createDatabase(context)
+                .also { instance = it }
         }
 
         private fun createDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, GitHubDatabase::class.java, "github_db.db").build()
+            Room.databaseBuilder(context.applicationContext, GitHubDatabase::class.java, "github_db.db").allowMainThreadQueries().build()
     }
 }
