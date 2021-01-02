@@ -10,12 +10,14 @@ class SearchRepository(private val api: GitHubApi, private val db: GitHubDatabas
         api.searchUser(username, page, per_page)
     }
 
-    suspend fun upsert(user: Item) = db.getGitHubDao().upsert(user)
+    suspend fun insert(user: Item) = db.getGitHubDao().insert(user)
 
     fun getSavedUsers() = db.getGitHubDao().getAllUsers()
 
     fun userExists(user: Item) = db.getGitHubDao().userExist(user.id)
 
     suspend fun deleteUser(user: Item) = db.getGitHubDao().deleteUser(user)
+
+    suspend fun deleteAll() = db.getGitHubDao().deleteAll()
 
 }

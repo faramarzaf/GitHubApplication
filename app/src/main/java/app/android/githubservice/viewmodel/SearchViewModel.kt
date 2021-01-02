@@ -23,11 +23,15 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         }
 
     fun saveUser(user: Item) = viewModelScope.launch {
-        searchRepository.upsert(user)
+        searchRepository.insert(user)
     }
 
     fun deleteUser(user: Item) = viewModelScope.launch {
         searchRepository.deleteUser(user)
+    }
+
+    fun deleteAll() = viewModelScope.launch {
+        searchRepository.deleteAll()
     }
 
     fun getAllUsers() = searchRepository.getSavedUsers()

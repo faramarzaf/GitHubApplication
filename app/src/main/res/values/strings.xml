@@ -15,11 +15,11 @@
     <string name="profile">Profile</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
-
     <string name="logout_title">Logout!</string>
     <string name="msg_dialog_logout">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
+    <string name="remove_all_title">Remove all!</string>
+    <string name="msg_dialog_remove_all">Are you sure you want to remove saved users?</string>
 
 </resources>

@@ -7,15 +7,33 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.FavoriteFragment">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgDeleteAll"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="@dimen/global_margin4X"
+        android:layout_marginEnd="@dimen/global_margin4X"
+        android:padding="@dimen/global_padding4X"
+        app:tint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_delete" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_saved"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/global_margin9X"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgDeleteAll"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textNoFavUser"
