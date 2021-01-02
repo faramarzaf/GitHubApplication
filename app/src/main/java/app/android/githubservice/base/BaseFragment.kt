@@ -110,6 +110,13 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent, options.toBundle())
     }
 
+
+    open fun toActivity(activity: Activity?, classOf: Class<*>) {
+        startActivity(Intent(activity, classOf))
+        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+
     fun transparentToolbar(activity: Activity) {
         ScreenHelper.hideToolbar(activity)
     }

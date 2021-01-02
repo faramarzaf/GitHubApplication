@@ -16,4 +16,10 @@
     <string name="followers">Followers</string>
     <string name="following">Following</string>
 
+    <string name="logout_title">Logout!</string>
+    <string name="msg_dialog_logout">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+
 </resources>

@@ -6,9 +6,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import app.android.githubservice.ui.fragment.FollowersFragment
 import app.android.githubservice.ui.fragment.FollowingFragment
-import app.android.githubservice.ui.fragment.OverviewFragment
 
-class ViewPagerOverviewAdapter(fm: FragmentManager, private val context: Context?) : FragmentStatePagerAdapter(fm) {
+class ViewPagerProfileAdapter(fm: FragmentManager, private val context: Context?) : FragmentStatePagerAdapter(fm) {
 
 
     override fun getItem(position: Int): Fragment {

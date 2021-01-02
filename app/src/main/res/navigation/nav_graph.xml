@@ -26,8 +26,8 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/overviewFragment"
-        android:name="app.android.githubservice.ui.fragment.OverviewFragment"
-        android:label="fragment_overview"
-        tools:layout="@layout/fragment_overview" />
+        android:id="@+id/profileFragment"
+        android:name="app.android.githubservice.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
