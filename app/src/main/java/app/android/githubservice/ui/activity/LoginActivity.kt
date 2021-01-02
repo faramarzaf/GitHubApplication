@@ -10,8 +10,8 @@ import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.AuthRepository
 import app.android.githubservice.repository.BaseRepository
 import app.android.githubservice.repository.Resource
-import app.android.githubservice.util.AVATAR_URL
-import app.android.githubservice.util.HTML_URL
+import app.android.githubservice.util.KEY_AVATAR_URL
+import app.android.githubservice.util.KEY_HTML_URL
 import app.android.githubservice.util.KEY_SESSION_ID
 import app.android.githubservice.util.KEY_USERNAME
 import app.android.githubservice.viewmodel.AuthViewModel
@@ -88,8 +88,8 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
 
     private fun saveUsefulUrls(response: SearchResponse) {
         for (info in response.items) {
-            MyPreferences.writeString(this, AVATAR_URL, info.avatarUrl.toString())
-            MyPreferences.writeString(this, HTML_URL, info.htmlUrl.toString())
+            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
+            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
         }
     }
 

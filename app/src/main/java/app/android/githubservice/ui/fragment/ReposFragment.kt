@@ -1,13 +1,10 @@
 package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.model.network.RetrofitInstance
@@ -53,7 +50,10 @@ class ReposFragment : BaseFragment() {
                     hideProgressBar(reposProgressBar)
                     reposAdapter.differ.submitList(response.value)
                     rv_repos.setPadding(0, 0, 0, 0)
-                    // response.value.get(0).language
+                    MyPreferences.writeString(
+                        requireContext(), KEY_SIZE_LIST_REPO,
+                        reposAdapter.itemCount.toString()
+                    )
                 }
                 is Resource.Failure -> {
                     hideProgressBar(reposProgressBar)

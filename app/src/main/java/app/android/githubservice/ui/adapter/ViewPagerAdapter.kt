@@ -6,9 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import app.android.githubservice.ui.fragment.FollowersFragment
 import app.android.githubservice.ui.fragment.FollowingFragment
-import app.android.githubservice.util.KEY_FOLLOWERS
-import app.android.githubservice.util.KEY_FOLLOWINGS
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import app.android.githubservice.ui.fragment.OverviewFragment
 
 class ViewPagerAdapter(fm: FragmentManager, private val context: Context?) : FragmentStatePagerAdapter(fm) {
 
@@ -17,19 +15,21 @@ class ViewPagerAdapter(fm: FragmentManager, private val context: Context?) : Fra
         return when (position) {
             0 -> return FollowersFragment()
             1 -> return FollowingFragment()
+            2 -> return OverviewFragment()
             else -> FollowersFragment()
         }
     }
 
 
     override fun getCount(): Int {
-        return 2
+        return 3
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         when (position) {
-            0 -> return "Followers " + MyPreferences.readString(context!!, KEY_FOLLOWERS, "")
-            1 -> return "Following " + MyPreferences.readString(context!!, KEY_FOLLOWINGS, "")
+            0 -> return "Following"
+            1 -> return "Followers"
+            2 -> return "Overview "
         }
         return super.getPageTitle(position)
     }
