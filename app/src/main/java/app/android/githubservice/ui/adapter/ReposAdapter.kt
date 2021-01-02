@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
 import app.android.githubservice.util.LanguageColorGenerator
+import app.android.githubservice.util.thousandPrinter
 import kotlinx.android.synthetic.main.item_list_repos.view.*
 
 
@@ -50,8 +51,8 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
             text_repo_name.text = repoInfo.name
             text_repo_desc.text = repoInfo.description
             if (repoInfo.stargazersCount!! > 1000 || repoInfo.forksCount!! > 1000) {
-                val startValue = "☆ " + repoInfo.stargazersCount.toString().substring(0, 2) + "K"
-                val forkValue = repoInfo.forksCount.toString().substring(0, 2) + "K"
+                val startValue = thousandPrinter(repoInfo.stargazersCount.toString())
+                val forkValue = thousandPrinter(repoInfo.forksCount.toString())
                 text_stars.text = startValue
                 text_forks.text = forkValue
             } else {
