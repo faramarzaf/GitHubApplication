@@ -1,14 +1,15 @@
 package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.ui.adapter.ViewPagerOverviewAdapter
 import app.android.githubservice.util.*
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import kotlinx.android.synthetic.main.fragment_overview.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class OverviewFragment : BaseFragment() {
@@ -17,6 +18,8 @@ class OverviewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewPagerOverview.adapter = ViewPagerOverviewAdapter(requireActivity().supportFragmentManager, context)
+        tabLayoutOverview.setupWithViewPager(viewPagerOverview)
         fillOverview()
     }
 
