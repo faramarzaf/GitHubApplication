@@ -40,15 +40,9 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
             MyPreferences.writeString(this, KEY_USERNAME, username)
             MyPreferences.writeString(this, KEY_SESSION_ID, HashHelper.sha256(username))
             viewModel.auth(username)
-            hideProgressBar(authProgressBar)
-            toActivity(MainActivity::class.java)
-            finish()
         } else if (!checkbox_remember_me.isChecked && !StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())) {
             MyPreferences.writeString(this, KEY_USERNAME, username)
             viewModel.auth(username)
-            hideProgressBar(authProgressBar)
-            toActivity(MainActivity::class.java)
-            finish()
         } else if (StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())) {
             hideProgressBar(authProgressBar)
             toast("Fill fields!")
@@ -72,6 +66,8 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
                     } else {
                         hideProgressBar(authProgressBar)
                         saveUsefulUrls(it.value)
+                        toActivity(MainActivity::class.java)
+                        finish()
                     }
                 }
                 is Resource.Failure -> {
@@ -80,7 +76,6 @@ class LoginActivity : BaseActivity<AuthViewModel>(), View.OnClickListener {
                         toast("Check your connection!")
                     }
                     toast(it.toString())
-
                 }
             }
         })

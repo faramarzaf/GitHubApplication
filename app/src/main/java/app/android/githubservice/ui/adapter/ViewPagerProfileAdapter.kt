@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import app.android.githubservice.ui.fragment.FollowersFragment
 import app.android.githubservice.ui.fragment.FollowingFragment
 
-class ViewPagerProfileAdapter(fm: FragmentManager, private val context: Context?) : FragmentStatePagerAdapter(fm) {
+class ViewPagerProfileAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
 
     override fun getItem(position: Int): Fragment {
@@ -25,8 +25,8 @@ class ViewPagerProfileAdapter(fm: FragmentManager, private val context: Context?
 
     override fun getPageTitle(position: Int): CharSequence? {
         when (position) {
-            0 -> return "Following"
-            1 -> return "Followers"
+            0 -> return "Followers"
+            1 -> return "Following"
         }
         return super.getPageTitle(position)
     }

@@ -20,7 +20,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager, context)
+        viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
         tabLayoutOverview.setupWithViewPager(viewPagerOverview)
         fillOverview()
         imgLogout.setOnClickListener {

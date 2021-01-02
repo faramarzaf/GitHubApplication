@@ -16,9 +16,9 @@
 
         <ImageView
             android:id="@+id/avatarOverview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="@dimen/global_margin4X" />
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/global_margin6X" />
 
         <TextView
             android:id="@+id/textUserNameOverview"
