@@ -64,7 +64,6 @@ class SearchFragment : BaseFragment() {
                     imageview.setColorFilter(Color.RED)
                     toast("User is already in favorites!")
                 }
-
             }
         }
     }
