@@ -32,8 +32,8 @@ class ProfileFragment : BaseFragment() {
         GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarOverview)
         textUserNameOverview.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
         textRepositoryOverview.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
-        textFollowersOverview.text = MyPreferences.readString(requireContext(), KEY_FOLLOWERS, "")
-        textFollowingOverview.text = MyPreferences.readString(requireContext(), KEY_FOLLOWINGS, "")
+        textFollowersOverview.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
+        textFollowingOverview.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
     }
 
     private fun openLogoutDialog() {
@@ -42,6 +42,7 @@ class ProfileFragment : BaseFragment() {
                 override fun onNegativeButtonClicked() {
                     return
                 }
+
                 override fun onPositiveButtonClicked() {
                     logout()
                 }
