@@ -51,6 +51,7 @@
         android:layout_margin="@dimen/global_margin8X"
         android:layout_marginBottom="196dp"
         android:background="@drawable/bg_button_login"
+        android:elevation="4dp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
