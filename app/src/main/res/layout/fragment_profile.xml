@@ -108,7 +108,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_overview_titles"
             android:gravity="center"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:padding="@dimen/global_padding2X"
             android:text="@string/repository"
             android:textColor="@color/gray"
@@ -124,7 +124,7 @@
             android:background="@drawable/bg_overview_titles"
             android:gravity="center"
             android:padding="@dimen/global_padding2X"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:text="@string/followers"
             android:textColor="@color/gray"
             style="@style/TextViewGlobal"
@@ -140,7 +140,7 @@
             android:background="@drawable/bg_overview_titles"
             android:gravity="center"
             android:padding="@dimen/global_padding2X"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:text="@string/following"
             android:textColor="@color/gray"
             style="@style/TextViewGlobal"
@@ -157,7 +157,11 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:tabSelectedTextColor="@color/colorPrimaryLight"
-        app:tabTextColor="@color/white" />
+        app:tabTextColor="@color/white"
+        app:tabGravity="fill"
+        app:tabTextAppearance="@style/TabLayoutTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerOverview"

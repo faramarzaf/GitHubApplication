@@ -14,3 +14,5 @@ const val MIN_PAGE = 1
 const val KEY_SIZE_LIST_REPO = "key_size_list_repo"
 const val KEY_NUMBER_FOLLOWERS = "key_number_followers"
 const val KEY_NUMBER_FOLLOWING = "key_number_following"
+const val TAG_LOG = "TAG00"
+

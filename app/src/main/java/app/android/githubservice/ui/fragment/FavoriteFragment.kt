@@ -50,10 +50,10 @@ class FavoriteFragment : BaseFragment() {
         viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { listFavorite ->
             favoriteAdapter.differ.submitList(listFavorite)
             if (listFavorite.isEmpty()) {
-                imgDeleteAll.setEnabled(false)
+                imgDeleteAll.isEnabled = false
                 noDataAvailable()
             } else {
-                imgDeleteAll.setEnabled(true)
+                imgDeleteAll.isEnabled = true
                 dataAvailable()
             }
         })

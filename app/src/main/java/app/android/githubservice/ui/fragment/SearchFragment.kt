@@ -2,6 +2,7 @@ package app.android.githubservice.ui.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.util.TAG_LOG
 import app.android.githubservice.viewmodel.SearchViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -99,7 +101,7 @@ class SearchFragment : BaseFragment() {
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Log.d(TAG_LOG, "handleSearchRepositoryData: $response")
                 }
             }
         })

@@ -1,6 +1,7 @@
 package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -71,7 +72,7 @@ class ReposFragment : BaseFragment() {
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Log.d(TAG_LOG, "fetchRepositoryData: $response")
                 }
             }
         })
@@ -109,7 +110,7 @@ class ReposFragment : BaseFragment() {
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Log.d(TAG_LOG, "getFollowersAsync: $response")
                 }
             }
         })
@@ -125,7 +126,7 @@ class ReposFragment : BaseFragment() {
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Log.d(TAG_LOG, "getFollowingAsync: $response")
                 }
             }
         })

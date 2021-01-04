@@ -1,6 +1,7 @@
 package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,10 +13,7 @@ import app.android.githubservice.model.network.RetrofitInstance
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.StarredRepository
 import app.android.githubservice.ui.adapter.StarredAdapter
-import app.android.githubservice.util.DEFAULT_USER
-import app.android.githubservice.util.KEY_USERNAME
-import app.android.githubservice.util.MAX_PAGE
-import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.StarredViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
@@ -56,7 +54,7 @@ class StarredFragment : BaseFragment() {
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
-                    toast(response.toString())
+                    Log.d(TAG_LOG, "fetchStarredRepositoryData: $response")
                 }
             }
         })
