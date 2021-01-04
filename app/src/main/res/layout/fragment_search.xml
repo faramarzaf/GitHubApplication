@@ -18,6 +18,7 @@
         android:inputType="text"
         android:maxLines="1"
         android:padding="@dimen/global_padding4X"
+        android:fontFamily="@font/font"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"

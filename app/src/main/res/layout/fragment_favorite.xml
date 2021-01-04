@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/no_favorite_user_yet"
-        android:textColor="@color/white"
+        style="@style/TextViewGlobal"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

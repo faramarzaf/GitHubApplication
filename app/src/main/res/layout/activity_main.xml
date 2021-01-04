@@ -28,7 +28,7 @@
         app:itemTextColor="@color/white"
         app:menu="@menu/menu"
         app:itemIconTint="@color/bnv_tab_item_foreground"
-
+        android:theme="@style/Widget.BottomNavigationView"
         />
 
 </LinearLayout>

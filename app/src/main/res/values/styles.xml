@@ -7,4 +7,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/font</item>
+    </style>
+
+    <style name="TextViewGlobal" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/font</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

@@ -9,19 +9,20 @@
     android:padding="4dp">
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageSavedUsers"
         />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_save_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="@color/white"
         android:textStyle="bold"
+        style="@style/TextViewGlobal"
         android:gravity="center"
         android:layout_gravity="center"
         />

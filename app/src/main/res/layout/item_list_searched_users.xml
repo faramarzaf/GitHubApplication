@@ -10,7 +10,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/global_padding2X">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avatarUser"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +29,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="bold"
+        style="@style/TextViewGlobal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageFav"
         app:layout_constraintHorizontal_bias="0.173"
@@ -36,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.505" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

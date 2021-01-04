@@ -20,7 +20,7 @@
             android:layout_height="80dp"
             android:layout_margin="@dimen/global_margin6X" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textUserNameOverview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/global_margin2X"
             android:layout_weight="1"
             android:text="sdada"
-            android:textColor="@color/white"
+            style="@style/TextViewGlobal"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -62,10 +62,10 @@
             android:padding="@dimen/global_padding2X"
             android:text="45"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            style="@style/TextViewGlobal"
               />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textFollowersOverview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,13 +73,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/global_padding2X"
-
             android:text="253"
             android:textSize="18sp"
-            android:textColor="@color/white" />
+            style="@style/TextViewGlobal"/>
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textFollowingOverview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,7 +88,7 @@
             android:padding="@dimen/global_padding2X"
             android:text="659"
             android:textSize="18sp"
-            android:textColor="@color/white" />
+            style="@style/TextViewGlobal" />
 
     </LinearLayout>
 
@@ -101,7 +100,7 @@
         android:padding="@dimen/global_padding">
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleRepository"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -112,9 +111,11 @@
             android:textSize="14sp"
             android:padding="@dimen/global_padding2X"
             android:text="@string/repository"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            style="@style/TextViewGlobal"
+            />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleFollowers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,10 +126,12 @@
             android:padding="@dimen/global_padding2X"
             android:textSize="14sp"
             android:text="@string/followers"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            style="@style/TextViewGlobal"
+            />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleFollowing"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -139,7 +142,9 @@
             android:padding="@dimen/global_padding2X"
             android:textSize="14sp"
             android:text="@string/following"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            style="@style/TextViewGlobal"
+            />
 
 
     </LinearLayout>
