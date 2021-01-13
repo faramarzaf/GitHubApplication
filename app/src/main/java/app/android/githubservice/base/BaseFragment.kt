@@ -18,6 +18,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper.Companion.che
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences.Prefs.readString
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 abstract class BaseFragment : Fragment() {

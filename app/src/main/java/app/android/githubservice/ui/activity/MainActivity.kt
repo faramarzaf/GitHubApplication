@@ -7,8 +7,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivityNONVM
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : BaseActivityNONVM() {
 
     private lateinit var navController: NavController

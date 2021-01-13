@@ -1,5 +1,6 @@
 package app.android.githubservice.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import app.android.githubservice.repository.AuthRepository
 import app.android.githubservice.repository.Resource
 import kotlinx.coroutines.launch
 
-class AuthViewModel(val authRepository: AuthRepository) : ViewModel() {
+class AuthViewModel @ViewModelInject constructor(private val authRepository: AuthRepository) : ViewModel() {
 
     private var _loginResponse: MutableLiveData<Resource<SearchResponse>> = MutableLiveData()
     val loginResponse: LiveData<Resource<SearchResponse>>

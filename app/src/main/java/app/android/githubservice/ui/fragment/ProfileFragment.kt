@@ -5,8 +5,10 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.di.AppModule
 import app.android.githubservice.model.db.GitHubDatabase
-import app.android.githubservice.model.network.RetrofitInstance
+import app.android.githubservice.model.network.GitHubApi
+
 import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.activity.LoginActivity
 import app.android.githubservice.ui.adapter.ViewPagerProfileAdapter
@@ -17,12 +19,19 @@ import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
 
     private lateinit var viewModel: SearchViewModel
+
+    @Inject
+    lateinit var api: GitHubApi
+    @Inject
+    lateinit var database: GitHubDatabase
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_profile
@@ -67,7 +76,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        val factory = ViewModelFactory(SearchRepository(RetrofitInstance.api, GitHubDatabase(requireActivity())))
+        val factory = ViewModelFactory(SearchRepository(api,database))
         viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
     }
 }

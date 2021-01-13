@@ -27,20 +27,19 @@ import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.SimpleDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
+
+abstract class BaseActivity : AppCompatActivity() {
 
     private var progressDialog: ProgressDialogCustom? = null
-    lateinit var viewModel: VM
 
-    abstract fun getRepository(): BaseRepository
-    abstract fun getViewModel(): Class<VM>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = ViewModelFactory(getRepository())
-        viewModel = ViewModelProvider(this, factory).get(getViewModel())
+
     }
 
     open fun toActivity(classOf: Class<*>) {

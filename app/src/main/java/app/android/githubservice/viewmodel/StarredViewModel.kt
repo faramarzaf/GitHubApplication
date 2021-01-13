@@ -1,5 +1,6 @@
 package app.android.githubservice.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.StarredRepository
 import kotlinx.coroutines.launch
 
-class StarredViewModel(val starredRepository: StarredRepository) : ViewModel() {
+class StarredViewModel @ViewModelInject constructor(val starredRepository: StarredRepository) : ViewModel() {
 
     private var _starredResponse: MutableLiveData<Resource<StarredResponse>> = MutableLiveData()
     val starredResponse: LiveData<Resource<StarredResponse>>

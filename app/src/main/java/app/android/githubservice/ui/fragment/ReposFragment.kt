@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.model.network.RetrofitInstance
+import app.android.githubservice.model.network.GitHubApi
 import app.android.githubservice.repository.FollowersRepository
 import app.android.githubservice.repository.FollowingRepository
 import app.android.githubservice.repository.ReposRepository
@@ -20,15 +20,21 @@ import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.RepositoriesViewModel
 import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ReposFragment : BaseFragment() {
 
     private lateinit var viewModel: RepositoriesViewModel
     private lateinit var viewModelFollowers: FollowersViewModel
     private lateinit var viewModelFollowing: FollowingViewModel
     private lateinit var reposAdapter: ReposAdapter
+
+    @Inject
+    lateinit var api: GitHubApi
+
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_repos
@@ -49,9 +55,9 @@ class ReposFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        val factory = ViewModelFactory(ReposRepository(RetrofitInstance.api))
-        val factoryFollower = ViewModelFactory(FollowersRepository(RetrofitInstance.api))
-        val factoryFollowing = ViewModelFactory(FollowingRepository(RetrofitInstance.api))
+        val factory = ViewModelFactory(ReposRepository(api))
+        val factoryFollower = ViewModelFactory(FollowersRepository(api))
+        val factoryFollowing = ViewModelFactory(FollowingRepository(api))
         viewModel = ViewModelProvider(this, factory).get(RepositoriesViewModel::class.java)
         viewModelFollowers = ViewModelProvider(this, factoryFollower).get(FollowersViewModel::class.java)
         viewModelFollowing = ViewModelProvider(this, factoryFollowing).get(FollowingViewModel::class.java)

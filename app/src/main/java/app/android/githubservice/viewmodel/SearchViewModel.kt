@@ -1,5 +1,6 @@
 package app.android.githubservice.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +11,7 @@ import app.android.githubservice.repository.Resource
 import app.android.githubservice.repository.SearchRepository
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class SearchViewModel @ViewModelInject constructor (private val searchRepository: SearchRepository) : ViewModel() {
 
     private var _searchResponse: MutableLiveData<Resource<SearchResponse>> = MutableLiveData()
     val searchResponse: LiveData<Resource<SearchResponse>>

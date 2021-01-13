@@ -1,5 +1,6 @@
 package app.android.githubservice.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +11,7 @@ import app.android.githubservice.repository.FollowersRepository
 import app.android.githubservice.repository.Resource
 import kotlinx.coroutines.launch
 
-class FollowersViewModel(val followersRepository: FollowersRepository) : ViewModel() {
+class FollowersViewModel @ViewModelInject constructor(val followersRepository: FollowersRepository) : ViewModel() {
 
     private var _followersResponse: MutableLiveData<Resource<FollowerFollowingResponse>> = MutableLiveData()
     val followersResponse: LiveData<Resource<FollowerFollowingResponse>>

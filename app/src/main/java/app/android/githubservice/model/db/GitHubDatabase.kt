@@ -7,12 +7,12 @@ import androidx.room.RoomDatabase
 import app.android.githubservice.entity.search.Item
 import app.android.githubservice.util.DATABASE_NAME
 
-@Database(entities = [Item::class], version = 1)
+@Database(entities = [Item::class], version = 1,exportSchema = false)
 abstract class GitHubDatabase : RoomDatabase() {
 
     abstract fun getGitHubDao(): GitHubDao
 
-    companion object {
+/*    companion object {
         @Volatile
         private var instance: GitHubDatabase? = null
         private val LOCK = Any()
@@ -24,5 +24,5 @@ abstract class GitHubDatabase : RoomDatabase() {
 
         private fun createDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, GitHubDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
-    }
+    }*/
 }

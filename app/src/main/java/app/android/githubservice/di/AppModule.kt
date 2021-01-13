@@ -26,8 +26,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGitHubDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context, GitHubDatabase::class.java, DATABASE_NAME
-    ).build()
+        context, GitHubDatabase::class.java, DATABASE_NAME).allowMainThreadQueries()
+        .build()
 
 
     @Singleton
