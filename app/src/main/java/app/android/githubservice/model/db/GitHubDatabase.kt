@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import app.android.githubservice.entity.search.Item
+import app.android.githubservice.util.DATABASE_NAME
 
 @Database(entities = [Item::class], version = 1)
 abstract class GitHubDatabase : RoomDatabase() {
@@ -22,6 +23,6 @@ abstract class GitHubDatabase : RoomDatabase() {
         }
 
         private fun createDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, GitHubDatabase::class.java, "github_db.db").allowMainThreadQueries().build()
+            Room.databaseBuilder(context.applicationContext, GitHubDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
     }
 }

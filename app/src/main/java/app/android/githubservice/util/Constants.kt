@@ -16,3 +16,4 @@ const val KEY_NUMBER_FOLLOWERS = "key_number_followers"
 const val KEY_NUMBER_FOLLOWING = "key_number_following"
 const val TAG_LOG = "TAG00"
 
+const val DATABASE_NAME = "github_db.db"
