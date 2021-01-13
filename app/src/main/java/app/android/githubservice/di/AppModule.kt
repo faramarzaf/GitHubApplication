@@ -77,5 +77,4 @@ object AppModule {
                 .placeholder(R.drawable.ic_github)
                 .error(R.drawable.ic_github)
         )
-
 }
