@@ -38,14 +38,12 @@ interface GitHubApi {
     ): StarredResponse
 
 
-
     @GET("/users/{user}/followers")
     suspend fun getFollowers(
         @Path("user") username: String
         , @Query("page") page: Int
         , @Query("per_page") per_page: Int
     ): FollowerFollowingResponse
-
 
 
     @GET("/users/{user}/following")

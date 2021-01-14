@@ -12,7 +12,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import kotlinx.android.synthetic.main.item_list_saved.view.*
 
 
-class FavoriteAdapter() : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() {
 
     inner class SavedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

@@ -10,6 +10,7 @@ import app.android.githubservice.util.BASE_URL
 import app.android.githubservice.util.DATABASE_NAME
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.faramarzaf.sdk.af_android_sdk.core.network.ServiceRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,9 +26,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideGitHubDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context, GitHubDatabase::class.java, DATABASE_NAME).allowMainThreadQueries()
-        .build()
+    fun provideGitHubDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, GitHubDatabase::class.java, DATABASE_NAME)
+            .allowMainThreadQueries()
+            .build()
 
 
     @Singleton
@@ -38,10 +40,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGitHubApi(): GitHubApi {
-        return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-            .create(GitHubApi::class.java)
+              return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+                  .baseUrl(BASE_URL)
+                  .build()
+                  .create(GitHubApi::class.java)
+/*        val api by lazy { ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java) }
+        return api*/
     }
 
     @Singleton
