@@ -5,49 +5,36 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.di.AppModule
 import app.android.githubservice.entity.search.Item
-import app.android.githubservice.model.db.GitHubDatabase
-import app.android.githubservice.model.network.GitHubApi
-
 import app.android.githubservice.repository.Resource
-import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
 import app.android.githubservice.util.TAG_LOG
 import app.android.githubservice.viewmodel.SearchViewModel
-import app.android.githubservice.viewmodel.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment() {
 
-    private lateinit var viewModel: SearchViewModel
     private lateinit var searchAdapter: SearchAdapter
-
-    @Inject
-    lateinit var api: GitHubApi
-    @Inject
-    lateinit var database: GitHubDatabase
+    private val viewModel: SearchViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_search
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         getUsersList()
         setupRecyclerView()
         handleSearchRepositoryData()
@@ -115,12 +102,6 @@ class SearchFragment : BaseFragment() {
                 }
             }
         })
-    }
-
-    private fun initViewModel() {
-        val factory = ViewModelFactory(SearchRepository(api,database))
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
-
     }
 
     private fun saveUser(user: Item) {

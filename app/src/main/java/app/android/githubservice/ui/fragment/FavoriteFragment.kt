@@ -3,38 +3,28 @@ package app.android.githubservice.ui.fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.di.AppModule
-import app.android.githubservice.model.db.GitHubDatabase
-import app.android.githubservice.model.network.GitHubApi
-import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.adapter.FavoriteAdapter
 import app.android.githubservice.viewmodel.SearchViewModel
-import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.SimpleSnackbar
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favorite.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment() {
 
-    private lateinit var viewModel: SearchViewModel
     private lateinit var favoriteAdapter: FavoriteAdapter
 
-    @Inject
-    lateinit var api: GitHubApi
-    @Inject
-    lateinit var database: GitHubDatabase
+    private val viewModel: SearchViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_favorite
@@ -42,7 +32,6 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         setupRecyclerView()
         swipeRemoving(view)
         observeUsersList()
@@ -104,10 +93,6 @@ class FavoriteFragment : BaseFragment() {
         }
     }
 
-    private fun initViewModel() {
-        val factory = ViewModelFactory(SearchRepository(api, database))
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
-    }
 
     private fun setupRecyclerView() {
         favoriteAdapter = FavoriteAdapter()

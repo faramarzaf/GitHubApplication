@@ -3,6 +3,8 @@ package app.android.githubservice.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,10 +17,7 @@ import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
-import app.android.githubservice.viewmodel.FollowersViewModel
-import app.android.githubservice.viewmodel.FollowingViewModel
-import app.android.githubservice.viewmodel.RepositoriesViewModel
-import app.android.githubservice.viewmodel.ViewModelFactory
+import app.android.githubservice.viewmodel.*
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
@@ -27,21 +26,18 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ReposFragment : BaseFragment() {
 
-    private lateinit var viewModel: RepositoriesViewModel
-    private lateinit var viewModelFollowers: FollowersViewModel
-    private lateinit var viewModelFollowing: FollowingViewModel
+
     private lateinit var reposAdapter: ReposAdapter
 
-    @Inject
-    lateinit var api: GitHubApi
-
+    private val viewModel: RepositoriesViewModel by viewModels()
+    private val viewModelFollowers: FollowersViewModel by viewModels()
+    private val viewModelFollowing: FollowingViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_repos
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
         setupRecyclerView()
         fetchRepositoryData()
@@ -54,14 +50,6 @@ class ReposFragment : BaseFragment() {
         }
     }
 
-    private fun initViewModel() {
-        val factory = ViewModelFactory(ReposRepository(api))
-        val factoryFollower = ViewModelFactory(FollowersRepository(api))
-        val factoryFollowing = ViewModelFactory(FollowingRepository(api))
-        viewModel = ViewModelProvider(this, factory).get(RepositoriesViewModel::class.java)
-        viewModelFollowers = ViewModelProvider(this, factoryFollower).get(FollowersViewModel::class.java)
-        viewModelFollowing = ViewModelProvider(this, factoryFollowing).get(FollowingViewModel::class.java)
-    }
 
     private fun fetchRepositoryData() {
         showProgressBar(reposProgressBar)

@@ -30,16 +30,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
-    private lateinit var viewModel: AuthViewModel
-
-    @Inject
-    lateinit var api: GitHubApi
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val factory = ViewModelFactory(AuthRepository(api))
-        viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         transparentToolbar(this)
         btnLogin.setOnClickListener(this)
         handleAuthResponse()

@@ -2,43 +2,30 @@ package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.di.AppModule
-import app.android.githubservice.model.db.GitHubDatabase
-import app.android.githubservice.model.network.GitHubApi
-
-import app.android.githubservice.repository.SearchRepository
 import app.android.githubservice.ui.activity.LoginActivity
 import app.android.githubservice.ui.adapter.ViewPagerProfileAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.SearchViewModel
-import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
 
-    private lateinit var viewModel: SearchViewModel
-
-    @Inject
-    lateinit var api: GitHubApi
-    @Inject
-    lateinit var database: GitHubDatabase
+    private val viewModel: SearchViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_profile
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
         tabLayoutOverview.setupWithViewPager(viewPagerOverview)
         fillOverview()
@@ -73,10 +60,5 @@ class ProfileFragment : BaseFragment() {
         MyPreferences.clearAll(requireContext())
         toActivity(activity, LoginActivity::class.java)
         requireActivity().finish()
-    }
-
-    private fun initViewModel() {
-        val factory = ViewModelFactory(SearchRepository(api,database))
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
     }
 }

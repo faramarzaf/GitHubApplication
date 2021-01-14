@@ -3,52 +3,37 @@ package app.android.githubservice.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.di.AppModule
-import app.android.githubservice.model.network.GitHubApi
-
-import app.android.githubservice.repository.FollowersRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowersViewModel
-import app.android.githubservice.viewmodel.ViewModelFactory
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_followers.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FollowersFragment : BaseFragment() {
 
-    private lateinit var viewModel: FollowersViewModel
     private lateinit var followersAdapter: FollowersFollowingAdapter
 
-    @Inject
-    lateinit var api: GitHubApi
+    private val viewModel: FollowersViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_followers
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         getFollowers()
         handleFollowersRepositoryData()
         setupRecyclerView()
         followersAdapter.setOnItemClickListener {
             toast(it.login)
         }
-    }
-
-    private fun initViewModel() {
-        val factory = ViewModelFactory(FollowersRepository(api))
-        viewModel = ViewModelProvider(this, factory).get(FollowersViewModel::class.java)
-
     }
 
     private fun getFollowers() {
