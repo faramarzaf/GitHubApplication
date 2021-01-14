@@ -11,7 +11,7 @@ import app.android.githubservice.repository.FollowersRepository
 import app.android.githubservice.repository.Resource
 import kotlinx.coroutines.launch
 
-class FollowersViewModel @ViewModelInject constructor(val followersRepository: FollowersRepository) : ViewModel() {
+class FollowersViewModel @ViewModelInject constructor(private val followersRepository: FollowersRepository) : ViewModel() {
 
     private var _followersResponse: MutableLiveData<Resource<FollowerFollowingResponse>> = MutableLiveData()
     val followersResponse: LiveData<Resource<FollowerFollowingResponse>>

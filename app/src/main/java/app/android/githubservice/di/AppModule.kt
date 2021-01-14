@@ -40,12 +40,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGitHubApi(): GitHubApi {
-              return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+/*              return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
                   .baseUrl(BASE_URL)
                   .build()
-                  .create(GitHubApi::class.java)
-/*        val api by lazy { ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java) }
-        return api*/
+                  .create(GitHubApi::class.java)*/
+        val api by lazy { ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java) }
+        return api
     }
 
     @Singleton

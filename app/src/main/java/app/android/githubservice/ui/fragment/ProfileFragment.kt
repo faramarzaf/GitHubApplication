@@ -35,11 +35,11 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun fillOverview() {
-        GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarOverview)
-        textUserNameOverview.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
-        textRepositoryOverview.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
-        textFollowersOverview.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
-        textFollowingOverview.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
+        GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarProfile)
+        textUserNameProfile.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
+        textRepositoryProfile.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
+        textFollowersProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
+        textFollowingProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
     }
 
     private fun openLogoutDialog() {

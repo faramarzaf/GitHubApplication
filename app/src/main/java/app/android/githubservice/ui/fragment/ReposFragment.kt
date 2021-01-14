@@ -3,25 +3,20 @@ package app.android.githubservice.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.model.network.GitHubApi
-import app.android.githubservice.repository.FollowersRepository
-import app.android.githubservice.repository.FollowingRepository
-import app.android.githubservice.repository.ReposRepository
 import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
-import app.android.githubservice.viewmodel.*
+import app.android.githubservice.viewmodel.FollowersViewModel
+import app.android.githubservice.viewmodel.FollowingViewModel
+import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReposFragment : BaseFragment() {
@@ -43,8 +38,8 @@ class ReposFragment : BaseFragment() {
         fetchRepositoryData()
         getFollowers()
         getFollowing()
-        getFollowersAsync()
-        getFollowingAsync()
+        observeFollowers()
+        observeFollowing()
         reposAdapter.setOnItemClickListener {
             toast(it.name)
         }
@@ -94,7 +89,7 @@ class ReposFragment : BaseFragment() {
 
     }
 
-    private fun getFollowersAsync() {
+    private fun observeFollowers() {
         viewModelFollowers.followersResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
@@ -110,7 +105,7 @@ class ReposFragment : BaseFragment() {
         })
     }
 
-    private fun getFollowingAsync() {
+    private fun observeFollowing() {
         viewModelFollowing.followingResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
