@@ -63,6 +63,7 @@ class FollowersFragment : BaseFragment() {
     private fun setupRecyclerView() {
         followersAdapter = FollowersFollowingAdapter()
         rv_followers.apply {
+            setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = followersAdapter
             layoutManager = LinearLayoutManager(activity)
 

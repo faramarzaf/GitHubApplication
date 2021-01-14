@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="@drawable/bg_search"
-    android:backgroundTint="#232323"
+    android:background="@color/blackDark"
     android:orientation="horizontal"
-    android:padding="4dp">
-
+   >
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageFollowersFollowing"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="@dimen/global_margin3X"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textFollowersFollowing"

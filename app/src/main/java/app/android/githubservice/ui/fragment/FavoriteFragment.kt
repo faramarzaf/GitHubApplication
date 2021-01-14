@@ -97,6 +97,7 @@ class FavoriteFragment : BaseFragment() {
     private fun setupRecyclerView() {
         favoriteAdapter = FavoriteAdapter()
         rv_saved.apply {
+            setRecyclerviewDivider(context, this, R.drawable.divider_list)
             layoutManager = LinearLayoutManager(activity)
             adapter = favoriteAdapter
         }

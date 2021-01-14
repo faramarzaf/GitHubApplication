@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/global_margin2X"
-    android:background="@drawable/bg_search"
-    android:backgroundTint="@color/colorListRecyclerview"
-    android:orientation="horizontal"
-    android:padding="@dimen/global_padding2X">
+    android:background="@color/blackDark"
+    android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avatarUser"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="start"
+        android:layout_margin="@dimen/global_margin3X"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageFav"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,13 +20,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textUser"
+        style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="bold"
-        style="@style/TextViewGlobal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageFav"
         app:layout_constraintHorizontal_bias="0.173"

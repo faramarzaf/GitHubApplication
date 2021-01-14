@@ -70,8 +70,8 @@ class StarredFragment : BaseFragment() {
     private fun setupRecyclerView() {
         starredAdapter = StarredAdapter()
         rv_starred.apply {
+            setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = starredAdapter
-            setItemViewCacheSize(500)
             layoutManager = LinearLayoutManager(context)
 
         }

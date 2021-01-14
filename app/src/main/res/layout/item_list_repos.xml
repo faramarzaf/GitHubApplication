@@ -2,29 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/global_margin2X"
-    android:background="@drawable/bg_search"
-    android:backgroundTint="@color/colorListRecyclerview"
-    android:orientation="vertical"
-    android:padding="@dimen/global_padding1X">
+    android:background="@color/blackDark"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_repo_name"
+        style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        style="@style/TextViewGlobal"
         android:padding="@dimen/global_padding1X"
         android:textColor="@color/colorPrimaryLight2X"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_repo_desc"
+        style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        style="@style/TextViewGlobal"
         android:maxLines="1"
         android:padding="@dimen/global_padding1X"
         android:textColor="@color/white" />
@@ -37,11 +34,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_stars"
+            style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2"
-            style="@style/TextViewGlobal"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 
@@ -54,21 +51,21 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_forks"
+            style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2"
-            style="@style/TextViewGlobal"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_language"
+            style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="6"
-            style="@style/TextViewGlobal"
             android:gravity="end|center"
             android:padding="@dimen/global_padding1X"
             android:textColor="@color/gray"
@@ -83,7 +80,6 @@
             android:background="@drawable/bg_dot_language"
             android:gravity="center"
             android:orientation="vertical" />
-
 
     </LinearLayout>
 

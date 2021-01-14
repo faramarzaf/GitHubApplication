@@ -71,8 +71,8 @@ class ReposFragment : BaseFragment() {
     private fun setupRecyclerView() {
         reposAdapter = ReposAdapter()
         rv_repos.apply {
+            setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = reposAdapter
-            setItemViewCacheSize(500)
             layoutManager = LinearLayoutManager(context)
         }
     }

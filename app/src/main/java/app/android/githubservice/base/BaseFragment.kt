@@ -10,15 +10,17 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.util.KEY_SESSION_ID
 import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper.Companion.checkNetwork
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences.Prefs.readString
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 abstract class BaseFragment : Fragment() {
@@ -88,6 +90,12 @@ abstract class BaseFragment : Fragment() {
 
     fun toast(msg: String?) {
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun setRecyclerviewDivider(context: Context, recyclerView: RecyclerView, resId: Int) {
+        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        divider.setDrawable(ContextCompat.getDrawable(context, resId)!!)
+        recyclerView.addItemDecoration(divider)
     }
 
     val sessionId: String

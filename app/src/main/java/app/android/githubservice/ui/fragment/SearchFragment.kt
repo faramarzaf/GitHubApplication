@@ -111,6 +111,7 @@ class SearchFragment : BaseFragment() {
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter()
         rv_search.apply {
+            setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(activity)
         }

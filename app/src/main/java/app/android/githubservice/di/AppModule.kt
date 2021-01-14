@@ -40,10 +40,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGitHubApi(): GitHubApi {
-/*              return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-                  .baseUrl(BASE_URL)
-                  .build()
-                  .create(GitHubApi::class.java)*/
         val api by lazy { ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java) }
         return api
     }
@@ -71,7 +67,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideStarredRepository(api: GitHubApi) = StarredRepository(api)
-
 
     @Singleton
     @Provides

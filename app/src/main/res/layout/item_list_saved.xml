@@ -2,32 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="@drawable/bg_search"
-    android:backgroundTint="#232323"
-    android:orientation="horizontal"
-    android:padding="4dp">
-
+    android:background="@color/blackDark"
+    android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:id="@+id/imageSavedUsers"
-        />
+        android:layout_width="70dp"
+        android:layout_margin="@dimen/global_margin3X"
+        android:layout_height="70dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_save_name"
+        style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        style="@style/TextViewGlobal"
-        android:gravity="center"
         android:layout_gravity="center"
-        />
-
-
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

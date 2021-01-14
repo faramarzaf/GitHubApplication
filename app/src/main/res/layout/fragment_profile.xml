@@ -101,6 +101,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerOverview"
         android:layout_width="match_parent"
+        android:background="@color/blackDark"
         android:layout_height="match_parent" />
 
 </LinearLayout>
