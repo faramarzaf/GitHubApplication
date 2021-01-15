@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowingViewModel
@@ -29,7 +28,7 @@ class FollowingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         getFollowing()
         setupRecyclerView()
-        handleFollowingRepositoryData()
+        observeFollowingRepositoryData()
         followingAdapter.setOnItemClickListener {
             toast(it.login)
         }
@@ -39,7 +38,7 @@ class FollowingFragment : BaseFragment() {
         viewModel.getFollowing(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
-    private fun handleFollowingRepositoryData() {
+    private fun observeFollowingRepositoryData() {
         showProgressBar(followingProgressBar)
         viewModel.followingResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -65,7 +64,6 @@ class FollowingFragment : BaseFragment() {
             setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = followingAdapter
             layoutManager = LinearLayoutManager(activity)
-
         }
     }
 }

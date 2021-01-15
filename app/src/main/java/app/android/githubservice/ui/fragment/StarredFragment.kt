@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import app.android.githubservice.ui.adapter.StarredAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.StarredViewModel
@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_starred.*
 
 @AndroidEntryPoint
 class StarredFragment : BaseFragment() {
-
 
     private lateinit var starredAdapter: StarredAdapter
 
@@ -31,13 +30,13 @@ class StarredFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getStarredRepositories(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
         setupRecyclerView()
-        fetchStarredRepositoryData()
+        observeStarredRepositoryData()
         starredAdapter.setOnItemClickListener {
             toast(it.name)
         }
     }
 
-    private fun fetchStarredRepositoryData() {
+    private fun observeStarredRepositoryData() {
         showProgressBar()
         viewModel.starredResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -59,12 +58,10 @@ class StarredFragment : BaseFragment() {
 
     private fun hideProgressBar() {
         starredProgressBar.visibility = View.INVISIBLE
-
     }
 
     private fun showProgressBar() {
         starredProgressBar.visibility = View.VISIBLE
-
     }
 
     private fun setupRecyclerView() {
@@ -73,7 +70,6 @@ class StarredFragment : BaseFragment() {
             setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = starredAdapter
             layoutManager = LinearLayoutManager(context)
-
         }
     }
 

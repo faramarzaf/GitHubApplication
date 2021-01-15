@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.starred.StarredResponse
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import app.android.githubservice.repository.StarredRepository
 import kotlinx.coroutines.launch
 

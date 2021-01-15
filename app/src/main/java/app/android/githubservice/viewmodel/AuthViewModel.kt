@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.search.SearchResponse
 import app.android.githubservice.repository.AuthRepository
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import kotlinx.coroutines.launch
 
 class AuthViewModel @ViewModelInject constructor(private val authRepository: AuthRepository) : ViewModel() {

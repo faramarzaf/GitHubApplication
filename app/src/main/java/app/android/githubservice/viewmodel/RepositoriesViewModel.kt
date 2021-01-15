@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.repo.RepositoryResponse
 import app.android.githubservice.repository.ReposRepository
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import kotlinx.coroutines.launch
 
 class RepositoriesViewModel @ViewModelInject constructor(val reposRepository: ReposRepository) : ViewModel() {

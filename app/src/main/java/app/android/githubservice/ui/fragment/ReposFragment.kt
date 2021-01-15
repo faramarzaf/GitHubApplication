@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowersViewModel
@@ -35,7 +35,7 @@ class ReposFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
         setupRecyclerView()
-        fetchRepositoryData()
+        observeRepositoryData()
         getFollowers()
         getFollowing()
         observeFollowers()
@@ -46,7 +46,7 @@ class ReposFragment : BaseFragment() {
     }
 
 
-    private fun fetchRepositoryData() {
+    private fun observeRepositoryData() {
         showProgressBar(reposProgressBar)
         viewModel.reposResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -66,7 +66,6 @@ class ReposFragment : BaseFragment() {
             }
         })
     }
-
 
     private fun setupRecyclerView() {
         reposAdapter = ReposAdapter()

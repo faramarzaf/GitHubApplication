@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
-import app.android.githubservice.repository.Resource
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowersViewModel
@@ -29,7 +28,7 @@ class FollowersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getFollowers()
-        handleFollowersRepositoryData()
+        observeFollowersRepositoryData()
         setupRecyclerView()
         followersAdapter.setOnItemClickListener {
             toast(it.login)
@@ -40,7 +39,7 @@ class FollowersFragment : BaseFragment() {
         viewModel.getFollowers(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
-    private fun handleFollowersRepositoryData() {
+    private fun observeFollowersRepositoryData() {
         showProgressBar(followersProgressBar)
         viewModel.followersResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -69,6 +68,4 @@ class FollowersFragment : BaseFragment() {
 
         }
     }
-
 }
-

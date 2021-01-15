@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.search.Item
 import app.android.githubservice.entity.search.SearchResponse
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import app.android.githubservice.repository.SearchRepository
 import kotlinx.coroutines.launch
 

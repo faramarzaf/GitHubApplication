@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.follower_following.FollowerFollowingResponse
 import app.android.githubservice.repository.FollowingRepository
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import kotlinx.coroutines.launch
 
 class FollowingViewModel @ViewModelInject constructor(val followingRepository: FollowingRepository) : ViewModel() {

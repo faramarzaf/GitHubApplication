@@ -1,4 +1,4 @@
-package app.android.githubservice.repository
+package app.android.githubservice.util
 
 import okhttp3.ResponseBody
 

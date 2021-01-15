@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.entity.search.Item
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
@@ -37,7 +37,7 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         getUsersList()
         setupRecyclerView()
-        handleSearchRepositoryData()
+        observeSearchRepositoryData()
         favoriteUserOperation()
     }
 
@@ -85,7 +85,7 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    private fun handleSearchRepositoryData() {
+    private fun observeSearchRepositoryData() {
         viewModel.searchResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {

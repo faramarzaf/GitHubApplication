@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import app.android.githubservice.entity.follower_following.FollowerFollowingResponse
 import app.android.githubservice.entity.search.SearchResponse
 import app.android.githubservice.repository.FollowersRepository
-import app.android.githubservice.repository.Resource
+import app.android.githubservice.util.Resource
 import kotlinx.coroutines.launch
 
 class FollowersViewModel @ViewModelInject constructor(private val followersRepository: FollowersRepository) : ViewModel() {
