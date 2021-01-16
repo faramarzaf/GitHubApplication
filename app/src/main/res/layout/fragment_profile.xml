@@ -33,13 +33,13 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imgLogout"
+            android:id="@+id/imgSetting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".2"
             android:padding="@dimen/global_padding2X"
-            android:src="@drawable/ic_logout"
+            android:src="@drawable/ic_setting"
             app:tint="@color/white" />
 
 

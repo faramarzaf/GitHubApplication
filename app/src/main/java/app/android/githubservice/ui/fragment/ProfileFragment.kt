@@ -5,19 +5,23 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.interfaces.GlobalBottomSheetCallBack
+import app.android.githubservice.ui.BottomSheetTheme
 import app.android.githubservice.ui.activity.LoginActivity
 import app.android.githubservice.ui.adapter.ViewPagerProfileAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.SearchViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
+import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DoGuardTask
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
+import com.faramarzaf.sdk.af_android_sdk.core.util.ClickGuard
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private val viewModel: SearchViewModel by viewModels()
 
@@ -28,18 +32,30 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
         tabLayoutOverview.setupWithViewPager(viewPagerOverview)
-        fillOverview()
-        imgLogout.setOnClickListener {
-            openLogoutDialog()
-        }
+        fillProfileInfo()
+        ClickGuard.guardView(imgSetting, 800, this)
     }
 
-    private fun fillOverview() {
+    private fun fillProfileInfo() {
         GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarProfile)
         textUserNameProfile.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
         textRepositoryProfile.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
         textFollowersProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
         textFollowingProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
+    }
+
+    override fun onGuard(view: View) {
+        val bottomSheetTheme = BottomSheetTheme()
+        bottomSheetTheme.show(requireActivity().supportFragmentManager, TAG_BOTTOM_SHEET)
+        bottomSheetTheme.setOnBottomSheetClickListener(object : GlobalBottomSheetCallBack {
+            override fun onLogoutClick() {
+                openLogoutDialog()
+            }
+
+            override fun onChangeThemeClick() {
+                toast("on change theme")
+            }
+        })
     }
 
     private fun openLogoutDialog() {
@@ -61,4 +77,5 @@ class ProfileFragment : BaseFragment() {
         toActivity(activity, LoginActivity::class.java)
         requireActivity().finish()
     }
+
 }

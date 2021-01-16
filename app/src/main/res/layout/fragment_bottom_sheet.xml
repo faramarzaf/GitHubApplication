@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_round_corner_bottom_sheet"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/bottomSheetNestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="@dimen/global_margin2X"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_margin5X"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin2X"
+                android:layout_weight="5"
+                style="@style/TextViewGlobal"
+                android:text="Change theme"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <Switch
+                android:id="@+id/switchTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin2X"
+                android:layout_weight="1"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_margin5X"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin2X"
+                android:layout_weight="10"
+                android:text="Logout"
+                style="@style/TextViewGlobal"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgLogout"
+                android:layout_width="0dp"
+                android:background="@drawable/bg_button_login"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin2X"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimaryLight2X"
+                android:padding="@dimen/global_padding"
+                app:srcCompat="@drawable/ic_logout"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
