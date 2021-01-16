@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private val viewModel: SearchViewModel by viewModels()
+    private val bottomSheetTheme = BottomSheetTheme()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_profile
@@ -33,7 +34,24 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
         viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
         tabLayoutOverview.setupWithViewPager(viewPagerOverview)
         fillProfileInfo()
+        bottomSheetOperations()
         ClickGuard.guardView(imgSetting, 800, this)
+    }
+
+    private fun bottomSheetOperations() {
+        bottomSheetTheme.setOnBottomSheetClickListener(object : GlobalBottomSheetCallBack {
+            override fun onLogoutClick() {
+                openLogoutDialog()
+            }
+
+            override fun onLightThemeClick() {
+                toast("on Light theme")
+            }
+
+            override fun onDarkThemeClick() {
+                toast("on Dark theme")
+            }
+        })
     }
 
     private fun fillProfileInfo() {
@@ -45,17 +63,7 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
     }
 
     override fun onGuard(view: View) {
-        val bottomSheetTheme = BottomSheetTheme()
         bottomSheetTheme.show(requireActivity().supportFragmentManager, TAG_BOTTOM_SHEET)
-        bottomSheetTheme.setOnBottomSheetClickListener(object : GlobalBottomSheetCallBack {
-            override fun onLogoutClick() {
-                openLogoutDialog()
-            }
-
-            override fun onChangeThemeClick() {
-                toast("on change theme")
-            }
-        })
     }
 
     private fun openLogoutDialog() {

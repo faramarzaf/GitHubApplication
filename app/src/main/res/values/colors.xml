@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+    //light mode
+    <color name="colorPrimaryThemeLight">#FFFFFF</color>
+    <color name="colorPrimaryThemeDarkLight">#ECECEC</color>
+    <color name="colorThemeTextLight">#000</color>
+    
 
     <color name="InactiveBottomNavIconColor">#03DAC5</color>
     <color name="white">#fff</color>
     <color name="colorPrimaryLight">#6F0AFF</color>
     <color name="colorPrimaryLightX">#7524E8</color>
     <color name="colorPrimaryLight2X">#9055E4</color>
-
     <color name="greenAccent">#43A047</color>
-
     <color name="blackDark">#101010</color>
     <color name="blackLight">#151515</color>
     <color name="colorListRecyclerview">#232323</color>
     <color name="colorOverViewTitles">#303030</color>
-
     <color name="colorDividerList">#252525</color>
 
 

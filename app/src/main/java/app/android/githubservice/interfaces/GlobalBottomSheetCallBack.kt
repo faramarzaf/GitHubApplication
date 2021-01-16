@@ -2,5 +2,6 @@ package app.android.githubservice.interfaces
 
 interface GlobalBottomSheetCallBack {
     fun onLogoutClick()
-    fun onChangeThemeClick()
+    fun onLightThemeClick()
+    fun onDarkThemeClick()
 }
