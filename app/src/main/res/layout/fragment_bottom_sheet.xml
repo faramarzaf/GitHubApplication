@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/bottomSheetNestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="180dp"
         android:layout_margin="@dimen/global_margin2X"
         android:orientation="vertical">
 
@@ -29,7 +29,7 @@
                 style="@style/TextViewGlobal"
                 android:text="Change theme"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
 
             <Switch
@@ -40,6 +40,14 @@
                 android:layout_weight="1"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center"
+            android:background="@color/gray"
+            android:layout_marginTop="@dimen/global_margin5X"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +63,7 @@
                 android:text="Logout"
                 style="@style/TextViewGlobal"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
