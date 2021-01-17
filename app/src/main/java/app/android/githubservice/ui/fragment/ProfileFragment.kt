@@ -2,6 +2,8 @@ package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -20,11 +22,13 @@ import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
 
+
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private val viewModel: SearchViewModel by viewModels()
     private val bottomSheetTheme = BottomSheetTheme()
+
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_profile
@@ -42,14 +46,6 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
         bottomSheetTheme.setOnBottomSheetClickListener(object : GlobalBottomSheetCallBack {
             override fun onLogoutClick() {
                 openLogoutDialog()
-            }
-
-            override fun onLightThemeClick() {
-                toast("on Light theme")
-            }
-
-            override fun onDarkThemeClick() {
-                toast("on Dark theme")
             }
         })
     }

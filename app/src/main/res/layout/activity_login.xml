@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#101010"
+    android:background="@color/colorBackground"
     tools:context=".ui.activity.LoginActivity">
 
 
@@ -15,14 +15,14 @@
         android:layout_margin="20dp"
         android:drawableStart="@drawable/ic_profile"
         android:drawablePadding="@dimen/global_padding1X"
-        android:drawableTint="@color/greenAccent"
+        android:drawableTint="@color/colorAccent"
         android:hint="@string/username"
         android:inputType="text"
         android:maxLines="1"
         android:fontFamily="@font/font"
-        android:textColor="@color/white"
+        android:textColor="@color/textColorPrimary"
         android:textColorHint="@color/gray"
-        app:backgroundTint="#E3E3E3"
+        app:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -38,7 +38,7 @@
         android:buttonTint="@color/greenAccent"
         android:checked="false"
         android:text="@string/remember_me"
-        android:textColor="@color/white"
+        android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
         android:fontFamily="@font/font"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
@@ -56,6 +56,7 @@
         android:elevation="4dp"
         android:fontFamily="@font/font"
         android:text="@string/login"
+        android:textColor="@color/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +81,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_github" />
+        app:srcCompat="@drawable/ic_github"
+        app:tint="@color/textColorPrimary"
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -88,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
+        android:textColor="@color/textColorPrimary"
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

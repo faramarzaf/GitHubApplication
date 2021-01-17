@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
@@ -24,8 +24,8 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/blackLight"
-        app:itemTextColor="@color/white"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorAccent"
         app:menu="@menu/menu"
         app:itemIconTint="@color/bnv_tab_item_foreground"
         android:theme="@style/Widget.BottomNavigationView"

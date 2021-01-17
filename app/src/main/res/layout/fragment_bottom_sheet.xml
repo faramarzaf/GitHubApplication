@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_round_corner_bottom_sheet"
+    android:backgroundTint="@color/colorBackground"
     android:orientation="vertical">
 
 
@@ -28,7 +29,7 @@
                 android:layout_weight="5"
                 style="@style/TextViewGlobal"
                 android:text="Change theme"
-                android:textColor="@color/white"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="16sp"
                 />
 
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/global_margin2X"
                 android:layout_weight="1"
+                android:checked="false"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </LinearLayout>
 
@@ -62,7 +64,7 @@
                 android:layout_weight="10"
                 android:text="Logout"
                 style="@style/TextViewGlobal"
-                android:textColor="@color/white"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="16sp"
                 />
 
@@ -73,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/global_margin2X"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimaryLight2X"
+                android:backgroundTint="@color/colorAccent"
                 android:padding="@dimen/global_padding"
                 app:srcCompat="@drawable/ic_logout"
                 app:tint="@color/white" />

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blackDark"
+    android:background="@color/colorBackground"
     android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/textColorPrimary"
         android:textStyle="bold" />
 
 
