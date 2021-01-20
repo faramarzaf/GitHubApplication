@@ -54,7 +54,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun handleAuthResponse() {
         viewModel.loginResponse.observe(this, Observer {
+            toActivity(MainActivity::class.java)
             when (it) {
+
                 is Resource.Success -> {
                     hideProgressBar(authProgressBar)
                     if (it.value.totalCount == 0) {

@@ -28,16 +28,13 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract val getFragmentLayout: Int
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getFragmentLayout, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         activity?.let { transparentToolbar(it) }
     }
 

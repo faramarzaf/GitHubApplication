@@ -1,4 +1,4 @@
-package app.android.githubservice.entity.Event
+package app.android.githubservice.entity.event
 
 
 import com.google.gson.annotations.SerializedName

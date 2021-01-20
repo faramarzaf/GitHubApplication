@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/blackDark"
     tools:context=".ui.activity.LoginActivity">
 
 
@@ -20,7 +20,7 @@
         android:inputType="text"
         android:maxLines="1"
         android:fontFamily="@font/font"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/white"
         android:textColorHint="@color/gray"
         app:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,10 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/global_margin4X"
-        android:buttonTint="@color/greenAccent"
+        android:buttonTint="@color/colorAccent"
         android:checked="false"
         android:text="@string/remember_me"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:fontFamily="@font/font"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_github"
-        app:tint="@color/textColorPrimary"
+        app:tint="@color/white"
         />
 
     <TextView
@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/white"
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

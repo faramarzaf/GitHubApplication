@@ -43,7 +43,7 @@
         android:text="@string/no_favorite_user_yet"
         style="@style/TextViewGlobal"
         android:visibility="gone"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
