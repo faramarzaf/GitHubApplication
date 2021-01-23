@@ -11,6 +11,7 @@ ext {
     def retrofitVersion = "2.9.0"
     def okHttp3Version = "4.7.2"
     def navigationVersion = "2.3.2"
+    def pagingVersion = "3.0.0-alpha03"
     def glideVersion = "4.11.0"
     def faramarzSdkVersion = "1.0.21"
 
@@ -74,6 +75,10 @@ ext {
     navigation = [
             fragment: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
             ui      : "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    ]
+
+    paging = [
+            paging3: "androidx.paging:paging-runtime:$pagingVersion"
     ]
 
     glide = [

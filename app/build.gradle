@@ -64,6 +64,7 @@ dependencies {
     implementation glide.glide
     kapt glide.compiler
 
+    implementation paging.paging3
 
     implementation faramarzSDK.sdk
 

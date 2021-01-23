@@ -69,28 +69,6 @@ abstract class BaseActivity : AppCompatActivity() {
         return MyPreferences.readString(this, KEY_SESSION_ID, "")
     }
 
-/*    open fun showAlerter(title: String, message: String) {
-        Alerter.create(this)
-            .setTitle(title)
-            .setText(message)
-            .setContentGravity(Gravity.END)
-            .setTitleTypeface(
-                Typeface.createFromAsset(
-                    assets,
-                    resources.getString(R.string.font_address)
-                )
-            )
-            .setTextTypeface(
-                Typeface.createFromAsset(
-                    assets,
-                    resources.getString(R.string.font_address)
-                )
-            )
-            .setBackgroundColorRes(R.color.colorAccent)
-            .setIcon(R.mipmap.ic_launcher)
-            .setIconColorFilter(0) // Optional - Removes white tint
-            .show()
-    }*/
 
     fun toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
