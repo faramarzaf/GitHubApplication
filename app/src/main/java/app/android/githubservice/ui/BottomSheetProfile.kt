@@ -14,7 +14,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.util.ClickGuard
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 
-open class BottomSheetTheme : BaseBottomSheet(), DoGuardTask {
+open class BottomSheetProfile : BaseBottomSheet(), DoGuardTask {
 
     override val fragmentLayout: Int
         get() = R.layout.fragment_bottom_sheet

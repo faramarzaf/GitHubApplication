@@ -2,13 +2,11 @@ package app.android.githubservice.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.interfaces.GlobalBottomSheetCallBack
-import app.android.githubservice.ui.BottomSheetTheme
+import app.android.githubservice.ui.BottomSheetProfile
 import app.android.githubservice.ui.activity.LoginActivity
 import app.android.githubservice.ui.adapter.ViewPagerProfileAdapter
 import app.android.githubservice.util.*
@@ -27,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private val viewModel: SearchViewModel by viewModels()
-    private val bottomSheetTheme = BottomSheetTheme()
+    private val bottomSheetTheme = BottomSheetProfile()
 
 
     override val getFragmentLayout: Int
