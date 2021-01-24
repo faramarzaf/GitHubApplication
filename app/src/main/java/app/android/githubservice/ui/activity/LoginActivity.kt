@@ -1,6 +1,7 @@
 package app.android.githubservice.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -54,9 +55,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun handleAuthResponse() {
         viewModel.loginResponse.observe(this, Observer {
-            toActivity(MainActivity::class.java)
             when (it) {
-
                 is Resource.Success -> {
                     hideProgressBar(authProgressBar)
                     if (it.value.totalCount == 0) {
