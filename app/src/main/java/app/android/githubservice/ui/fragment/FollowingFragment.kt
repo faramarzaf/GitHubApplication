@@ -14,6 +14,7 @@ import app.android.githubservice.viewmodel.FollowingViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_following.*
+import kotlinx.android.synthetic.main.fragment_repos.*
 
 @AndroidEntryPoint
 class FollowingFragment : BaseFragment() {
@@ -43,6 +44,11 @@ class FollowingFragment : BaseFragment() {
         viewModel.followingResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
+                    if (response.value.isEmpty()) {
+                        noDataAvailable()
+                    } else {
+                        dataAvailable()
+                    }
                     hideProgressBar(followingProgressBar)
                     followingAdapter.differ.submitList(response.value)
                     rv_following.setPadding(0, 0, 0, 0)
@@ -66,4 +72,13 @@ class FollowingFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(activity)
         }
     }
+
+    private fun noDataAvailable() {
+        textNoFollowing.visibility = View.VISIBLE
+    }
+
+    private fun dataAvailable() {
+        textNoFollowing.visibility = View.GONE
+    }
+
 }

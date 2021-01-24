@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.entity.repo.RepositoryResponse
 import app.android.githubservice.util.Resource
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
@@ -16,6 +17,7 @@ import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_repos.*
 
 @AndroidEntryPoint
@@ -46,27 +48,6 @@ class ReposFragment : BaseFragment() {
     }
 
 
-    private fun observeRepositoryData() {
-        showProgressBar(reposProgressBar)
-        viewModel.reposResponse.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Success -> {
-                    hideProgressBar(reposProgressBar)
-                    reposAdapter.differ.submitList(response.value)
-                    rv_repos.setPadding(0, 0, 0, 0)
-                    MyPreferences.writeString(requireContext(), KEY_SIZE_LIST_REPO, response.value.size.toString())
-                }
-                is Resource.Failure -> {
-                    hideProgressBar(reposProgressBar)
-                    if (response.isNetworkError) {
-                        toast("Check your connection!")
-                    }
-                    Log.d(TAG_LOG, "fetchRepositoryData: $response")
-                }
-            }
-        })
-    }
-
     private fun setupRecyclerView() {
         reposAdapter = ReposAdapter()
         rv_repos.apply {
@@ -86,6 +67,32 @@ class ReposFragment : BaseFragment() {
     private fun getFollowing() {
         viewModelFollowing.getFollowing(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
 
+    }
+
+    private fun observeRepositoryData() {
+        showProgressBar(reposProgressBar)
+        viewModel.reposResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    if (response.value.isEmpty()) {
+                        noDataAvailable()
+                    } else {
+                        dataAvailable()
+                    }
+                    hideProgressBar(reposProgressBar)
+                    reposAdapter.differ.submitList(response.value)
+                    rv_repos.setPadding(0, 0, 0, 0)
+                    MyPreferences.writeString(requireContext(), KEY_SIZE_LIST_REPO, response.value.size.toString())
+                }
+                is Resource.Failure -> {
+                    hideProgressBar(reposProgressBar)
+                    if (response.isNetworkError) {
+                        toast("Check your connection!")
+                    }
+                    Log.d(TAG_LOG, "fetchRepositoryData: $response")
+                }
+            }
+        })
     }
 
     private fun observeFollowers() {
@@ -119,4 +126,13 @@ class ReposFragment : BaseFragment() {
             }
         })
     }
+
+    private fun noDataAvailable() {
+        textNoRepos.visibility = View.VISIBLE
+    }
+
+    private fun dataAvailable() {
+        textNoRepos.visibility = View.GONE
+    }
+
 }

@@ -14,6 +14,7 @@ import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.StarredViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_starred.*
 
 @AndroidEntryPoint
@@ -41,6 +42,11 @@ class StarredFragment : BaseFragment() {
         viewModel.starredResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
+                    if (response.value.isEmpty()) {
+                        noDataAvailable()
+                    } else {
+                        dataAvailable()
+                    }
                     hideProgressBar()
                     starredAdapter.differ.submitList(response.value)
                     rv_starred.setPadding(0, 0, 0, 0)
@@ -71,6 +77,14 @@ class StarredFragment : BaseFragment() {
             adapter = starredAdapter
             layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    private fun noDataAvailable() {
+        textNoStarred.visibility = View.VISIBLE
+    }
+
+    private fun dataAvailable() {
+        textNoStarred.visibility = View.GONE
     }
 
 }

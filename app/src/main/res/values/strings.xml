@@ -21,5 +21,9 @@
     <string name="no">No</string>
     <string name="remove_all_title">Remove all!</string>
     <string name="msg_dialog_remove_all">Are you sure you want to remove saved users?</string>
+    <string name="no_repository_yet">You don\'t have any repository yet!</string>
+    <string name="no_starred_yet">No starred repository yet!</string>
+    <string name="no_followers_yet">You don\'t have followers yet!</string>
+    <string name="no_following_yet">You don\'t have following yet!</string>
 
 </resources>
