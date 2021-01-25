@@ -6,12 +6,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import app.android.githubservice.R
-import app.android.githubservice.base.BaseActivityNONVM
+import app.android.githubservice.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
-class MainActivity : BaseActivityNONVM() {
+class MainActivity : BaseActivity() {
 
     private lateinit var navController: NavController
 
@@ -20,9 +20,7 @@ class MainActivity : BaseActivityNONVM() {
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
-        //    NavigationUI.setupActionBarWithNavController(this, navController) disabled because of no action bar theme
         transparentToolbar(this)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
