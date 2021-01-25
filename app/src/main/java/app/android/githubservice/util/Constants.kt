@@ -17,3 +17,4 @@ const val DATABASE_NAME = "github_db.db"
 const val DELAY_GUARD_CLICK = 800L
 const val TAG_BOTTOM_SHEET = "bottom_sheet"
 const val KEY_THEME = "key_theme"
+const val CACHE_SIZE = 500
