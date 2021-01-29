@@ -18,6 +18,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -72,7 +77,7 @@ dependencies {
     implementation dagger_hilt.daggerHilt
     kapt dagger_hilt.daggerHiltAndroidCompiler
     kapt dagger_hilt.daggerHiltCompiler
-    
+
 
     implementation unitTest.core
     testImplementation unitTest.junit

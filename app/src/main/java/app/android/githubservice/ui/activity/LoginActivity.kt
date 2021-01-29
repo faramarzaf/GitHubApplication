@@ -1,12 +1,11 @@
 package app.android.githubservice.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import app.android.githubservice.R
 import app.android.githubservice.base.BaseActivity
+import app.android.githubservice.databinding.ActivityLoginBinding
 import app.android.githubservice.entity.search.SearchResponse
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.AuthViewModel
@@ -20,10 +19,12 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private val viewModel: AuthViewModel by viewModels()
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         transparentToolbar(this)
         btnLogin.setOnClickListener(this)
         handleAuthResponse()
@@ -31,17 +32,17 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        val username = editTextUsername.text.toString().trim()
-        showProgressBar(authProgressBar)
-        if (checkbox_remember_me.isChecked && !StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())) {
+        val username = binding.editTextUsername.text.toString().trim()
+        showProgressBar(binding.authProgressBar)
+        if (binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
             MyPreferences.writeString(this, KEY_USERNAME, username)
             MyPreferences.writeString(this, KEY_SESSION_ID, HashHelper.sha256(username))
             viewModel.auth(username)
-        } else if (!checkbox_remember_me.isChecked && !StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())) {
+        } else if (!binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
             MyPreferences.writeString(this, KEY_USERNAME, username)
             viewModel.auth(username)
-        } else if (StringHelper.stringIsEmptyOrNull(editTextUsername.text.toString().trim())) {
-            hideProgressBar(authProgressBar)
+        } else if (StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
+            hideProgressBar(binding.authProgressBar)
             toast("Fill fields!")
         }
     }
@@ -57,18 +58,18 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         viewModel.loginResponse.observe(this, Observer {
             when (it) {
                 is Resource.Success -> {
-                    hideProgressBar(authProgressBar)
+                    hideProgressBar(binding.authProgressBar)
                     if (it.value.totalCount == 0) {
                         toast("User not found!")
                     } else {
-                        hideProgressBar(authProgressBar)
+                        hideProgressBar(binding.authProgressBar)
                         saveUsefulUrls(it.value)
                         toActivity(MainActivity::class.java)
                         finish()
                     }
                 }
                 is Resource.Failure -> {
-                    hideProgressBar(authProgressBar)
+                    hideProgressBar(binding.authProgressBar)
                     if (it.isNetworkError) {
                         toast("Check your connection!")
                     }

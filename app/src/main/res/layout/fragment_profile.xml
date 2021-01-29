@@ -94,6 +94,8 @@
         android:background="@color/black"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:tabGravity="fill"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextAppearance="@style/TabLayoutTheme"
