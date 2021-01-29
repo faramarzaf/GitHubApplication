@@ -3,6 +3,14 @@
 <img src="https://raw.github.com/faramarzaf/GitHubApplication/master/screenshots/name.png" width=1000 height=350 />
 </p>
 
+
+[![Kotlin Version](https://img.shields.io/badge/kotlin-1.3.72-blue.svg)](https://kotlinlang.org)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
+![](https://img.shields.io/github/languages/count/faramarzaf/GitHubApplication.svg)
+![](https://img.shields.io/github/repo-size/faramarzaf/GitHubApplication.svg)
+![](https://img.shields.io/github/last-commit/faramarzaf/GitHubApplication.svg)
+
+
 In this program, we have tried to use new and modern Android technologies to be an example of a program for those who want to learn how to use new tools. 
 
 <p align="center">
