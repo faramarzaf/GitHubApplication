@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.databinding.FragmentProfileBinding
 import app.android.githubservice.interfaces.GlobalBottomSheetCallBack
 import app.android.githubservice.ui.BottomSheetProfile
 import app.android.githubservice.ui.activity.LoginActivity
@@ -25,16 +26,19 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private val viewModel: SearchViewModel by viewModels()
+    private lateinit var binding: FragmentProfileBinding
     private val bottomSheetTheme = BottomSheetProfile()
-
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_profile
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
-        tabLayoutOverview.setupWithViewPager(viewPagerOverview)
+        binding = FragmentProfileBinding.bind(view)
+        with(binding) {
+            viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
+            tabLayoutOverview.setupWithViewPager(viewPagerOverview)
+        }
         fillProfileInfo()
         bottomSheetOperations()
         ClickGuard.guardView(imgSetting, 800, this)
@@ -49,11 +53,13 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
     }
 
     private fun fillProfileInfo() {
-        GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarProfile)
-        textUserNameProfile.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
-        textRepositoryProfile.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
-        textFollowersProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
-        textFollowingProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
+        with(binding) {
+            GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarProfile)
+            textUserNameProfile.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
+            textRepositoryProfile.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
+            textFollowersProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
+            textFollowingProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
+        }
     }
 
     override fun onGuard(view: View) {

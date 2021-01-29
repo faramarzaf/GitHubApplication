@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.FollowersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_followers"
+        android:id="@+id/rvFollowers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

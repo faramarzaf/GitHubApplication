@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.028" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search"
+        android:id="@+id/rvSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/global_margin9X"

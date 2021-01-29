@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/ic_delete" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_saved"
+        android:id="@+id/rvSaved"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/global_margin9X"

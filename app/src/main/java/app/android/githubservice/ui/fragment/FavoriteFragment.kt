@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.databinding.FragmentFavoriteBinding
 import app.android.githubservice.ui.adapter.FavoriteAdapter
 import app.android.githubservice.viewmodel.SearchViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 class FavoriteFragment : BaseFragment() {
 
     private lateinit var favoriteAdapter: FavoriteAdapter
-
+    private lateinit var binding: FragmentFavoriteBinding
     private val viewModel: SearchViewModel by viewModels()
 
     override val getFragmentLayout: Int
@@ -32,13 +33,14 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentFavoriteBinding.bind(view)
         setupRecyclerView()
         swipeRemoving(view)
         observeUsersList()
         favoriteAdapter.setOnItemClickListener {
             toast(it.login)
         }
-        imgDeleteAll.setOnClickListener {
+        binding.imgDeleteAll.setOnClickListener {
             deleteAllFavorites()
         }
     }
@@ -47,10 +49,10 @@ class FavoriteFragment : BaseFragment() {
         viewModel.getAllUsers().observe(viewLifecycleOwner, Observer { listFavorite ->
             favoriteAdapter.differ.submitList(listFavorite)
             if (listFavorite.isEmpty()) {
-                imgDeleteAll.isEnabled = false
+                binding.imgDeleteAll.isEnabled = false
                 noDataAvailable()
             } else {
-                imgDeleteAll.isEnabled = true
+                binding.imgDeleteAll.isEnabled = true
                 dataAvailable()
             }
         })
@@ -89,14 +91,14 @@ class FavoriteFragment : BaseFragment() {
         }
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(rv_saved)
+            attachToRecyclerView(rvSaved)
         }
     }
 
 
     private fun setupRecyclerView() {
         favoriteAdapter = FavoriteAdapter()
-        rv_saved.apply {
+        binding.rvSaved.apply {
             setRecyclerviewDivider(context, this, R.drawable.divider_list)
             layoutManager = LinearLayoutManager(activity)
             adapter = favoriteAdapter
@@ -104,10 +106,10 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun noDataAvailable() {
-        textNoFavUser.visibility = View.VISIBLE
+        binding.textNoFavUser.visibility = View.VISIBLE
     }
 
     private fun dataAvailable() {
-        textNoFavUser.visibility = View.GONE
+        binding.textNoFavUser.visibility = View.GONE
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.ReposFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_repos"
+        android:id="@+id/rvRepos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

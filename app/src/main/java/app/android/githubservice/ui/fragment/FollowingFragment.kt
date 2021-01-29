@@ -8,18 +8,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.databinding.FragmentFollowingBinding
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowingViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_following.*
-import kotlinx.android.synthetic.main.fragment_repos.*
 
 @AndroidEntryPoint
 class FollowingFragment : BaseFragment() {
 
     private lateinit var followingAdapter: FollowersFollowingAdapter
+    private lateinit var binding: FragmentFollowingBinding
     private val viewModel: FollowingViewModel by viewModels()
 
     override val getFragmentLayout: Int
@@ -27,6 +27,7 @@ class FollowingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentFollowingBinding.bind(view)
         getFollowing()
         setupRecyclerView()
         observeFollowingRepositoryData()
@@ -40,7 +41,7 @@ class FollowingFragment : BaseFragment() {
     }
 
     private fun observeFollowingRepositoryData() {
-        showProgressBar(followingProgressBar)
+        showProgressBar(binding.followingProgressBar)
         viewModel.followingResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
@@ -49,12 +50,12 @@ class FollowingFragment : BaseFragment() {
                     } else {
                         dataAvailable()
                     }
-                    hideProgressBar(followingProgressBar)
+                    hideProgressBar(binding.followingProgressBar)
                     followingAdapter.differ.submitList(response.value)
-                    rv_following.setPadding(0, 0, 0, 0)
+                    binding.rvFollowing.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
-                    hideProgressBar(followingProgressBar)
+                    hideProgressBar(binding.followingProgressBar)
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
@@ -66,7 +67,7 @@ class FollowingFragment : BaseFragment() {
 
     private fun setupRecyclerView() {
         followingAdapter = FollowersFollowingAdapter()
-        rv_following.apply {
+        binding.rvFollowing.apply {
             setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = followingAdapter
             layoutManager = LinearLayoutManager(activity)
@@ -74,11 +75,11 @@ class FollowingFragment : BaseFragment() {
     }
 
     private fun noDataAvailable() {
-        textNoFollowing.visibility = View.VISIBLE
+        binding.textNoFollowing.visibility = View.VISIBLE
     }
 
     private fun dataAvailable() {
-        textNoFollowing.visibility = View.GONE
+        binding.textNoFollowing.visibility = View.GONE
     }
 
 }

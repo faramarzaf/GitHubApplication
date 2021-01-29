@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/shape_round_corner_bottom_sheet"
     android:backgroundTint="@color/blackLight"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true">
 
 
     <LinearLayout

@@ -11,15 +11,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
+import app.android.githubservice.databinding.FragmentSearchBinding
 import app.android.githubservice.entity.search.Item
-import app.android.githubservice.util.Resource
 import app.android.githubservice.ui.adapter.SearchAdapter
 import app.android.githubservice.util.MAX_PAGE
 import app.android.githubservice.util.MIN_PAGE
+import app.android.githubservice.util.Resource
 import app.android.githubservice.util.TAG_LOG
 import app.android.githubservice.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : BaseFragment() {
 
     private lateinit var searchAdapter: SearchAdapter
+    private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
 
     override val getFragmentLayout: Int
@@ -35,6 +36,7 @@ class SearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSearchBinding.bind(view)
         getUsersList()
         setupRecyclerView()
         observeSearchRepositoryData()
@@ -69,16 +71,16 @@ class SearchFragment : BaseFragment() {
 
     private fun getUsersList() {
         var job: Job? = null
-        editTextSearch.addTextChangedListener { editable ->
+        binding.editTextSearch.addTextChangedListener { editable ->
             job?.cancel()
             job = lifecycleScope.launch {
-                showProgressBar(searchProgressBar)
+                showProgressBar(binding.searchProgressBar)
                 delay(500)
                 editable?.let {
                     if (editable.toString().isNotEmpty()) {
                         viewModel.searchUser(editable.toString(), MIN_PAGE, MAX_PAGE)
                     } else {
-                        hideProgressBar(searchProgressBar)
+                        hideProgressBar(binding.searchProgressBar)
                     }
                 }
             }
@@ -89,12 +91,12 @@ class SearchFragment : BaseFragment() {
         viewModel.searchResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    hideProgressBar(searchProgressBar)
+                    hideProgressBar(binding.searchProgressBar)
                     searchAdapter.differ.submitList(response.value.items)
-                    rv_search.setPadding(0, 0, 0, 0)
+                    binding.rvSearch.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
-                    hideProgressBar(searchProgressBar)
+                    hideProgressBar(binding.searchProgressBar)
                     if (response.isNetworkError) {
                         toast("Check your connection!")
                     }
@@ -110,7 +112,7 @@ class SearchFragment : BaseFragment() {
 
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter()
-        rv_search.apply {
+        binding.rvSearch.apply {
             setRecyclerviewDivider(context, this, R.drawable.divider_list)
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(activity)

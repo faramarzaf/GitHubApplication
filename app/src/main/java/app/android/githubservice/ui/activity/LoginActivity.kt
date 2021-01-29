@@ -26,7 +26,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         transparentToolbar(this)
-        btnLogin.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
         handleAuthResponse()
         checkUserIsAuth()
     }

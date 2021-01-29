@@ -6,8 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".ui.activity.MainActivity">
-
+    tools:context=".ui.activity.MainActivity"
+    tools:viewBindingIgnore="true">
+    <!--  tools:viewBindingIgnore="true"
+    Because we don't need viewBinding in main activity then
+     we ignore this activity to generate class for this layout xml-->
 
     <fragment
         android:id="@+id/fragment"
@@ -24,11 +27,10 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/blackLight"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/menu"
-        app:itemIconTint="@color/bnv_tab_item_foreground"
         android:theme="@style/Widget.BottomNavigationView"
-        />
+        app:backgroundTint="@color/blackLight"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/menu" />
 
 </LinearLayout>
