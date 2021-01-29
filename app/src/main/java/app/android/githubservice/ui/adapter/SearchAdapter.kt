@@ -1,13 +1,12 @@
 package app.android.githubservice.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.android.githubservice.R
+import app.android.githubservice.databinding.ItemListSearchedUsersBinding
 import app.android.githubservice.entity.search.Item
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 import kotlinx.android.synthetic.main.item_list_searched_users.view.*
@@ -15,7 +14,30 @@ import kotlinx.android.synthetic.main.item_list_searched_users.view.*
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
-    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class SearchViewHolder(private val itemBinding: ItemListSearchedUsersBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(items: Item) {
+            val imageViewFav = itemView.imageFav
+            itemBinding.imageFav.setOnClickListener {
+                onSaveUserClickListener?.let { item ->
+                    item(items, imageViewFav)
+                }
+            }
+            getItemInstance?.let {
+                it(items)
+            }
+
+            itemView.apply {
+                GlideHelper.circularImage(context, items.avatarUrl.toString(), itemBinding.avatarUser)
+                itemBinding.textUser.text = items.login
+                setOnClickListener {
+                    onItemClickListener?.let { it(items) }
+                }
+                getViewFromAdapter?.let { views ->
+                    views(imageFav)
+                }
+            }
+        }
+    }
 
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
@@ -30,7 +52,8 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        return SearchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_searched_users, parent, false))
+        val itemBinding = ItemListSearchedUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -44,28 +67,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val searchInfo = differ.currentList[position]
-        val imageViewFav = holder.itemView.imageFav
-
-        imageViewFav.setOnClickListener {
-            onSaveUserClickListener?.let { item ->
-                item(searchInfo, imageViewFav)
-            }
-        }
-
-        getItemInstance?.let {
-            it(searchInfo)
-        }
-
-        holder.itemView.apply {
-            GlideHelper.circularImage(context, searchInfo.avatarUrl.toString(), avatarUser)
-            textUser.text = searchInfo.login
-            setOnClickListener {
-                onItemClickListener?.let { it(searchInfo) }
-            }
-            getViewFromAdapter?.let { views ->
-                views(imageFav)
-            }
-        }
+        holder.bind(searchInfo)
     }
 
     fun setOnItemClickListener(listener: (Item) -> Unit) {

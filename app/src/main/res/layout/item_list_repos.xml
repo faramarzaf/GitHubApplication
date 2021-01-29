@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_repo_name"
+        android:id="@+id/textRepoName"
         style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_repo_desc"
+        android:id="@+id/textRepoDesc"
         style="@style/TextViewGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:padding="@dimen/global_padding1X">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_stars"
+            android:id="@+id/textStars"
             style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:src="@drawable/ic_fork" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_forks"
+            android:id="@+id/textForks"
             style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_language"
+            android:id="@+id/textLanguage"
             style="@style/TextViewGlobal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
 
 
         <LinearLayout
-            android:id="@+id/view_colored_language"
+            android:id="@+id/viewColoredLanguage"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_gravity="center"

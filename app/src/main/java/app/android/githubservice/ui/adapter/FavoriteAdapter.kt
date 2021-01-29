@@ -1,22 +1,31 @@
 package app.android.githubservice.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.android.githubservice.R
+import app.android.githubservice.databinding.ItemListFavoriteBinding
 import app.android.githubservice.entity.search.Item
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
-import kotlinx.android.synthetic.main.item_list_saved.view.*
 
 
-class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    inner class SavedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class FavoriteViewHolder(private val itemBinding: ItemListFavoriteBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(item: Item) {
+            itemView.apply {
+                itemBinding.textSaveName.text = item.login.toString()
+                GlideHelper.circularImage(context, item.avatarUrl.toString(), itemBinding.imageSavedUsers)
+                setOnClickListener {
+                    onItemClickListener?.let { it(item) }
+                }
+            }
+        }
+    }
 
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
+
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.id == newItem.id
         }
@@ -28,8 +37,9 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() 
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedViewHolder {
-        return SavedViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_saved, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
+        val itemBinding = ItemListFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FavoriteViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -38,15 +48,9 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.SavedViewHolder>() 
 
     private var onItemClickListener: ((Item) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: SavedViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
-        holder.itemView.apply {
-            text_save_name.text = repoInfo.login.toString()
-            GlideHelper.circularImage(context, repoInfo.avatarUrl.toString(), imageSavedUsers)
-            setOnClickListener {
-                onItemClickListener?.let { it(repoInfo) }
-            }
-        }
+        holder.bind(repoInfo)
     }
 
     fun setOnItemClickListener(listener: (Item) -> Unit) {

@@ -45,29 +45,29 @@ class StarredAdapter : RecyclerView.Adapter<StarredAdapter.StarredViewHolder>() 
     override fun onBindViewHolder(holder: StarredViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.itemView.apply {
-            text_repo_name.text = repoInfo.fullName
-            text_repo_desc.text  = repoInfo.description
-            text_forks.text = repoInfo.forksCount.toString()
+            textRepoName.text = repoInfo.fullName
+            textRepoDesc.text  = repoInfo.description
+            textForks.text = repoInfo.forksCount.toString()
             if (repoInfo.stargazersCount!! > 1000 || repoInfo.forksCount!! > 1000) {
                 val startValue = thousandPrinter(repoInfo.stargazersCount.toString())
                 val forkValue = thousandPrinter(repoInfo.forksCount.toString())
-                text_stars.text = startValue
-                text_forks.text = forkValue
+                textStars.text = startValue
+                textForks.text = forkValue
             } else {
-                text_stars.text = "☆ " + repoInfo.stargazersCount.toString()
-                text_forks.text = repoInfo.forksCount.toString()
+                textStars.text = "☆ " + repoInfo.stargazersCount.toString()
+                textForks.text = repoInfo.forksCount.toString()
             }
 
             val keyColor = repoInfo.language.toString()
             val codeColor = LanguageColorGenerator.getColors(context, keyColor)
             if (codeColor != null)
-                ViewCompat.setBackgroundTintList(view_colored_language, ColorStateList.valueOf(Color.parseColor(codeColor)))
+                ViewCompat.setBackgroundTintList(viewColoredLanguage, ColorStateList.valueOf(Color.parseColor(codeColor)))
 
             val language = repoInfo.language
-            text_language.text = language
+            textLanguage.text = language
             if (language.isNullOrEmpty()){
-                text_language.text = "-"
-                view_colored_language.visibility = View.GONE
+                textLanguage.text = "-"
+                viewColoredLanguage.visibility = View.GONE
             }
 
             setOnClickListener {
