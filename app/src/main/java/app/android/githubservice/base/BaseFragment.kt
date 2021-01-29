@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.util.KEY_SESSION_ID
 import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper.Companion.checkNetwork
+import com.faramarzaf.sdk.af_android_sdk.core.helper.RecyclerviewHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences.Prefs.readString
@@ -34,7 +33,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         activity?.let { transparentToolbar(it) }
     }
 
@@ -90,9 +88,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun setRecyclerviewDivider(context: Context, recyclerView: RecyclerView, resId: Int) {
-        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        divider.setDrawable(ContextCompat.getDrawable(context, resId)!!)
-        recyclerView.addItemDecoration(divider)
+        RecyclerviewHelper.setRecyclerviewDivider(context, recyclerView, resId)
     }
 
     val sessionId: String
@@ -127,18 +123,6 @@ abstract class BaseFragment : Fragment() {
         ScreenHelper.hideToolbar(activity)
     }
 
-    /*    public void showAlerter(String title, String message) {
-        Alerter.create(getActivity())
-                .setTitle(title)
-                .setText(message)
-                .setContentGravity(Gravity.END)
-                .setTitleTypeface(Typeface.createFromAsset(Objects.requireNonNull(getActivity()).getAssets(), getActivity().getResources().getString(R.string.font_address)))
-                .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), getActivity().getResources().getString(R.string.font_address)))
-                .setBackgroundColorRes(R.color.colorAccent)
-                .setIcon(R.mipmap.ic_launcher)
-                .setIconColorFilter(0) // Optional - Removes white tint
-                .show();
-    }*/
     fun isNetworkConnected(): Boolean {
         return checkNetwork(requireContext())
     }

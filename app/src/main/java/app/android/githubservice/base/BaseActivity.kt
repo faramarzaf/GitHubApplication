@@ -144,12 +144,6 @@ abstract class BaseActivity : AppCompatActivity() {
         pg.visibility = View.GONE
     }
 
-    fun setRecyclerviewDivider(context: Context, recyclerView: RecyclerView, resId: Int) {
-        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        divider.setDrawable(ContextCompat.getDrawable(context, resId)!!)
-        recyclerView.addItemDecoration(divider)
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
