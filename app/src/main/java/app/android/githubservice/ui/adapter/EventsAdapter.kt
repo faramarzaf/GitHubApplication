@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.databinding.ItemListEventsBinding
 import app.android.githubservice.entity.event.Events
-import app.android.githubservice.util.EventPageDataProvider
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 
 
@@ -16,9 +15,8 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
     inner class EventsViewHolder(private val itemBinding: ItemListEventsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(item: Events.EventsItem) {
             itemView.apply {
-                val event = EventPageDataProvider.getEvent(item)
                 with(itemBinding) {
-                    textEventType.text = "Action: $event"
+                    textEventType.text = "Action: ${item.type}"
                     textUsernameEvent.text = item.actor.login
                     textRepoNameEvent.text = item.repo.name
                     GlideHelper.circularImage(context, item.actor.avatarUrl, avatarEvent)
