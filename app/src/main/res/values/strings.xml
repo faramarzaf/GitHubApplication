@@ -6,6 +6,7 @@
     <string name="remember_me">Remember me</string>
     <string name="username">username</string>
     <string name="repositories">Repositories</string>
+    <string name="events">Events</string>
     <string name="repository">Repository</string>
     <string name="starred">starred</string>
     <string name="search">Search</string>

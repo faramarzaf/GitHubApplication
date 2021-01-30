@@ -70,10 +70,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideGlideInstance(@ApplicationContext context: Context) = Glide.with(context)
-        .setDefaultRequestOptions(
-            RequestOptions()
-                .placeholder(R.drawable.ic_github)
-                .error(R.drawable.ic_github)
-        )
+    fun provideEventsRepository(api: GitHubApi) = EventsRepository(api)
+
+
 }

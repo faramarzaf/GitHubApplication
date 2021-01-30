@@ -14,7 +14,6 @@
         android:layout_marginTop="@dimen/global_margin4X"
         android:layout_marginEnd="@dimen/global_margin4X"
         android:padding="@dimen/global_padding4X"
-        app:tint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
