@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.databinding.ItemListEventsBinding
 import app.android.githubservice.entity.event.Events
+import app.android.githubservice.util.URL_GITHUB
 import com.faramarzaf.sdk.af_android_sdk.core.helper.GlideHelper
 
 
@@ -14,15 +15,18 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     inner class EventsViewHolder(private val itemBinding: ItemListEventsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(item: Events.EventsItem) {
+            val urlRepo = URL_GITHUB + item.repo.name
             itemView.apply {
                 with(itemBinding) {
-                    textEventType.text = "Action: ${item.type}"
+                    textEventType.text = " did ${item.type} on "
                     textUsernameEvent.text = item.actor.login
                     textRepoNameEvent.text = item.repo.name
                     GlideHelper.circularImage(context, item.actor.avatarUrl, avatarEvent)
                 }
-                setOnClickListener {
-                    onItemClickListener?.let { it(item) }
+                itemBinding.textRepoNameEvent.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(urlRepo)
+                    }
                 }
             }
         }
@@ -50,14 +54,14 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Events.EventsItem) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.bind(repoInfo)
     }
 
-    fun setOnItemClickListener(listener: (Events.EventsItem) -> Unit) {
+    fun setOnRepoClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
 }

@@ -15,6 +15,7 @@ import app.android.githubservice.viewmodel.EventsViewModel
 import app.android.githubservice.viewmodel.FollowersViewModel
 import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.RepositoriesViewModel
+import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,8 +44,8 @@ class EventsFragment : BaseFragment() {
         observeFollowers()
         observeFollowing()
         setupRecyclerView()
-        eventsAdapter.setOnItemClickListener {
-            it.actor.login
+        eventsAdapter.setOnRepoClickListener {
+            IntentHelper.openUrl(requireContext(), it)
         }
     }
 
@@ -74,7 +75,7 @@ class EventsFragment : BaseFragment() {
     }
 
     /**
-     * Fetch followers, following and repositories data for store in share pref and show them in profile page
+     * Fetch followers, following and repositories data for store in shared pref and show them in profile page
      */
 
     private fun getRepos() {
@@ -141,7 +142,6 @@ class EventsFragment : BaseFragment() {
             }
         })
     }
-
 
     private fun setupRecyclerView() {
         eventsAdapter = EventsAdapter()
