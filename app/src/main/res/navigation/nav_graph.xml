@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/reposFragment">
+    app:startDestination="@id/eventsFragment">
 
     <fragment
-        android:id="@+id/reposFragment"
-        android:name="app.android.githubservice.ui.fragment.ReposFragment"
-        android:label="fragment_repos"
-        tools:layout="@layout/fragment_repos" />
+        android:id="@+id/eventsFragment"
+        android:name="app.android.githubservice.ui.fragment.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/starredFragment"
         android:name="app.android.githubservice.ui.fragment.StarredFragment"

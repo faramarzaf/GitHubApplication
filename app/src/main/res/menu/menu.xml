@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/reposFragment"
-        android:icon="@drawable/ic_repo"
-        android:title="@string/repositories" />
+        android:id="@+id/eventsFragment"
+        android:icon="@drawable/ic_events"
+        android:title="@string/events" />
 
     <item
         android:id="@+id/starredFragment"

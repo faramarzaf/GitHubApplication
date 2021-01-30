@@ -11,8 +11,6 @@ import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.databinding.FragmentReposBinding
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
-import app.android.githubservice.viewmodel.FollowersViewModel
-import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +23,6 @@ class ReposFragment : BaseFragment() {
     private lateinit var reposAdapter: ReposAdapter
     private lateinit var binding: FragmentReposBinding
     private val viewModel: RepositoriesViewModel by viewModels()
-    private val viewModelFollowers: FollowersViewModel by viewModels()
-    private val viewModelFollowing: FollowingViewModel by viewModels()
 
     override val getFragmentLayout: Int
         get() = R.layout.fragment_repos
@@ -34,14 +30,9 @@ class ReposFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentReposBinding.bind(view)
-
-        viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
-        setupRecyclerView()
+        getRepos()
         observeRepositoryData()
-        getFollowers()
-        getFollowing()
-        observeFollowers()
-        observeFollowing()
+        setupRecyclerView()
         reposAdapter.setOnItemClickListener {
             toast(it.name)
         }
@@ -58,17 +49,10 @@ class ReposFragment : BaseFragment() {
         }
     }
 
-    /**
-     * Fetch followers and following data for store in share pref and show them in profile page
-     */
-    private fun getFollowers() {
-        viewModelFollowers.getFollowers(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
+    private fun getRepos() {
+        viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
-    private fun getFollowing() {
-        viewModelFollowing.getFollowing(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
-
-    }
 
     private fun observeRepositoryData() {
         showProgressBar(binding.reposProgressBar)
@@ -91,38 +75,6 @@ class ReposFragment : BaseFragment() {
                         toast("Check your connection!")
                     }
                     Log.d(TAG_LOG, "fetchRepositoryData: $response")
-                }
-            }
-        })
-    }
-
-    private fun observeFollowers() {
-        viewModelFollowers.followersResponse.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Success -> {
-                    MyPreferences.writeString(requireContext(), KEY_NUMBER_FOLLOWERS, response.value.size.toString())
-                }
-                is Resource.Failure -> {
-                    if (response.isNetworkError) {
-                        toast("Check your connection!")
-                    }
-                    Log.d(TAG_LOG, "getFollowersAsync: $response")
-                }
-            }
-        })
-    }
-
-    private fun observeFollowing() {
-        viewModelFollowing.followingResponse.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Success -> {
-                    MyPreferences.writeString(requireContext(), KEY_NUMBER_FOLLOWING, response.value.size.toString())
-                }
-                is Resource.Failure -> {
-                    if (response.isNetworkError) {
-                        toast("Check your connection!")
-                    }
-                    Log.d(TAG_LOG, "getFollowingAsync: $response")
                 }
             }
         })

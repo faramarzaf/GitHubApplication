@@ -1,5 +1,6 @@
 package app.android.githubservice.model.network
 
+import app.android.githubservice.entity.event.Events
 import app.android.githubservice.entity.follower_following.FollowerFollowingResponse
 import app.android.githubservice.entity.repo.RepositoryResponse
 import app.android.githubservice.entity.search.SearchResponse
@@ -53,5 +54,7 @@ interface GitHubApi {
         , @Query("per_page") per_page: Int
     ): FollowerFollowingResponse
 
+    @GET("/events")
+    suspend fun getEvents(): Events
 
 }
