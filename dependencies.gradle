@@ -13,7 +13,7 @@ ext {
     def navigationVersion = "2.3.2"
     def pagingVersion = "3.0.0-alpha03"
     def glideVersion = "4.11.0"
-    def faramarzSdkVersion = "1.0.23"
+    def faramarzSdkVersion = "1.0.24"
 
 
     def androidxTestVersion = "1.3.0"
