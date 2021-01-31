@@ -90,6 +90,7 @@ ext {
             sdk: "com.github.faramarzaf:Android-SDK:$faramarzSdkVersion"
     ]
 
+
     dagger_hilt = [
             daggerHiltAndroid        : "com.google.dagger:hilt-android:$hiltAndroidVersion",
             daggerHiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion",
