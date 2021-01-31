@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.databinding.FragmentEventsBinding

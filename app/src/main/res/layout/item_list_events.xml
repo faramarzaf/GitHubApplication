@@ -51,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/global_margin"
+                android:padding="@dimen/global_padding1X"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/colorAccent"
