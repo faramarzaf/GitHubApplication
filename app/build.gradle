@@ -73,6 +73,7 @@ dependencies {
 
     implementation faramarzSDK.sdk
 
+
     implementation dagger_hilt.daggerHiltAndroid
     implementation dagger_hilt.daggerHilt
     kapt dagger_hilt.daggerHiltAndroidCompiler
