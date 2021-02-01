@@ -14,12 +14,10 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
-import app.android.githubservice.util.KEY_SESSION_ID
 import com.faramarzaf.sdk.af_android_sdk.core.helper.NetworkHelper.Companion.checkNetwork
 import com.faramarzaf.sdk.af_android_sdk.core.helper.RecyclerviewHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences.Prefs.readString
 import java.util.*
 
 abstract class BaseFragment : Fragment() {
@@ -91,8 +89,6 @@ abstract class BaseFragment : Fragment() {
         RecyclerviewHelper.setRecyclerviewDivider(context, recyclerView, resId)
     }
 
-    val sessionId: String
-        get() = readString(requireContext(), KEY_SESSION_ID, "")
 
     fun setFragments(layout: Int, fragment: Fragment, addToBackStack: Boolean) {
         val fragmentManager = requireActivity().supportFragmentManager

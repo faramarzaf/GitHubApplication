@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -12,8 +13,9 @@ import app.android.githubservice.databinding.FragmentFollowersBinding
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowersViewModel
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FollowersFragment : BaseFragment() {
@@ -28,7 +30,7 @@ class FollowersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFollowersBinding.bind(view)
-        getFollowers()
+        callSuspendFunctions()
         observeFollowersRepositoryData()
         setupRecyclerView()
         followersAdapter.setOnItemClickListener {
@@ -36,8 +38,15 @@ class FollowersFragment : BaseFragment() {
         }
     }
 
-    private fun getFollowers() {
-        viewModel.getFollowers(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
+    private fun callSuspendFunctions() {
+        lifecycleScope.launch {
+            getFollowers()
+        }
+    }
+
+    private suspend fun getFollowers() {
+        viewModel.getFollowers(MyDataStore(requireContext()).readString(KEY_USERNAME).toString(), MIN_PAGE, MAX_PAGE)
+
     }
 
     private fun observeFollowersRepositoryData() {
