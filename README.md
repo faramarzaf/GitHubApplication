@@ -33,7 +33,21 @@ GitHubApplication is based on MVVM architecture
 <img src="https://raw.github.com/faramarzaf/GitHubApplication/master/screenshots/arch.png" />
 </p>
 
-# Contribute 🛠
+# Built With 🛠
+- [Kotlin](https://kotlinlang.org/)
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+- [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
+- [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
+- [Room](https://developer.android.com/topic/libraries/architecture/room)
+- [Hilt-Dagger](https://dagger.dev/hilt/)
+- [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack)
+- [Retrofit](https://square.github.io/retrofit/)
+- [Glide](https://github.com/bumptech/glide)
+
+
+
+# Contribute  
 
 Feeling Awesome! Thanks for thinking about this.
 
