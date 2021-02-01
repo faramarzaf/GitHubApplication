@@ -26,9 +26,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkUserIsAuth()
         transparentToolbar(this)
         handleAuthResponse()
-        checkUserIsAuth()
         binding.btnLogin.setOnClickListener(this)
     }
 
