@@ -10,13 +10,10 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.R
 import app.android.githubservice.interfaces.AppDialogCallback
 import app.android.githubservice.util.KEY_SESSION_ID
@@ -25,7 +22,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.SimpleDialog
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
 import java.util.*
 
 
@@ -61,12 +58,8 @@ abstract class BaseActivity : AppCompatActivity() {
         transaction.commitAllowingStateLoss()
     }
 
-    fun getSessionId(context: Context): String {
-        return MyPreferences.readString(context, KEY_SESSION_ID, "")
-    }
-
-    fun getSessionId(): String {
-        return MyPreferences.readString(this, KEY_SESSION_ID, "")
+    suspend fun getSessionId(): String {
+        return MyDataStore(this).readString(KEY_SESSION_ID).toString()
     }
 
 

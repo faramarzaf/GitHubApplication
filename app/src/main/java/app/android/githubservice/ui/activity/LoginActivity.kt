@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import app.android.githubservice.base.BaseActivity
 import app.android.githubservice.databinding.ActivityLoginBinding
 import app.android.githubservice.entity.search.SearchResponse
@@ -11,9 +12,9 @@ import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.AuthViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.HashHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.StringHelper
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity(), View.OnClickListener {
@@ -26,20 +27,20 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         transparentToolbar(this)
-        binding.btnLogin.setOnClickListener(this)
         handleAuthResponse()
         checkUserIsAuth()
+        binding.btnLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         val username = binding.editTextUsername.text.toString().trim()
         showProgressBar(binding.authProgressBar)
         if (binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
-            MyPreferences.writeString(this, KEY_USERNAME, username)
-            MyPreferences.writeString(this, KEY_SESSION_ID, HashHelper.sha256(username))
+            writeUsername(username)
+            writeSessionId(username)
             viewModel.auth(username)
         } else if (!binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
-            MyPreferences.writeString(this, KEY_USERNAME, username)
+            writeUsername(username)
             viewModel.auth(username)
         } else if (StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
             hideProgressBar(binding.authProgressBar)
@@ -47,10 +48,24 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    private fun writeUsername(username: String) {
+        lifecycleScope.launch {
+            MyDataStore(this@LoginActivity).writeString(KEY_USERNAME, username)
+        }
+    }
+
+    private fun writeSessionId(username: String) {
+        lifecycleScope.launch {
+            MyDataStore(this@LoginActivity).writeString(KEY_SESSION_ID, HashHelper.sha256(username))
+        }
+    }
+
     private fun checkUserIsAuth() {
-        if (!StringHelper.stringIsEmptyOrNull(getSessionId())) {
-            toActivity(MainActivity::class.java)
-            finish()
+        lifecycleScope.launch {
+            if (!StringHelper.stringIsEmptyOrNull(getSessionId())) {
+                toActivity(MainActivity::class.java)
+                finish()
+            }
         }
     }
 
@@ -81,8 +96,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun saveUsefulUrls(response: SearchResponse) {
         for (info in response.items) {
-            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
-            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
+            lifecycleScope.launch {
+                MyDataStore(this@LoginActivity).writeString(KEY_AVATAR_URL, info.avatarUrl.toString())
+                MyDataStore(this@LoginActivity).writeString(KEY_HTML_URL, info.htmlUrl.toString())
+            }
         }
     }
 
