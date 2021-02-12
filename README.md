@@ -21,7 +21,7 @@ In this program, we have tried to use new and modern Android technologies to be 
 # Screenshots ✨
 
 <p align="center">
-<img src="https://raw.github.com/faramarzaf/GitHubApplication/master/screenshots/poster1.png" />
+<img src="https://raw.github.com/faramarzaf/GitHubApplication/master/screenshots/poster1a.png" />
 </p>
 
 
