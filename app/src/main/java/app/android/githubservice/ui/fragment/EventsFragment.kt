@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -17,9 +16,8 @@ import app.android.githubservice.viewmodel.FollowersViewModel
 import app.android.githubservice.viewmodel.FollowingViewModel
 import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EventsFragment : BaseFragment() {
@@ -38,7 +36,9 @@ class EventsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEventsBinding.bind(view)
         getEvents()
-        callSuspendFunctions()
+        getRepos()
+        getFollowers()
+        getFollowing()
         observeEventsList()
         observeRepositoryData()
         observeFollowers()
@@ -49,13 +49,6 @@ class EventsFragment : BaseFragment() {
         }
     }
 
-    private fun callSuspendFunctions() {
-        lifecycleScope.launch {
-            getRepos()
-            getFollowers()
-            getFollowing()
-        }
-    }
 
     private fun getEvents() {
         viewModel.getEvents()
@@ -85,17 +78,16 @@ class EventsFragment : BaseFragment() {
      * Fetch followers, following and repositories data for store in shared pref and show them in profile page
      */
 
-    private suspend fun getRepos() {
-        viewModelRepositories.getRepos(MyDataStore(requireContext()).readString(KEY_USERNAME).toString(), MIN_PAGE, MAX_PAGE)
+    private fun getRepos() {
+        viewModelRepositories.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
-    private suspend fun getFollowers() {
-        viewModelFollowers.getFollowers(MyDataStore(requireContext()).readString(KEY_USERNAME).toString(), MIN_PAGE, MAX_PAGE)
-
+    private fun getFollowers() {
+        viewModelFollowers.getFollowers(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
-    private suspend fun getFollowing() {
-        viewModelFollowing.getFollowing(MyDataStore(requireContext()).readString(KEY_USERNAME).toString(), MIN_PAGE, MAX_PAGE)
+    private fun getFollowing() {
+        viewModelFollowing.getFollowing(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
 
@@ -106,9 +98,7 @@ class EventsFragment : BaseFragment() {
                     if (response.value.isEmpty()) {
                         Log.d(TAG_LOG, "observeRepositoryData: response.value.isEmpty")
                     } else {
-                        lifecycleScope.launch {
-                            MyDataStore(requireContext()).writeString(KEY_SIZE_LIST_REPO, response.value.size.toString())
-                        }
+                        MyPreferences.writeString(requireContext(), KEY_SIZE_LIST_REPO, response.value.size.toString())
                     }
                 }
                 is Resource.Failure -> {
@@ -125,9 +115,7 @@ class EventsFragment : BaseFragment() {
         viewModelFollowers.followersResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    lifecycleScope.launch {
-                        MyDataStore(requireContext()).writeString(KEY_NUMBER_FOLLOWERS, response.value.size.toString())
-                    }
+                    MyPreferences.writeString(requireContext(), KEY_NUMBER_FOLLOWERS, response.value.size.toString())
                 }
                 is Resource.Failure -> {
                     if (response.isNetworkError) {
@@ -143,9 +131,7 @@ class EventsFragment : BaseFragment() {
         viewModelFollowing.followingResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    lifecycleScope.launch {
-                        MyDataStore(requireContext()).writeString(KEY_NUMBER_FOLLOWING, response.value.size.toString())
-                    }
+                    MyPreferences.writeString(requireContext(), KEY_NUMBER_FOLLOWING, response.value.size.toString())
                 }
                 is Resource.Failure -> {
                     if (response.isNetworkError) {

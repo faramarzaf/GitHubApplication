@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
@@ -13,10 +12,9 @@ import app.android.githubservice.databinding.FragmentReposBinding
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.RepositoriesViewModel
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ReposFragment : BaseFragment() {
@@ -32,17 +30,11 @@ class ReposFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentReposBinding.bind(view)
-        callSuspendFunctions()
+        getRepos()
         observeRepositoryData()
         setupRecyclerView()
         reposAdapter.setOnItemClickListener {
             toast(it.name)
-        }
-    }
-
-    private fun callSuspendFunctions() {
-        lifecycleScope.launch {
-            getRepos()
         }
     }
 
@@ -56,8 +48,8 @@ class ReposFragment : BaseFragment() {
         }
     }
 
-    private suspend fun getRepos() {
-        viewModel.getRepos(MyDataStore(requireContext()).readString(KEY_USERNAME).toString(), MIN_PAGE, MAX_PAGE)
+    private fun getRepos() {
+        viewModel.getRepos(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
     }
 
 
@@ -74,6 +66,7 @@ class ReposFragment : BaseFragment() {
                     hideProgressBar(binding.reposProgressBar)
                     reposAdapter.differ.submitList(response.value)
                     rvRepos.setPadding(0, 0, 0, 0)
+                    MyPreferences.writeString(requireContext(), KEY_SIZE_LIST_REPO, response.value.size.toString())
                 }
                 is Resource.Failure -> {
                     hideProgressBar(binding.reposProgressBar)
@@ -93,5 +86,4 @@ class ReposFragment : BaseFragment() {
     private fun dataAvailable() {
         binding.textNoRepos.visibility = View.GONE
     }
-
 }

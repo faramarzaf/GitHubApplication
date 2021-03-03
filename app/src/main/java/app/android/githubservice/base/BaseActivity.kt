@@ -23,6 +23,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.SimpleDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import java.util.*
 
 
@@ -58,10 +59,9 @@ abstract class BaseActivity : AppCompatActivity() {
         transaction.commitAllowingStateLoss()
     }
 
-    suspend fun getSessionId(): String {
-        return MyDataStore(this).readString(KEY_SESSION_ID).toString()
+    fun getSessionId(): String {
+        return MyPreferences.readString(this, KEY_SESSION_ID, "")
     }
-
 
     fun toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

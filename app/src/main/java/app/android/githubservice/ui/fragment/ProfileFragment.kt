@@ -3,7 +3,6 @@ package app.android.githubservice.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import app.android.githubservice.R
 import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.databinding.FragmentProfileBinding
@@ -18,10 +17,9 @@ import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DoGuardTask
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.ClickGuard
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -41,16 +39,11 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
             viewPagerOverview.adapter = ViewPagerProfileAdapter(requireActivity().supportFragmentManager)
             tabLayoutOverview.setupWithViewPager(viewPagerOverview)
         }
-        callSuspendFunction()
+        fillProfileInfo()
         bottomSheetOperations()
         ClickGuard.guardView(imgSetting, 800, this)
     }
 
-    private fun callSuspendFunction() {
-        lifecycleScope.launch {
-            fillProfileInfo()
-        }
-    }
 
     private fun bottomSheetOperations() {
         bottomSheetTheme.setOnBottomSheetClickListener(object : GlobalBottomSheetCallBack {
@@ -60,13 +53,13 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
         })
     }
 
-    private suspend fun fillProfileInfo() {
+    private fun fillProfileInfo() {
         with(binding) {
-            GlideHelper.circularImage(requireContext(), MyDataStore(requireContext()).readString(KEY_AVATAR_URL).toString(), avatarProfile)
-            textUserNameProfile.text = MyDataStore(requireContext()).readString(KEY_USERNAME).toString()
-            textRepositoryProfile.text = MyDataStore(requireContext()).readString(KEY_SIZE_LIST_REPO).toString()
-            textFollowersProfile.text = MyDataStore(requireContext()).readString(KEY_NUMBER_FOLLOWERS).toString()
-            textFollowingProfile.text = MyDataStore(requireContext()).readString(KEY_NUMBER_FOLLOWING).toString()
+            GlideHelper.circularImage(requireContext(), MyPreferences.readString(requireContext(), KEY_AVATAR_URL, ""), avatarProfile)
+            textUserNameProfile.text = MyPreferences.readString(requireContext(), KEY_USERNAME, "")
+            textRepositoryProfile.text = MyPreferences.readString(requireContext(), KEY_SIZE_LIST_REPO, "")
+            textFollowersProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWERS, "")
+            textFollowingProfile.text = MyPreferences.readString(requireContext(), KEY_NUMBER_FOLLOWING, "")
         }
     }
 
@@ -89,11 +82,8 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
 
     private fun logout() {
         viewModel.deleteAll()
-        lifecycleScope.launch {
-            MyDataStore(requireContext()).clearAll()
-        }
+        MyPreferences.clearAll(requireContext())
         toActivity(activity, LoginActivity::class.java)
         requireActivity().finish()
     }
-
 }
