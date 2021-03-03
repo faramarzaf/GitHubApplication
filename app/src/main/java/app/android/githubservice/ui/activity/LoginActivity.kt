@@ -13,6 +13,7 @@ import app.android.githubservice.viewmodel.AuthViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.HashHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.StringHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
+import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -36,11 +37,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         val username = binding.editTextUsername.text.toString().trim()
         showProgressBar(binding.authProgressBar)
         if (binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
-            writeUsername(username)
-            writeSessionId(username)
+            MyPreferences.writeString(this, KEY_USERNAME, username)
+            MyPreferences.writeString(this, KEY_SESSION_ID, HashHelper.sha256(username))
             viewModel.auth(username)
         } else if (!binding.checkboxRememberMe.isChecked && !StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
-            writeUsername(username)
+            MyPreferences.writeString(this, KEY_USERNAME, username)
             viewModel.auth(username)
         } else if (StringHelper.stringIsEmptyOrNull(binding.editTextUsername.text.toString().trim())) {
             hideProgressBar(binding.authProgressBar)
@@ -61,11 +62,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun checkUserIsAuth() {
-        lifecycleScope.launch {
-            if (!StringHelper.stringIsEmptyOrNull(getSessionId())) {
-                toActivity(MainActivity::class.java)
-                finish()
-            }
+        if (!StringHelper.stringIsEmptyOrNull(getSessionId())) {
+            toActivity(MainActivity::class.java)
+            finish()
         }
     }
 
@@ -96,10 +95,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun saveUsefulUrls(response: SearchResponse) {
         for (info in response.items) {
-            lifecycleScope.launch {
-                MyDataStore(this@LoginActivity).writeString(KEY_AVATAR_URL, info.avatarUrl.toString())
-                MyDataStore(this@LoginActivity).writeString(KEY_HTML_URL, info.htmlUrl.toString())
-            }
+            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
+            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
         }
     }
 
