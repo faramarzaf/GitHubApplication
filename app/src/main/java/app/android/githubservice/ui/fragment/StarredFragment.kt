@@ -12,6 +12,7 @@ import app.android.githubservice.databinding.FragmentStarredBinding
 import app.android.githubservice.ui.adapter.StarredAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.StarredViewModel
+import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_starred.*
@@ -32,8 +33,8 @@ class StarredFragment : BaseFragment() {
         viewModel.getStarredRepositories(MyPreferences.readString(requireActivity(), KEY_USERNAME, DEFAULT_USER), MIN_PAGE, MAX_PAGE)
         setupRecyclerView()
         observeStarredRepositoryData()
-        starredAdapter.setOnItemClickListener {
-            toast(it.name)
+        starredAdapter.setOnRepoClickListener {
+            IntentHelper.openUrl(requireContext(), it)
         }
     }
 
