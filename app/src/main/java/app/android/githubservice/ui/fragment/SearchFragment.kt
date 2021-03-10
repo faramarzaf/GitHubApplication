@@ -56,14 +56,14 @@ class SearchFragment : BaseFragment() {
             setOnItemClickListener {
                 toast(it.login)
             }
-            setOnSaveUserClickListener { item, imageview ->
+            setOnSaveUserClickListener { item, favImg ->
 
                 if (!viewModel.userExists(item)) {
-                    imageview.setColorFilter(Color.RED)
+                    favImg.setColorFilter(Color.RED)
                     saveUser(item)
                 } else if (viewModel.userExists(item)) {
-                    imageview.setColorFilter(Color.RED)
-                    toast("User is already in favorites!")
+                    favImg.setColorFilter(Color.WHITE)
+                    viewModel.deleteUser(item)
                 }
             }
         }
