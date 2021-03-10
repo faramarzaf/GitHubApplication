@@ -49,18 +49,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun writeUsername(username: String) {
-        lifecycleScope.launch {
-            MyDataStore(this@LoginActivity).writeString(KEY_USERNAME, username)
-        }
-    }
-
-    private fun writeSessionId(username: String) {
-        lifecycleScope.launch {
-            MyDataStore(this@LoginActivity).writeString(KEY_SESSION_ID, HashHelper.sha256(username))
-        }
-    }
-
     private fun checkUserIsAuth() {
         if (!StringHelper.stringIsEmptyOrNull(getSessionId())) {
             toActivity(MainActivity::class.java)
