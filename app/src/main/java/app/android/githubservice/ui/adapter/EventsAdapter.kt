@@ -23,7 +23,7 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
                     textRepoNameEvent.text = item.repo.name
                     GlideHelper.circularImage(context, item.actor.avatarUrl, avatarEvent)
                 }
-                itemBinding.textRepoNameEvent.setOnClickListener {
+                itemView.setOnClickListener {
                     onItemClickListener?.let {
                         it(urlRepo)
                     }
