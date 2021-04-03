@@ -13,6 +13,7 @@ import app.android.githubservice.base.BaseFragment
 import app.android.githubservice.databinding.FragmentFavoriteBinding
 import app.android.githubservice.ui.adapter.FavoriteAdapter
 import app.android.githubservice.viewmodel.SearchViewModel
+import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.CallbackSnackBar
 import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.SimpleSnackbar
@@ -37,8 +38,8 @@ class FavoriteFragment : BaseFragment() {
         setupRecyclerView()
         swipeRemoving(view)
         observeUsersList()
-        favoriteAdapter.setOnItemClickListener {
-            toast(it.login)
+        favoriteAdapter.setOnRepoClickListener {
+            IntentHelper.openUrl(requireContext(),it)
         }
         binding.imgDeleteAll.setOnClickListener {
             deleteAllFavorites()
