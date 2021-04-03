@@ -12,6 +12,7 @@ import app.android.githubservice.databinding.FragmentFollowingBinding
 import app.android.githubservice.ui.adapter.FollowersFollowingAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.FollowingViewModel
+import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,8 +32,8 @@ class FollowingFragment : BaseFragment() {
         getFollowing()
         setupRecyclerView()
         observeFollowingRepositoryData()
-        followingAdapter.setOnItemClickListener {
-            toast(it.login)
+        followingAdapter.setOnRepoClickListener {
+            IntentHelper.openUrl(requireContext(), it)
         }
     }
 

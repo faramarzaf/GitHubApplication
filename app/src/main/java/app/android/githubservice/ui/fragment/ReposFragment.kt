@@ -12,6 +12,7 @@ import app.android.githubservice.databinding.FragmentReposBinding
 import app.android.githubservice.ui.adapter.ReposAdapter
 import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.RepositoriesViewModel
+import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
@@ -33,8 +34,8 @@ class ReposFragment : BaseFragment() {
         getRepos()
         observeRepositoryData()
         setupRecyclerView()
-        reposAdapter.setOnItemClickListener {
-            toast(it.name)
+        reposAdapter.setOnRepoClickListener {
+            IntentHelper.openUrl(requireContext(), it)
         }
     }
 
