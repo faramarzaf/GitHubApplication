@@ -14,11 +14,14 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
 
     inner class FavoriteViewHolder(private val itemBinding: ItemListFavoriteBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(item: Item) {
+            val urlRepo = item.htmlUrl
             itemView.apply {
                 itemBinding.textSaveName.text = item.login.toString()
                 GlideHelper.circularImage(context, item.avatarUrl.toString(), itemBinding.imageSavedUsers)
-                setOnClickListener {
-                    onItemClickListener?.let { it(item) }
+                itemView.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(urlRepo.toString())
+                    }
                 }
             }
         }
@@ -46,14 +49,14 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Item) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.bind(repoInfo)
     }
 
-    fun setOnItemClickListener(listener: (Item) -> Unit) {
+    fun setOnRepoClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
 }

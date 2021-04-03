@@ -14,11 +14,14 @@ class FollowersFollowingAdapter : RecyclerView.Adapter<FollowersFollowingAdapter
 
     inner class FollowersFollowingViewHolder(private val itemBinding: ItemListFollowersFollowingBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(item: FollowerFollowingResponse.FollowerFollowingItem) {
+            val urlRepo = item.htmlUrl
             itemView.apply {
                 GlideHelper.circularImage(context, item.avatarUrl.toString(), itemBinding.imageFollowersFollowing)
                 itemBinding.textFollowersFollowing.text = item.login
-                setOnClickListener {
-                    onItemClickListener?.let { it(item) }
+                itemView.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(urlRepo.toString())
+                    }
                 }
             }
         }
@@ -45,14 +48,15 @@ class FollowersFollowingAdapter : RecyclerView.Adapter<FollowersFollowingAdapter
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((FollowerFollowingResponse.FollowerFollowingItem) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: FollowersFollowingViewHolder, position: Int) {
         val info = differ.currentList[position]
         holder.bind(info)
     }
 
-    fun setOnItemClickListener(listener: (FollowerFollowingResponse.FollowerFollowingItem) -> Unit) {
+    fun setOnRepoClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
+
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.android.githubservice.databinding.ItemListReposBinding
 import app.android.githubservice.entity.repo.RepositoryResponse.RepositoryModelItem
 import app.android.githubservice.util.LanguageColorGenerator
+import app.android.githubservice.util.URL_GITHUB
 import app.android.githubservice.util.thousandPrinter
 
 
@@ -19,7 +20,7 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
 
     inner class ReposViewHolder(private val itemBinding: ItemListReposBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(item: RepositoryModelItem) {
-
+            val urlRepo = URL_GITHUB + item.fullName
             itemView.apply {
                 itemBinding.textRepoName.text = item.name
                 itemBinding.textRepoDesc.text = item.description
@@ -45,8 +46,10 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
                     itemBinding.viewColoredLanguage.visibility = View.GONE
                 }
 
-                setOnClickListener {
-                    onItemClickListener?.let { it(item) }
+                itemView.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(urlRepo)
+                    }
                 }
             }
         }
@@ -73,14 +76,14 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((RepositoryModelItem) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ReposViewHolder, position: Int) {
         val repoInfo = differ.currentList[position]
         holder.bind(repoInfo)
     }
 
-    fun setOnItemClickListener(listener: (RepositoryModelItem) -> Unit) {
+    fun setOnRepoClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
 

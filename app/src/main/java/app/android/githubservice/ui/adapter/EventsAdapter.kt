@@ -18,9 +18,14 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
             val urlRepo = URL_GITHUB + item.repo.name
             itemView.apply {
                 with(itemBinding) {
-                    textEventType.text = " did ${item.type} on "
+                    textEventType.text = "${item.type} on "
                     textUsernameEvent.text = item.actor.login
-                    textRepoNameEvent.text = item.repo.name
+                    if (item.repo.name.contains("/")) {
+                        val parts: List<String> = item.repo.name.split("/")
+                        val repoName = parts[1]
+                        textRepoNameEvent.text = repoName
+                    } else
+                        textRepoNameEvent.text = item.repo.name
                     GlideHelper.circularImage(context, item.actor.avatarUrl, avatarEvent)
                 }
                 itemView.setOnClickListener {
