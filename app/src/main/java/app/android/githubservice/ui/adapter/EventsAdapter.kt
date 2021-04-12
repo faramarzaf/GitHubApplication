@@ -22,7 +22,7 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
                     textUsernameEvent.text = item.actor.login
                     if (item.repo.name.contains("/")) {
                         val parts: List<String> = item.repo.name.split("/")
-                        val repoName = parts[1]
+                        val repoName = parts[1] // item.repo.name= faramarzaf/GithubApplication --> parts[1] = GithubApplication
                         textRepoNameEvent.text = repoName
                     } else
                         textRepoNameEvent.text = item.repo.name
