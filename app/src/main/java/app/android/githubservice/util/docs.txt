@@ -34,10 +34,10 @@
 
 
 
-https://api.github.com/search/users?q=faramarzaf
-https://api.github.com/users/faramarzaf/repos
+https://api.github.com/search/users?q=USERNAME
+https://api.github.com/users/USERNAME/repos
 https://api.github.com/events
 https://api.github.com/feeds
-https://api.github.com/users/faramarzaf/followers
-https://api.github.com/users/faramarzaf/following
-https://api.github.com/users/faramarzaf/starred
+https://api.github.com/users/USERNAME/followers
+https://api.github.com/users/USERNAME/following
+https://api.github.com/users/USERNAME/starred
