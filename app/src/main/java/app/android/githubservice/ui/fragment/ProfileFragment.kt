@@ -19,7 +19,6 @@ import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import com.faramarzaf.sdk.af_android_sdk.core.util.ClickGuard
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 @AndroidEntryPoint
@@ -41,7 +40,7 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
         }
         fillProfileInfo()
         bottomSheetOperations()
-        ClickGuard.guardView(imgSetting, 800, this)
+        ClickGuard.guardView(binding.imgSetting, 800, this)
     }
 
 
@@ -68,16 +67,15 @@ class ProfileFragment : BaseFragment(), DoGuardTask {
     }
 
     private fun openLogoutDialog() {
-        PublicDialog.yesNoDialog(requireContext(), getString(R.string.logout_title), getString(R.string.msg_dialog_logout)
-            , getString(R.string.yes), getString(R.string.no), R.drawable.ic_logout, object : DialogCallback {
-                override fun onNegativeButtonClicked() {
-                    return
-                }
+        PublicDialog.yesNoDialog(requireContext(), getString(R.string.logout_title), getString(R.string.msg_dialog_logout), getString(R.string.yes), getString(R.string.no), R.drawable.ic_logout, object : DialogCallback {
+            override fun onNegativeButtonClicked() {
+                return
+            }
 
-                override fun onPositiveButtonClicked() {
-                    logout()
-                }
-            })
+            override fun onPositiveButtonClicked() {
+                logout()
+            }
+        })
     }
 
     private fun logout() {

@@ -15,7 +15,6 @@ import app.android.githubservice.viewmodel.RepositoriesViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_repos.*
 
 @AndroidEntryPoint
 class ReposFragment : BaseFragment() {
@@ -66,7 +65,7 @@ class ReposFragment : BaseFragment() {
                     }
                     hideProgressBar(binding.reposProgressBar)
                     reposAdapter.differ.submitList(response.value)
-                    rvRepos.setPadding(0, 0, 0, 0)
+                    binding.rvRepos.setPadding(0, 0, 0, 0)
                     MyPreferences.writeString(requireContext(), KEY_SIZE_LIST_REPO, response.value.size.toString())
                 }
                 is Resource.Failure -> {

@@ -15,7 +15,6 @@ import app.android.githubservice.viewmodel.StarredViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.IntentHelper
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_starred.*
 
 @AndroidEntryPoint
 class StarredFragment : BaseFragment() {
@@ -50,7 +49,7 @@ class StarredFragment : BaseFragment() {
                     }
                     hideProgressBar(binding.starredProgressBar)
                     starredAdapter.differ.submitList(response.value)
-                    rvStarred.setPadding(0, 0, 0, 0)
+                    binding.rvStarred.setPadding(0, 0, 0, 0)
                 }
                 is Resource.Failure -> {
                     hideProgressBar(binding.starredProgressBar)

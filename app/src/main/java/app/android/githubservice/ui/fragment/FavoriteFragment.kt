@@ -19,7 +19,7 @@ import com.faramarzaf.sdk.af_android_sdk.core.interfaces.DialogCallback
 import com.faramarzaf.sdk.af_android_sdk.core.ui.SimpleSnackbar
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.PublicDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_favorite.*
+
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment() {
@@ -39,7 +39,7 @@ class FavoriteFragment : BaseFragment() {
         swipeRemoving(view)
         observeUsersList()
         favoriteAdapter.setOnRepoClickListener {
-            IntentHelper.openUrl(requireContext(),it)
+            IntentHelper.openUrl(requireContext(), it)
         }
         binding.imgDeleteAll.setOnClickListener {
             deleteAllFavorites()
@@ -60,16 +60,15 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun deleteAllFavorites() {
-        PublicDialog.yesNoDialog(requireContext(), getString(R.string.remove_all_title), getString(R.string.msg_dialog_remove_all)
-            , getString(R.string.yes), getString(R.string.no), R.drawable.ic_delete, object : DialogCallback {
-                override fun onNegativeButtonClicked() {
-                    return
-                }
+        PublicDialog.yesNoDialog(requireContext(), getString(R.string.remove_all_title), getString(R.string.msg_dialog_remove_all), getString(R.string.yes), getString(R.string.no), R.drawable.ic_delete, object : DialogCallback {
+            override fun onNegativeButtonClicked() {
+                return
+            }
 
-                override fun onPositiveButtonClicked() {
-                    viewModel.deleteAll()
-                }
-            })
+            override fun onPositiveButtonClicked() {
+                viewModel.deleteAll()
+            }
+        })
     }
 
     private fun swipeRemoving(view: View) {
@@ -92,7 +91,7 @@ class FavoriteFragment : BaseFragment() {
         }
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(rvSaved)
+            attachToRecyclerView(binding.rvSaved)
         }
     }
 

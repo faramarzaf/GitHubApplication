@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import app.android.githubservice.base.BaseActivity
 import app.android.githubservice.databinding.ActivityLoginBinding
 import app.android.githubservice.entity.search.SearchResponse
@@ -12,10 +11,8 @@ import app.android.githubservice.util.*
 import app.android.githubservice.viewmodel.AuthViewModel
 import com.faramarzaf.sdk.af_android_sdk.core.helper.HashHelper
 import com.faramarzaf.sdk.af_android_sdk.core.helper.StringHelper
-import com.faramarzaf.sdk.af_android_sdk.core.util.MyDataStore
 import com.faramarzaf.sdk.af_android_sdk.core.util.MyPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity(), View.OnClickListener {
